@@ -22,165 +22,170 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
     />
     <style type="text/css">
-            * {
-            font-size: 16px;
-            font-family: Nunito, -apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
-            color: var(--bs-body-color);
-            }
-            @media screen and (max-width: 426px) {
-            * {
-            font-size: 14px;
-            }
-            }
+      * {
+        font-size: 16px;
+        font-family: Nunito, -apple-system, BlinkMacSystemFont, Segoe UI,
+          Noto Sans, Helvetica, Arial, sans-serif, Apple Color Emoji,
+          Segoe UI Emoji;
+        color: var(--bs-body-color);
+      }
 
       body {
         background-color: var(--bs-body-bg);
       }
-            p {
-            line-height: 1.8;
-            word-break: break-word;
-            }
-            header.row {
-            position: sticky;
-            top: 0;
-      background-color: var(--bs-body-bg);
-            padding: 1rem;
-            padding-top: 2rem;
-            min-height: 90px;
-            z-index: 10;
-            overflow: hidden;
-            border-bottom: 1px solid var(--bs-gray-300);
-            * {
-            line-height: 2rem;
-            margin: 0;
-            }
-            }
-            footer.row {
-            position: sticky;
-            bottom: 0;
-            background-color: var(--bs-body-bg);
-            padding: 1rem;
-            z-index: 10;
-            border-top: 1px solid var(--bs-gray-300);
-            overflow: hidden;
-            * {
-            line-height: 1.4;
-            text-decoration: none;
-            font-size: 1.2rem;
-            }
 
-            a {
-            white-space: nowrap;
-            }
-            }
+      p {
+        line-height: 1.8;
+        word-break: break-word;
+        display: block;
+        font-size: 1rem;
+        margin-block-end: 1rem;
+        margin-block-start: 0px;
+        margin-bottom: 1rem;
+      }
 
-            @media print {
-            p {
-            font-size: 14px;
-            line-height: 1.5;
-            }
-            footer.row{
-            position: static;
-            }
-            footer.row i{
-            position: static;
-            transform: unset;
+      header.row {
+        position: sticky;
+        top: 0;
+        background-color: var(--bs-body-bg);
+        padding: 1rem;
+        padding-top: 2rem;
+        min-height: 90px;
+        z-index: 10;
+        overflow: hidden;
+        border-bottom: 1px solid var(--bs-secondary);
+        * {
+          line-height: 2rem;
+          margin: 0;
+        }
+      }
+      footer.row {
+        position: sticky;
+        bottom: 0;
+        background-color: var(--bs-body-bg);
+        padding: 1rem;
+        z-index: 10;
+        border-top: 1px solid var(--bs-secondary);
+        overflow: hidden;
+        * {
+          line-height: 1.4;
+          text-decoration: none;
+          font-size: 1.2rem;
+        }
 
-            }
+        a {
+          white-space: nowrap;
+        }
+      }
 
-            }
-
-            @media screen and (max-width: 426px) {
-            footer.row {
-            * {
+      @media screen and (max-width: 426px) {
+        * {
+          font-size: 14px;
+        }
+        footer.row {
+          * {
             font-size: 1rem;
-            }
-            }
-            }
+          }
+        }
+      }
 
+      @media print {
+        * {
+          font-size: 14px;
+        }
+        p {
+          line-height: 1.5;
+        }
+        footer.row {
+          position: static;
+        }
 
-            .sticky {
-            position: sticky;
-            top: 90px;
-            padding-top: 1rem;
-            padding-right: 1rem;
-            border-right: 1px solid var(--bs-gray-300);
-            padding-bottom: 2rem;
-            z-index: 9;
-            }
-            main {
-            padding: 0 1rem;
-            }
-            main .row .col-7,
-            main .row .col-md-8 {
-            padding-top: 1rem;
-            }
-            p {
+        footer.row i {
+          position: static;
+          transform: unset;
+        }
+      }
 
-            color: rgb(31, 35, 40):
-            color-scheme: light:
-            display: block;
-            font-size: 1rem;
-            margin-block-end: 1rem;
-            margin-block-start: 0px;
-            margin-bottom: 1rem;
-            }
+      .sticky {
+        position: sticky;
+        top: 90px;
+        padding-top: 1rem;
+        padding-right: 1rem;
+        border-right: 1px solid var(--bs-secondary);
+        padding-bottom: 2rem;
+        z-index: 9;
+      }
 
-            .title1 {
-            color: var(--bs-text);
-            display: block;
-            font-size: 1.4rem;
-            font-weight: 600;
+      main {
+        padding: 0 1rem;
+      }
 
-            }
-            .subtitle1 {
-            color: var(--bs-secondary);
-            font-size: 1.6rem;
+      main .row .col-7,
+      main .row .col-md-8 {
+        padding-top: 1rem;
+      }
 
-            }
-            .title3 {
-            color: var(--bs-secondary);
-            color-scheme: light;
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0rem;
-            overflow-wrap: break-word;
-            }
+      .title1 {
+        color: var(--bs-text);
+        display: block;
+        font-size: 1.4rem;
+        font-weight: 600;
+      }
 
-            .title3 + p {
-            margin-top: 0rem;
-            }
+      .subtitle1 {
+        color: var(--bs-secondary);
+        font-size: 1.6rem;
+      }
 
-            .divider {
-            margin: 0.7rem 0;
-            height: 2px;
-            border-bottom: 1px solid var(--bs-secondary);
-            }
-            i {
-            position: absolute;
-            z-index: -1;
-            transform: scale(6.5) translate(3px, -2px);
-            opacity: 0.1;
-            }
+      .title3 {
+        color: var(--bs-secondary);
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 0rem;
+        overflow-wrap: break-word;
+      }
 
-            .row.subtitle2 {
-            font-weight: 600;
-            margin-top: 1rem;
+      .title3 + p {
+        margin-top: 0rem;
+      }
 
-            }
-            .row.subtitle2 a {
-            font-size: 0.8rem;
-            opacity: 0.8;
-            font-weight: normal;
-            text-decoration: none;
-            }
-            .right-subtitle {
-            text-align: right;
-                                          font-size: 0.9rem;
+      i {
+        position: absolute;
+        z-index: -1;
+        transform: scale(6.5) translate(3px, -2px);
+        opacity: 0.1;
+      }
 
-            font-weight: 700;
-            color: var(--bs-info);
-            }
+      .row.subtitle2 {
+        font-weight: 600;
+        margin-top: 1rem;
+      }
+
+      .row.subtitle2 .col {
+        color: var(--bs-secondary-color);
+      }
+      .row.subtitle2 a {
+        font-size: 0.8rem;
+        opacity: 0.8;
+        font-weight: normal;
+        text-decoration: none;
+      }
+
+      .right-subtitle {
+        text-align: right;
+        font-size: 0.9rem;
+
+        font-weight: 700;
+        color: var(--bs-info);
+      }
+
+      .shadow {
+        opacity: 0.2;
+      }
+
+      p + .row.subtitle2 {
+        margin-top: 2rem;
+      }
     </style>
     <script>
       window.addEventListener('load', () => {
@@ -232,14 +237,14 @@
         <div class="row">
           <div class="col-5 col-md-4">
             <div class="sticky">
-              <p class="title3">Занятость</p>
+              <h3 class="title3">Занятость</h3>
               <p
                 >полная, почасовая с долгосрочным контрактом, проектная
                 работа</p
               >
-              <p class="title3">Трудовое соглашение</p>
+              <h3 class="title3">Трудовое соглашение</h3>
               <p>контракт, ГХП, самозанятый</p>
-              <p class="title3">Тип работы</p>
+              <h3 class="title3">Тип работы</h3>
               <p
                 >удаленная, работа в офисе в Москве с частичным посещением
                 офиса, релокация</p
@@ -248,25 +253,26 @@
           </div>
           <div class="col-7 col-md-8">
             <p>
-              Опыт веб-разработки более 19 лет – это подтверждение моей глубокой
+              Более 19 лет опыта веб-разработки подтверждение моей глубокой
               квалификации. Я специализируюсь на Front-end разработках с фокусом
               на JavaScript, а также Fullstack JS разработке, которая позволяет
-              мне работать над как frontend, так и backend частями веб
-              приложений.
-              <u>
-                У меня есть желание развивать навыки в создании мобильных
-                систем, микросервисов и обработки баз данных, тестирование,
-                глубокое использование в работе систем ИИ.
-              </u>
+              мне работать над всеми частями разработки кода веб приложений.
             </p>
             <p>
               Знаком со всеми этапами жизненного цикла проекта, включая оценку
               требований клиента, оценку времени разработки, планирование
               разработки, саму разработку, создание технической документации и
-              управление командой. Имеет опыт использования дополнительных
+              управление командой. Есть опыт использования дополнительных
               инструментов для работы с веб-приложениями, таких как инструменты
               CI/CD для сборки и развертывания проектов, системы кэширования,
               системы мониторинга производительности, поисковые системы.
+            </p>
+
+            <p>
+              Дипломатичность, внимание к деталям, передача накопленных знаний
+              новым сотрудникам организации. Опыт взаимодействия с заказчиками
+              из США, Великобритании, Германии, Чехии, Канады, ближнего
+              зарубежья. Работа на фрилансерских площадках.
             </p>
           </div>
         </div>
@@ -274,7 +280,7 @@
         <div class="row">
           <div class="col-5 col-md-4">
             <div class="sticky">
-              <p class="title3">Знания</p>
+              <h3 class="title3">Знания</h3>
               <div class="row subtitle2">
                 <div class="col-9">
                   Javascript
@@ -347,7 +353,6 @@
                   <div class="right-subtitle"><!--10/10--></div>
                 </div>
               </div>
-
               <div class="row subtitle2">
                 <div class="col-9">
                   Другие технологии
@@ -365,7 +370,7 @@
             </div>
           </div>
           <div class="col-7 col-md-8">
-            <p class="title3">Опыт работы </p>
+            <h3 class="title3">Опыт работы </h3>
 
             <div class="row subtitle2">
               <div class="col">
@@ -417,14 +422,16 @@
               </div>
             </div>
 
-            <p>02/2020 - 09/2021</p>
-            <p>Фриланс</p>
-            <p
-              >Стек:<em>
-                NodeJs, MeteorJs, React, Typescript, Microfronteds, WebRTC,
-                Styled Components
-              </em>
-            </p>
+            <div class="shadow">
+              <p>02/2020 - 09/2021</p>
+              <p>Фриланс</p>
+              <p
+                >Стек:<em>
+                  NodeJs, MeteorJs, React, Typescript, Microfronteds, WebRTC,
+                  Styled Components
+                </em>
+              </p>
+            </div>
 
             <div class="row subtitle2">
               <div class="col">
@@ -454,20 +461,37 @@
               возможностей. Встраивание в систему вебконференций на базе
               Janus.js(WebRTC)
             </p>
-            <p>12/2019 - 06/2020</p>
-            <p>IBS group (https://www.ibs.ru/)</p>
-            <p>Разработка системы возврата налогов</p>
-            <p
-              >Стек: NodeJs, React, Redux, Redux Saga, Styled Components,
-              Microfronteds
-            </p>
-            <p>Старший инженер разработчик</p>
-            <p
-              >Большое предприятие с большие количетством вертикальных и
-              горизонтальных связей
-            </p>
-            <p>07/2019 - 10/2019</p>
-            <p>BlockProof Tech</p>
+
+            <div class="shadow">
+              <p>12/2019 - 06/2020</p>
+              <p>IBS group (https://www.ibs.ru/)</p>
+              <p>Разработка системы возврата налогов</p>
+              <p
+                >Стек: NodeJs, React, Redux, Redux Saga, Styled Components,
+                Microfronteds
+              </p>
+              <p>Старший инженер разработчик</p>
+              <p
+                >Большое предприятие с большие количетством вертикальных и
+                горизонтальных связей
+              </p>
+            </div>
+
+            <div class="row subtitle2">
+              <div class="col">
+                BlockProof Tech
+                <br />
+                <a
+                  href="https://dao.casino/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >https://dao.casino/</a
+                >
+              </div>
+              <div class="col">
+                <div class="right-subtitle">07/2019 - 10/2019</div>
+              </div>
+            </div>
             <p
               >Разработка DAO Casino (https://dao.casino/). Building a Gambling
               3.0 industry regulated by technology. Создание платформы на базе
@@ -475,10 +499,7 @@
               создавать без глубоких знаний блокчейн игры используя ее
               возможности
             </p>
-            <p
-              >Стек: NodeJs, Typescript, React, Redux, Redux Saga, Styled
-              Components, GraphQL (Apollo Client), PostgreSql
-            </p>
+
             <p
               >Участвовал в разработке проекта с начальной версии и доведения ее
               до MVP стадии
@@ -492,92 +513,147 @@
               >В коллективе 15 разработчиков. Использовался Scrum метод
               управления</p
             >
-            <p>01/2019 - 06/2019</p>
-            <p>Writing Club</p>
             <p
-              >Разработка ряда информационныйх сайтов. Разработка платформы
-              управления контентом
+              >Стек:
+              <em>
+                NodeJs, Typescript, React, Redux, Redux Saga, Styled Components,
+                GraphQL (Apollo Client), PostgreSql
+              </em>
             </p>
-            <p
-              >Стек технологий: MeteorJs, React, Redux, Redux Thunk, Semantic
-              UI, Google Maps Api, MongoDB
-            </p>
-            <p
-              >Было создано и запущенно 5 сайтов. Разработана основная часть
-              платформы как отдельный пакет - пример кода и одну из
-              промежуточных версий можно изучить тут
-              https://github.com/Miniwe/code_sample/tree/master/mcore
-            </p>
-            <p
-              >Проект целиком создавался мной: архитектура, разработка,
-              наполнение базовой информацией со сторонних ресурсов - был созданы
-              боты для скачивания первоначальных данных. Настройка Nginx,
-              Mongodb Server
-            </p>
-            <p>07/2018 - 12/2018</p>
-            <p>Maxiru (http://maxiru.com/)</p>
-            <p
-              >Разработка приложения для пассажиров крузных судов. Разработка
-              сайта https://www.virginvoyages.com/
-            </p>
-            <p
-              >Стек технологий: React, React Native, Expo, Redux Saga, Less,
-              Python
-            </p>
-            <p
-              >Проект находится в активной фазе разработки. Работают более 10
-              программистов
-            </p>
-            <p>Разработка экранов приложения была основная задача в проекте</p>
-            <p>03/2018 - 09/2018</p>
-            <p>JivoSite: Онлайн-консультант для сайта</p>
+
+            <div class="shadow">
+              <p>01/2019 - 06/2019</p>
+              <p>Writing Club</p>
+              <p
+                >Разработка ряда информационныйх сайтов. Разработка платформы
+                управления контентом
+              </p>
+              <p
+                >Стек технологий: MeteorJs, React, Redux, Redux Thunk, Semantic
+                UI, Google Maps Api, MongoDB
+              </p>
+              <p
+                >Было создано и запущенно 5 сайтов. Разработана основная часть
+                платформы как отдельный пакет - пример кода и одну из
+                промежуточных версий можно изучить тут
+                https://github.com/Miniwe/code_sample/tree/master/mcore
+              </p>
+              <p
+                >Проект целиком создавался мной: архитектура, разработка,
+                наполнение базовой информацией со сторонних ресурсов - был
+                созданы боты для скачивания первоначальных данных. Настройка
+                Nginx, Mongodb Server
+              </p>
+            </div>
+
+            <div class="shadow">
+              <p>07/2018 - 12/2018</p>
+              <p>Maxiru (http://maxiru.com/)</p>
+              <p
+                >Разработка приложения для пассажиров крузных судов. Разработка
+                сайта https://www.virginvoyages.com/
+              </p>
+              <p
+                >Стек технологий: React, React Native, Expo, Redux Saga, Less,
+                Python
+              </p>
+              <p
+                >Проект находится в активной фазе разработки. Работают более 10
+                программистов
+              </p>
+              <p
+                >Разработка экранов приложения была основная задача в проекте</p
+              >
+            </div>
+
+            <div class="row subtitle2">
+              <div class="col">
+                JivoSite: Онлайн-консультант для сайта
+                <br />
+                <a
+                  href="https://www.jivo.ru/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >https://www.jivo.ru/</a
+                >
+              </div>
+              <div class="col">
+                <div class="right-subtitle">03/2018 - 09/2018</div>
+              </div>
+            </div>
+
             <p>Чат для сайта и инструмент для общения с клиентами</p>
             <p>Стек технологий: Native Javascript, React, React Native, SVG</p>
             <p
               >Занимался рефакторингом и текущими работами по проекту.
               Паралельные работы с более чем 10 коллегами
             </p>
-            <p>01/2018 - 04/2018</p>
-            <p>Meteor Factory (http://meteorfactory.io)</p>
-            <p
-              >Разработака ресурса https://www.iplytics.com/ по поиску
-              патентов</p
-            >
-            <p
-              >Стек технологий: Native Javascript, React, Styled Components,
-              SVG</p
-            >
-            <p
-              >Занимался разработкой внутренних страниц. Международная комманда
-              из более чем 10 разработчиков
-            </p>
-            <p>05/2017 - 12/2017</p>
-            <p>FollowUp App - An evidence based EMR</p>
-            <p
-              >Разработака приложения для учета и сопровождения пациентов сети
-              клиник в Канаде. Разработка мобильной версии. Проект был доведен
-              до MVP стадии, состоялясь презентация конечным пользователям, но
-              дальше видимо появились проблемы с инвестициями
-            </p>
-            <p
-              >Стек технологий: MeteorJS, React, Less, Uniforms, SimpleSchema,
-              SemanticUI, Docker
-            </p>
-            <p>Ведущий разработчик на проекте. Постановка задач через trello</p>
-            <p>05/2016 - 06/2017</p>
-            <p>Net Work Shop It</p>
-            <p>своя фирма - работа по заказам</p>
-            <p
-              >Стек: Meteor, React, SemanticUI, Google Maps Api, Google
-              Translate Api, XSLT
-            </p>
-            <p
-              >Разработка ресурса для HR Skailink и разные фрилансерские работы
-              (верстка, скрипты), Участие в разработке мобильного приложения
-              takefin.com (рефакторинг, работа с камерой, MeteorJs)
-            </p>
-            <p>12/2012 - 04/2016</p>
-            <p>evrone.ru</p>
+
+            <div class="shadow">
+              <p>01/2018 - 04/2018</p>
+              <p>Meteor Factory (http://meteorfactory.io)</p>
+              <p
+                >Разработака ресурса https://www.iplytics.com/ по поиску
+                патентов</p
+              >
+              <p
+                >Стек технологий: Native Javascript, React, Styled Components,
+                SVG</p
+              >
+              <p
+                >Занимался разработкой внутренних страниц. Международная
+                комманда из более чем 10 разработчиков
+              </p>
+            </div>
+
+            <div class="shadow">
+              <p>05/2017 - 12/2017</p>
+              <p>FollowUp App - An evidence based EMR</p>
+              <p
+                >Разработака приложения для учета и сопровождения пациентов сети
+                клиник в Канаде. Разработка мобильной версии. Проект был доведен
+                до MVP стадии, состоялясь презентация конечным пользователям, но
+                дальше видимо появились проблемы с инвестициями
+              </p>
+              <p
+                >Стек технологий: MeteorJS, React, Less, Uniforms, SimpleSchema,
+                SemanticUI, Docker
+              </p>
+              <p
+                >Ведущий разработчик на проекте. Постановка задач через
+                trello</p
+              >
+            </div>
+            <div class="shadow">
+              <p>05/2016 - 06/2017</p>
+              <p>Net Work Shop It</p>
+              <p>своя фирма - работа по заказам</p>
+              <p
+                >Стек: Meteor, React, SemanticUI, Google Maps Api, Google
+                Translate Api, XSLT
+              </p>
+              <p
+                >Разработка ресурса для HR Skailink и разные фрилансерские
+                работы (верстка, скрипты), Участие в разработке мобильного
+                приложения takefin.com (рефакторинг, работа с камерой, MeteorJs)
+              </p>
+            </div>
+
+            <div class="row subtitle2">
+              <div class="col">
+                Evrone — компания по разработке программных продуктов
+                <br />
+                <a
+                  href="https://www.evrone.ru/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >https://www.evrone.ru/</a
+                >
+              </div>
+              <div class="col">
+                <div class="right-subtitle">07/2012 - 04/2016</div>
+              </div>
+            </div>
             <p>Front-end разработчик на различных проектах</p>
             <p
               >Ruby on Rails, Coffee Script, Sass, Backbone, Knockout,
@@ -587,50 +663,77 @@
               >Разработка frontend для сайтов seopult.pro, uptopromo.com,
               evrone.ru
             </p>
-            <p>07/2012 - 12/2012</p>
+
             <p>kipikupon.ru. Front-end разработчик</p>
+
             <p>Ruby on Rails, Coffee Script, Sass, Haml</p>
-            <p>01/2011 - 07/2012.</p>
-            <p
-              >Создание сервиса Youopened.com. Разработка интерфейсной части
-              (Backbone, Twitter Bootstrap, HTML5, CSS3, HTML5 Canvas)
-            </p>
-            <p>09/2009 - 12/2010</p>
-            <p
-              >http://trafica.ru/, разработка интерфейсной части проекта (Zend,
-              Jquery, Raphael)
-            </p>
-            <p>06/2007 - 09/2009</p>
-            <p>AdLabs, www.adlabs.ru</p>
-            <p
-              >Web программист. Разработка программной части сайтов:
-              www.verto.ru , www.nevkusno.ru, www.intalia.ru,
-              www.rusjeweller.ru, www.seneschal.ru, www.liteway.ru,
-              www.bigmash.ru
-            </p>
-            <p>HTML, Javascript, JQuery, Sass</p>
-            <p>08/2004 - 11/2006</p>
-            <p>РосБизнесКонсалтинг, www.rbc.ru, Web программист</p>
+
+            <div class="shadow">
+
+              <p>01/2011 - 07/2012</p>
+              <p
+                >Создание сервиса Youopened.com. Разработка интерфейсной части
+                (Backbone, Twitter Bootstrap, HTML5, CSS3, HTML5 Canvas)
+              </p>
+            </div>
+
+            <div class="shadow">
+              <p>09/2009 - 12/2010</p>
+              <p
+                >http://trafica.ru/, разработка интерфейсной части проекта
+                (Zend, Jquery, Raphael)
+              </p>
+              <p>06/2007 - 09/2009</p>
+              <p>AdLabs, www.adlabs.ru</p>
+              <p
+                >Web программист. Разработка программной части сайтов:
+                www.verto.ru , www.nevkusno.ru, www.intalia.ru,
+                www.rusjeweller.ru, www.seneschal.ru, www.liteway.ru,
+                www.bigmash.ru
+              </p>
+              <p>HTML, Javascript, JQuery, Sass</p>
+            </div>
+
+            <div class="row subtitle2">
+              <div class="col">
+                РосБизнесКонсалтинг, www.rbc.ru
+                <br />
+                <a
+                  href="https://www.rbc.ru/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >https://www.rbc.ru/</a
+                >
+              </div>
+              <div class="col">
+                <div class="right-subtitle">08/2004 - 11/2006</div>
+              </div>
+            </div>
+            <p>Web программист</p>
             <p
               >Разрабатывал сам или принимал участие в разработке:
               www.pogoda.rbc.ru, forum.top.rbc.ru, www.photofile.ru. Поддержка и
               разработка форумов forum.rbc.ru
             </p>
-            <p>10/2002 - 04/2004</p>
-            <p>ВЦ Каскад, www.vc-kaskad.ru</p>
-            <p
-              >1C, Web программист Старший инженер-программист (07/2003 -
-              04/2004), Внедрение и написание программ для автоматизации
-              предприятий. Специалист по интернет-технологиям (10/2002 -
-              07/2003), Разработка и поддержка сайта корпорации Каскад
-              www.kaskad.biz. Контроль над соблюдением договоров с фирмами
-              предоставляющими хостинг
-            </p>
-            <p>В разное время</p>
-            <p
-              >Некоторые фрилансерские разработки: petrogazeta.ru, inright.ru,
-              starguard.ru, tar-tass.ru, mosmonitor.ru, azcongress.ru
-            </p>
+            <div class="shadow">
+              <p>10/2002 - 04/2004</p>
+              <p>ВЦ Каскад, www.vc-kaskad.ru</p>
+              <p
+                >1C, Web программист Старший инженер-программист (07/2003 -
+                04/2004), Внедрение и написание программ для автоматизации
+                предприятий. Специалист по интернет-технологиям (10/2002 -
+                07/2003), Разработка и поддержка сайта корпорации Каскад
+                www.kaskad.biz. Контроль над соблюдением договоров с фирмами
+                предоставляющими хостинг
+              </p>
+            </div>
+            <div class="shadow">
+              <p>В разное время</p>
+              <p
+                >Некоторые фрилансерские разработки: petrogazeta.ru, inright.ru,
+                starguard.ru, tar-tass.ru, mosmonitor.ru, azcongress.ru
+              </p>
+            </div>
           </div>
         </div>
         <div class="row">
@@ -680,8 +783,8 @@
             </div>
           </div>
           <div class="col-7 col-md-8">
-            <p class="title3"
-              >Профессиональные интересы куда планирую развиваться:</p
+            <h3 class="title3"
+              >Профессиональные интересы куда планирую развиваться:</h3
             >
 
             <p>
