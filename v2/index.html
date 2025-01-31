@@ -179,8 +179,16 @@
         color: var(--bs-info);
       }
 
-      .shadow {
+      .shadow-exp {
         opacity: 0.2;
+      }
+      .shadow-exp:hover {
+        opacity: 0.8;
+        box-shadow-exp: none !important;
+      }
+      .shadow-exp:active,
+      .shadow-exp:focus {
+        opacity: 1;
       }
 
       p + .row.subtitle2 {
@@ -422,17 +430,6 @@
               </div>
             </div>
 
-            <div class="shadow">
-              <p>02/2020 - 09/2021</p>
-              <p>Фриланс</p>
-              <p
-                >Стек:<em>
-                  NodeJs, MeteorJs, React, Typescript, Microfronteds, WebRTC,
-                  Styled Components
-                </em>
-              </p>
-            </div>
-
             <div class="row subtitle2">
               <div class="col">
                 EnBourse - N°1 Plateforme Trader Indépendant
@@ -461,21 +458,6 @@
               возможностей. Встраивание в систему вебконференций на базе
               Janus.js(WebRTC)
             </p>
-
-            <div class="shadow">
-              <p>12/2019 - 06/2020</p>
-              <p>IBS group (https://www.ibs.ru/)</p>
-              <p>Разработка системы возврата налогов</p>
-              <p
-                >Стек: NodeJs, React, Redux, Redux Saga, Styled Components,
-                Microfronteds
-              </p>
-              <p>Старший инженер разработчик</p>
-              <p
-                >Большое предприятие с большие количетством вертикальных и
-                горизонтальных связей
-              </p>
-            </div>
 
             <div class="row subtitle2">
               <div class="col">
@@ -521,51 +503,6 @@
               </em>
             </p>
 
-            <div class="shadow">
-              <p>01/2019 - 06/2019</p>
-              <p>Writing Club</p>
-              <p
-                >Разработка ряда информационныйх сайтов. Разработка платформы
-                управления контентом
-              </p>
-              <p
-                >Стек технологий: MeteorJs, React, Redux, Redux Thunk, Semantic
-                UI, Google Maps Api, MongoDB
-              </p>
-              <p
-                >Было создано и запущенно 5 сайтов. Разработана основная часть
-                платформы как отдельный пакет - пример кода и одну из
-                промежуточных версий можно изучить тут
-                https://github.com/Miniwe/code_sample/tree/master/mcore
-              </p>
-              <p
-                >Проект целиком создавался мной: архитектура, разработка,
-                наполнение базовой информацией со сторонних ресурсов - был
-                созданы боты для скачивания первоначальных данных. Настройка
-                Nginx, Mongodb Server
-              </p>
-            </div>
-
-            <div class="shadow">
-              <p>07/2018 - 12/2018</p>
-              <p>Maxiru (http://maxiru.com/)</p>
-              <p
-                >Разработка приложения для пассажиров крузных судов. Разработка
-                сайта https://www.virginvoyages.com/
-              </p>
-              <p
-                >Стек технологий: React, React Native, Expo, Redux Saga, Less,
-                Python
-              </p>
-              <p
-                >Проект находится в активной фазе разработки. Работают более 10
-                программистов
-              </p>
-              <p
-                >Разработка экранов приложения была основная задача в проекте</p
-              >
-            </div>
-
             <div class="row subtitle2">
               <div class="col">
                 JivoSite: Онлайн-консультант для сайта
@@ -588,56 +525,6 @@
               >Занимался рефакторингом и текущими работами по проекту.
               Паралельные работы с более чем 10 коллегами
             </p>
-
-            <div class="shadow">
-              <p>01/2018 - 04/2018</p>
-              <p>Meteor Factory (http://meteorfactory.io)</p>
-              <p
-                >Разработака ресурса https://www.iplytics.com/ по поиску
-                патентов</p
-              >
-              <p
-                >Стек технологий: Native Javascript, React, Styled Components,
-                SVG</p
-              >
-              <p
-                >Занимался разработкой внутренних страниц. Международная
-                комманда из более чем 10 разработчиков
-              </p>
-            </div>
-
-            <div class="shadow">
-              <p>05/2017 - 12/2017</p>
-              <p>FollowUp App - An evidence based EMR</p>
-              <p
-                >Разработака приложения для учета и сопровождения пациентов сети
-                клиник в Канаде. Разработка мобильной версии. Проект был доведен
-                до MVP стадии, состоялясь презентация конечным пользователям, но
-                дальше видимо появились проблемы с инвестициями
-              </p>
-              <p
-                >Стек технологий: MeteorJS, React, Less, Uniforms, SimpleSchema,
-                SemanticUI, Docker
-              </p>
-              <p
-                >Ведущий разработчик на проекте. Постановка задач через
-                trello</p
-              >
-            </div>
-            <div class="shadow">
-              <p>05/2016 - 06/2017</p>
-              <p>Net Work Shop It</p>
-              <p>своя фирма - работа по заказам</p>
-              <p
-                >Стек: Meteor, React, SemanticUI, Google Maps Api, Google
-                Translate Api, XSLT
-              </p>
-              <p
-                >Разработка ресурса для HR Skailink и разные фрилансерские
-                работы (верстка, скрипты), Участие в разработке мобильного
-                приложения takefin.com (рефакторинг, работа с камерой, MeteorJs)
-              </p>
-            </div>
 
             <div class="row subtitle2">
               <div class="col">
@@ -668,32 +555,6 @@
 
             <p>Ruby on Rails, Coffee Script, Sass, Haml</p>
 
-            <div class="shadow">
-
-              <p>01/2011 - 07/2012</p>
-              <p
-                >Создание сервиса Youopened.com. Разработка интерфейсной части
-                (Backbone, Twitter Bootstrap, HTML5, CSS3, HTML5 Canvas)
-              </p>
-            </div>
-
-            <div class="shadow">
-              <p>09/2009 - 12/2010</p>
-              <p
-                >http://trafica.ru/, разработка интерфейсной части проекта
-                (Zend, Jquery, Raphael)
-              </p>
-              <p>06/2007 - 09/2009</p>
-              <p>AdLabs, www.adlabs.ru</p>
-              <p
-                >Web программист. Разработка программной части сайтов:
-                www.verto.ru , www.nevkusno.ru, www.intalia.ru,
-                www.rusjeweller.ru, www.seneschal.ru, www.liteway.ru,
-                www.bigmash.ru
-              </p>
-              <p>HTML, Javascript, JQuery, Sass</p>
-            </div>
-
             <div class="row subtitle2">
               <div class="col">
                 РосБизнесКонсалтинг, www.rbc.ru
@@ -715,24 +576,98 @@
               www.pogoda.rbc.ru, forum.top.rbc.ru, www.photofile.ru. Поддержка и
               разработка форумов forum.rbc.ru
             </p>
-            <div class="shadow">
-              <p>10/2002 - 04/2004</p>
-              <p>ВЦ Каскад, www.vc-kaskad.ru</p>
-              <p
-                >1C, Web программист Старший инженер-программист (07/2003 -
+            <div class="shadow-exp">
+              <div class="row subtitle2">
+                <div class="col"> Другие проекты </div>
+                <div class="col">
+                  <div class="right-subtitle">в разное время</div>
+                </div>
+              </div>
+
+
+
+              <details>
+                <summary>IBS group (https://www.ibs.ru/) (2019-2020)</summary>
+                Старший инженер разработчик. Разработка системы возврата
+                налогов. Большое предприятие с большим количетством вертикальных
+                и горизонтальных связей<br />
+                Стек:<em>
+                  NodeJs, React, Redux, Redux Saga, Styled Components,
+                  Microfronteds</em
+                >
+              </details>
+
+              <details>
+                <summary>Writing Club (2011-2020)</summary>
+                Разработка ряда информационныйх сайтов. Разработка платформы
+                управления контентом
+                <br />
+                Было создано и запущенно 5 сайтов. Разработана основная часть
+                платформы как отдельный пакет - пример кода и одну из
+                промежуточных версий можно изучить тут
+                https://github.com/Miniwe/code_sample/tree/master/mcore
+                <br />Проект целиком создавался мной: архитектура, разработка,
+                наполнение базовой информацией со сторонних ресурсов - был
+                созданы боты для скачивания первоначальных данных. Настройка
+                Nginx, Mongodb Server
+                <br />
+                Некоторые фрилансерские разработки: petrogazeta.ru, inright.ru,
+                starguard.ru, tar-tass.ru, mosmonitor.ru, azcongress.ru
+                <br />
+                Создание сервиса Youopened.com. Разработка интерфейсной части
+                (Backbone, Twitter Bootstrap, HTML5, CSS3, HTML5 Canvas)
+                <br />
+                http://trafica.ru/, разработка интерфейсной части проекта на
+                Zend, Jquery, Raphael Стек:<em>
+                  MeteorJs, React, Redux, Redux Thunk, Semantic UI, Google Maps
+                  Api, MongoDB</em
+                >
+              </details>
+              <details>
+                <summary
+                  >Ряд разработок для зарубежных компаний (2016-2018)</summary
+                >
+                Разработка ресурса для HR Skailink и разные фрилансерские работы
+                (верстка, скрипты), Участие в разработке мобильного приложения
+                takefin.com (рефакторинг, работа с камерой, MeteorJs)
+                <br />
+                Maxiru (http://maxiru.com/) Разработка приложения для пассажиров
+                крузных Разработка экранов приложения была основная задача в
+                проекте. судов. Разработка сайта https://www.virginvoyages.com/
+                <br />
+                Meteor Factory (http://meteorfactory.io), Разработака ресурса
+                https://www.iplytics.com/ по поиску патентов. Занимался
+                разработкой внутренних страниц. Международная комманда из более
+                чем 10 разработчиков
+                <br />
+                FollowUp App - An evidence based EMR.Разработака приложения для
+                учета и сопровождения пациентов сети клиник в Канаде. Разработка
+                мобильной версии. Проект был доведен до MVP стадии, состоялясь
+                презентация конечным пользователям, но дальше видимо появились
+                проблемы с инвестициями. Ведущий разработчик на проекте.
+                Постановка задач через trello
+                <p
+                  >Стек технологий: Native Javascript, React, Styled
+                  Components,SemanticUI, Docker, JSON Schema SVG</p
+                >
+              </details>
+
+              <details>
+                <summary>AdLabs, www.adlabs.ru (2007 - 2009)</summary>
+                Web программист. Разработка программной части сайтов:
+                www.verto.ru , www.nevkusno.ru, www.intalia.ru,
+                www.rusjeweller.ru, www.seneschal.ru, www.liteway.ru,
+                www.bigmash.ru
+              </details>
+              <details>
+                <summary>ВЦ Каскад, www.vc-kaskad.ru (2002 - 2004)</summary>
+                1C, Web программист Старший инженер-программист (07/2003 -
                 04/2004), Внедрение и написание программ для автоматизации
                 предприятий. Специалист по интернет-технологиям (10/2002 -
                 07/2003), Разработка и поддержка сайта корпорации Каскад
                 www.kaskad.biz. Контроль над соблюдением договоров с фирмами
                 предоставляющими хостинг
-              </p>
-            </div>
-            <div class="shadow">
-              <p>В разное время</p>
-              <p
-                >Некоторые фрилансерские разработки: petrogazeta.ru, inright.ru,
-                starguard.ru, tar-tass.ru, mosmonitor.ru, azcongress.ru
-              </p>
+              </details>
             </div>
           </div>
         </div>
@@ -854,39 +789,3 @@
     </div>
   </body>
 </html>
-<!--
-
-This is a great start to your resume! It provides a comprehensive overview of your skills and experience across various web development domains and software engineering projects.
-
-Here's how I suggest you further optimize it:
-
-Structure & Organization:
-
-Clear Sections: Separate into "Work Experience," "Projects," and maybe "Skills." This makes the resume more scannable and easy to read
-Project Descriptions (Focus on Impact): Each project should have a brief description that highlights your contribution, key technologies used, and measurable results (e.g., Increased traffic by X%, developed new features).
-Details & Emphasis:
-
-Quantify Achievements: Whenever possible, use numbers to quantify your impact ("Improved site conversion rate by 15%," "Built an app with X users"). This adds tangible value and draws more attention from recruiters.
-Technical Skills (Highlight Strongest): Categorize skills into frontend/backend categories like React, Node.js, Ruby on Rails. Prioritize the most relevant for your desired roles. You could also mention specific frameworks you're familiar with (e.g., Angular, Vue).
-Software Engineering: If applicable to the role you are targeting, highlight your experience in software engineering principles and practices such as Agile methodologies or version control systems like Git.
-Formatting Tips:
-
-Modern Template: Choose a clean, modern template that makes it easy for recruiters to view your information quickly (many free templates are available online).
-Use Bullets/Lists: Bullet points make large blocks of text easier to read and digest on the go.
-White Space: Don't overcrowd - use white space liberally to improve readability.
-Additional Considerations:
-
-Cover Letter & Portfolio: Have a strong cover letter ready that summarizes your relevant skills for each application, and an online portfolio or GitHub repository showcasing your work (if applicable).
-Here are some examples of how you could enhance specific sections:
-
-* **Work Experience**: Instead of simply listing job titles, describe the scope of projects. For instance, "Developed responsive websites using React and Node.js for a client in the healthcare industry" rather than just "Front-end Developer".
-
-* **Projects:** In each project description you mention: What was your role? Describe key technologies used, challenges faced and how they were solved, outcomes achieved (measurable results).
-Additional Resources:
-
-Resume Templates: https://www.canva.com/design-ideas/resume-templates
-Online Portfolio Tools: If you have work online, use platforms like GitHub to host your projects and showcase them effectively (especially for software engineering roles).
-I hope this helps! Please let me know if you'd like assistance with tailoring a specific section or would like more feedback. Good luck with your job hunt!
-
-
-  -->
