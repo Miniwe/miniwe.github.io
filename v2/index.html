@@ -1,808 +1,125 @@
 <!DOCTYPE html>
-<html lang="ru" data-bs-theme="light">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Фулстек JavaScript разработчик</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <title>Резюме - Виталий Дрюков</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      type="text/css"
-    />
-
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
-    />
-    <style type="text/css">
-      * {
-        font-size: 16px;
-        font-family: Nunito, -apple-system, BlinkMacSystemFont, Segoe UI,
-          Noto Sans, Helvetica, Arial, sans-serif, Apple Color Emoji,
-          Segoe UI Emoji;
-        color: var(--bs-body-color);
-      }
-
-      body {
-        background-color: var(--bs-body-bg);
-      }
-
-      p {
-        line-height: 1.8;
-        word-break: break-word;
-        display: block;
-        font-size: 1rem;
-        margin-block-end: 1rem;
-        margin-block-start: 0px;
-        margin-bottom: 1rem;
-      }
-
-      header.row {
-        position: sticky;
-        top: 0;
-        background-color: var(--bs-body-bg);
-        padding: 1rem;
-        padding-top: 2rem;
-        min-height: 90px;
-        z-index: 10;
-        overflow: hidden;
-        border-bottom: 1px solid var(--bs-secondary);
-        * {
-          line-height: 2rem;
-          margin: 0;
-        }
-      }
-      footer.row {
-        position: sticky;
-        bottom: 0;
-        background-color: var(--bs-body-bg);
-        padding: 1rem;
-        z-index: 10;
-        border-top: 1px solid var(--bs-secondary);
-        overflow: hidden;
-        * {
-          line-height: 1.4;
-          text-decoration: none;
-          font-size: 1.2rem;
-        }
-
-        a {
-          white-space: nowrap;
-        }
-      }
-
-      @media screen and (max-width: 426px) {
-        * {
-          font-size: 14px;
-        }
-        footer.row {
-          * {
-            font-size: 1rem;
-          }
-        }
-      }
-
-      @media print {
-        * {
-          font-size: 14px;
-        }
-        p {
-          line-height: 1.5;
-        }
-        footer.row {
-          position: static;
-        }
-
-        footer.row i {
-          position: static;
-          transform: unset;
-        }
-      }
-
-      .sticky {
-        position: sticky;
-        top: 90px;
-        padding-top: 1rem;
-        padding-right: 1rem;
-        border-right: 1px solid var(--bs-secondary);
-        padding-bottom: 2rem;
-        z-index: 9;
-      }
-
-      main {
-        padding: 0 1rem;
-      }
-
-      main .row .col-7,
-      main .row .col-md-8 {
-        padding-top: 1rem;
-      }
-
-      .title1 {
-        color: var(--bs-text);
-        display: block;
-        font-size: 1.4rem;
-        font-weight: 600;
-      }
-
-      .subtitle1 {
-        color: var(--bs-secondary);
-        font-size: 1.6rem;
-      }
-
-      .title3 {
-        color: var(--bs-secondary);
-        font-size: 1.2rem;
-        font-weight: 600;
-        margin-bottom: 0rem;
-        overflow-wrap: break-word;
-      }
-
-      .title3 + p {
-        margin-top: 0rem;
-      }
-
-      i {
-        position: absolute;
-        z-index: -1;
-        transform: scale(6.5) translate(3px, -2px);
-        opacity: 0.1;
-      }
-
-      .row.subtitle2 {
-        font-weight: 600;
-        margin-top: 1rem;
-      }
-
-      .row.subtitle2 .col {
-        color: var(--bs-secondary-color);
-        font-size: 1.2rem;
-      }
-      .row.subtitle2 a {
-        font-size: 0.8rem;
-        opacity: 0.8;
-        font-weight: normal;
-        text-decoration: none;
-      }
-
-      .right-subtitle {
-        text-align: right;
-        font-size: 0.9rem;
-
-        font-weight: 700;
-        color: var(--bs-info);
-      }
-
-      .shadow-exp {
-        opacity: 0.2;
-      }
-      .shadow-exp:hover {
-        opacity: 0.8;
-        box-shadow-exp: none !important;
-      }
-      .shadow-exp:active,
-      .shadow-exp:focus {
-        opacity: 1;
-      }
-
-      p + .row.subtitle2 {
-        margin-top: 2rem;
-      }
-    </style>
-    <script>
-      window.addEventListener('load', () => {
-        'use strict';
-
-        const getStoredTheme = () => localStorage.getItem('theme');
-        const setStoredTheme = (theme) => localStorage.setItem('theme', theme);
-
-        const getPreferredTheme = () => {
-          const storedTheme = getStoredTheme();
-          if (storedTheme) {
-            return storedTheme;
-          }
-
-          return window.matchMedia('(prefers-color-scheme: dark)').matches
-            ? 'dark'
-            : 'light';
-        };
-
-        const setTheme = (theme) => {
-          if (theme === 'auto') {
-            document.documentElement.setAttribute(
-              'data-bs-theme',
-              window.matchMedia('(prefers-color-scheme: dark)').matches
-                ? 'dark'
-                : 'light',
-            );
-          } else {
-            document.documentElement.setAttribute('data-bs-theme', theme);
-          }
-        };
-
-        setTheme(getPreferredTheme());
-      });
-    </script>
   </head>
   <body>
-    <div class="container">
-      <header class="row align-items-center">
-        <div data-plugin="bs-darkmode-toggle"></div>
-
-        <h2 class="title1 col-4"> Виталий Дрюков </h2>
-        <h1 class="subtitle1 col-8 text-end">
-          Фулстек JavaScript разработчик
-        </h1>
+    <div class="container mt-5">
+      <header class="text-center mb-4">
+        <h1>Виталий Дрюков</h1>
+        <p class="text-muted">Старший фронтенд-разработчик</p>
       </header>
 
-      <main>
-        <div class="row">
-          <div class="col-5 col-md-4">
-            <div class="sticky">
-              <h3 class="title3">Занятость</h3>
-              <p
-                >полная, почасовая с долгосрочным контрактом, проектная
-                работа</p
-              >
-              <h3 class="title3">Трудовое соглашение</h3>
-              <p>контракт, ГХП, самозанятый</p>
-              <h3 class="title3">Тип работы</h3>
-              <p
-                >удаленная, работа в офисе в Москве с частичным посещением
-                офиса, релокация</p
-              >
-            </div>
-          </div>
-          <div class="col-7 col-md-8">
-            <p>
-              Более 19 лет опыта веб-разработки подтверждение моей глубокой
-              квалификации. Я специализируюсь на Front-end разработках с фокусом
-              на JavaScript, а также Fullstack JS разработке, которая позволяет
-              мне работать над всеми частями разработки кода веб приложений.
-            </p>
-            <p>
-              Знаком со всеми этапами жизненного цикла проекта, включая оценку
-              требований клиента, оценку времени разработки, планирование
-              разработки, саму разработку, создание технической документации и
-              управление командой. Есть опыт использования дополнительных
-              инструментов для работы с веб-приложениями, таких как инструменты
-              CI/CD для сборки и развертывания проектов, системы кэширования,
-              системы мониторинга производительности, поисковые системы.
-            </p>
-
-            <p>
-              Дипломатичность, внимание к деталям, передача накопленных знаний
-              новым сотрудникам организации. Опыт взаимодействия с заказчиками
-              из США, Великобритании, Германии, Чехии, Канады, ближнего
-              зарубежья. Работа на фрилансерских площадках.
-            </p>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-5 col-md-4">
-            <div class="sticky">
-              <h3 class="title3">Знания</h3>
-              <div class="row subtitle2">
-                <div class="col-9">
-                  Javascript
-                  <br />
-                  <a
-                    >Typescript, Meteor, NodeJs, NestJs, JQuery, GSAP,
-                    Highcharts</a
-                  >
-                </div>
-                <div class="col-3-4">
-                  <div class="right-subtitle"><!--10/10--></div>
-                </div>
-              </div>
-              <div class="row subtitle2">
-                <div class="col-9">
-                  React
-                  <br />
-                  <a
-                    >Effector, Jest, GraphQL Apllo Client, React Router, Redux,
-                    Redux Toolkit, Redux Saga, Mobx</a
-                  >
-                </div>
-                <div class="col-3-4">
-                  <div class="right-subtitle"><!--10/10--></div>
-                </div>
-              </div>
-              <div class="row subtitle2">
-                <div class="col-9">
-                  CSS
-                  <br />
-                  <a
-                    >And Design, Postcss, Less, Stylus, Sass, Bootstrap,
-                    Semantic UI, Material UI, BEM</a
-                  >
-                </div>
-                <div class="col-3-4">
-                  <div class="right-subtitle"><!--10/10--></div>
-                </div>
-              </div>
-              <div class="row subtitle2">
-                <div class="col-9">
-                  СУБД
-                  <br />
-                  <a>MySql, MongoDB, PostgreSQL</a>
-                </div>
-                <div class="col-3-4">
-                  <div class="right-subtitle"><!--10/10--></div>
-                </div>
-              </div>
-              <div class="row subtitle2">
-                <div class="col-9">
-                  Интернет сервисы
-                  <br />
-                  <a
-                    >AWS, Google Maps, Google Web Services, Facebook API,
-                    Shopify API, Paypal API, Intercom</a
-                  >
-                </div>
-                <div class="col-3-4">
-                  <div class="right-subtitle"><!--10/10--></div>
-                </div>
-              </div>
-              <div class="row subtitle2">
-                <div class="col-9">
-                  Системы управления жизненным циклом разработки
-                  <br />
-                  <a>Git, Gitlab, Jira, Trello, PVCS Tracker, Unfuddle</a>
-                </div>
-                <div class="col-3-4">
-                  <div class="right-subtitle"><!--10/10--></div>
-                </div>
-              </div>
-              <div class="row subtitle2">
-                <div class="col-9">
-                  Другие технологии
-                  <br />
-                  <a
-                    >Ruby, RoR Middleman, Webpack, Vite, Docker, Php, Laravel,
-                    Symphony, Zend, XML, XSLT, XPath, Wordpress, Linux на уровне
-                    пользователя, Photoshop, Figma, Ollama, WebRTC</a
-                  >
-                </div>
-                <div class="col-3-4">
-                  <div class="right-subtitle"><!--10/10--></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-7 col-md-8">
-            <h3 class="title3">Опыт работы </h3>
-
-            <div class="row subtitle2">
-              <div class="col">
-                Mitgo
-                <br />
-                <a
-                  href="https://mitgo.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >https://mitgo.com/</a
-                >
-              </div>
-              <div class="col-4">
-                <div class="right-subtitle">04/2022 - Текущее время</div>
-              </div>
-            </div>
-            <strong>Старший фронтенд разработчик</strong>
-            <p
-              >Mitgo Group — глобальная технологическая компания, занимающаяся
-              разработкой инновационных маркетинговых решений и развитием
-              предпринимательства.
-              <br />
-              Разработка Tapfiliate — платформы для отслеживания партнерских
-              программ и рефералов.
-              <br />
-              • Примарная работа с JavaScript (ES6+), включая написание кода для
-              различных проектов.<br />
-              • Архитектура приложений: проектирование структуры данных,
-              оптимизация нагрузки и улучшение производительности.<br />
-              • Использование инструментов разработчика: VS Code, Postman,
-              Swagger.<br />
-              • Тестирование кода с использованием Jest, и других фреймворков
-              для проверки функциональности.<br />
-              • Обучение пользователей: создание документации и интерактивных
-              примеров. Собеседование кандидатов на проекты компании<br />
-              • Внедрялstate management с Redux, оптимизировал rendering и
-              уменьшил загрузки.<br />
-              • Носил ответственность за разработку крупных частей
-              веб-приложения.<br />
-              • Использовался Jest для тестирования функционала и уменьшения
-              дефектов.<br />
-              • Включал аналитику данных, такие как Google Analytics, для
-              улучшения пользовательского опыта.
-            </p>
-            <p>
-              Стек:
-              <em>
-                NodeJs, AntDesign, React, ReduxToolkit, Typescript,
-                Microfronteds, PHP, Symfony, Styled Components.
-              </em>
-            </p>
-
-            <div class="row subtitle2">
-              <div class="col">
-                Digital Agro
-                <br />
-                <a
-                  href="https://digitalagro.ru/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >https://digitalagro.ru/</a
-                >
-              </div>
-              <div class="col-4">
-                <div class="right-subtitle">09/2021 - 04/2022</div>
-              </div>
-            </div>
-            <p>
-              ООО «Диджитал Агро» — компания, разрабатывающая программное
-              обеспечение и сервисы в сфере сельского хозяйства. Компания
-              повышает эффективность агробизнеса с помощью IT-решений и
-              независимой агрономической экспертизы
-              <br />
-              Разрабатывал интерфейсы для работы с сельхозйственными задачами с
-              использованием JavaScript и React.
-            </p>
-            <p>
-              Стек:
-              <em>
-                Разработка приложения на платформе Google Maps + Leaflet.js.
-                Интерфейс разрабатывался Typescript на Styled Components
-              </em>
-            </p>
-
-            <div class="row subtitle2">
-              <div class="col">
-                EnBourse - N°1 Plateforme Trader Indépendant
-                <br />
-                <a
-                  href="https://www.en-bourse.fr/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >https://www.en-bourse.fr/</a
-                >
-              </div>
-              <div class="col-4">
-                <div class="right-subtitle">08/2020 - 02/2020</div>
-              </div>
-            </div>
-            <p
-              >Французская компания разрабатывающая омплексное решению для
-              инвестирования в криптоактивы.</p
-            >
-
-            <p><strong>Разработчик</strong></p>
-
-            <p>Разработка системы обучения трейдеров на базе Rocket.Chat</p>
-            <p
-              >Стек: NodeJs, MeteorJs, React, Rocket.Chat, Microfronteds,
-              WebRTC</p
-            >
-            <p>Старший инженер разработчик</p>
-            <p
-              >Работа над улучшением системы чатов, добавление новых
-              возможностей. Встраивание в систему вебконференций на базе
-              Janus.js(WebRTC)
-            </p>
-
-            <div class="row subtitle2">
-              <div class="col">
-                BlockProof Tech
-                <br />
-                <a
-                  href="https://dao.casino/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >https://dao.casino/</a
-                >
-              </div>
-              <div class="col-4">
-                <div class="right-subtitle">07/2019 - 10/2019</div>
-              </div>
-            </div>
-            <p
-              >Разработка DAO Casino (https://dao.casino/). Building a Gambling
-              3.0 industry regulated by technology. Создание платформы на базе
-              блокчейн-протокола. Платформа должна позволять разработчикам
-              создавать без глубоких знаний блокчейн игры используя ее
-              возможности
-            </p>
-
-            <p
-              >Участвовал в разработке проекта с начальной версии и доведения ее
-              до MVP стадии
-            </p>
-            <p
-              >Разработка фронт части ландинг сайта, создания библиотеки
-              компонент, разработка административной панели для разработчиков и
-              управления играми
-            </p>
-            <p
-              >В коллективе 15 разработчиков. Использовался Scrum метод
-              управления</p
-            >
-            <p
-              >Стек:
-              <em>
-                NodeJs, Typescript, React, Redux, Redux Saga, Styled Components,
-                GraphQL (Apollo Client), PostgreSql
-              </em>
-            </p>
-
-            <div class="row subtitle2">
-              <div class="col">
-                JivoSite: Онлайн-консультант для сайта
-                <br />
-                <a
-                  href="https://www.jivo.ru/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >https://www.jivo.ru/</a
-                >
-              </div>
-              <div class="col-4">
-                <div class="right-subtitle">03/2018 - 09/2018</div>
-              </div>
-            </div>
-
-            <p>Чат для сайта и инструмент для общения с клиентами</p>
-            <p>Стек технологий: Native Javascript, React, React Native, SVG</p>
-            <p
-              >Занимался рефакторингом и текущими работами по проекту.
-              Паралельные работы с более чем 10 коллегами
-            </p>
-
-            <div class="row subtitle2">
-              <div class="col">
-                Evrone — компания по разработке программных продуктов
-                <br />
-                <a
-                  href="https://www.evrone.ru/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >https://www.evrone.ru/</a
-                >
-              </div>
-              <div class="col-4">
-                <div class="right-subtitle">07/2012 - 04/2016</div>
-              </div>
-            </div>
-            <p>Front-end разработчик на различных проектах</p>
-            <p
-              >Ruby on Rails, Coffee Script, Sass, Backbone, Knockout,
-              Middleman</p
-            >
-            <p
-              >Разработка frontend для сайтов seopult.pro, uptopromo.com,
-              evrone.ru
-            </p>
-
-            <p>kipikupon.ru. Front-end разработчик</p>
-
-            <p>Ruby on Rails, Coffee Script, Sass, Haml</p>
-
-            <div class="row subtitle2">
-              <div class="col">
-                РосБизнесКонсалтинг, www.rbc.ru
-                <br />
-                <a
-                  href="https://www.rbc.ru/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >https://www.rbc.ru/</a
-                >
-              </div>
-              <div class="col-4">
-                <div class="right-subtitle">08/2004 - 11/2006</div>
-              </div>
-            </div>
-            <p>Web программист</p>
-            <p
-              >Разрабатывал сам или принимал участие в разработке:
-              www.pogoda.rbc.ru, forum.top.rbc.ru, www.photofile.ru. Поддержка и
-              разработка форумов forum.rbc.ru
-            </p>
-            <div class="shadow-exp">
-              <div class="row subtitle2">
-                <div class="col"> Другие проекты </div>
-                <div class="col-4">
-                  <div class="right-subtitle">в разное время</div>
-                </div>
-              </div>
-
-              <details>
-                <summary>IBS group (https://www.ibs.ru/) (2019-2020)</summary>
-                Старший инженер разработчик. Разработка системы возврата
-                налогов. Большое предприятие с большим количетством вертикальных
-                и горизонтальных связей<br />
-                Стек:<em>
-                  NodeJs, React, Redux, Redux Saga, Styled Components,
-                  Microfronteds</em
-                >
-              </details>
-
-              <details>
-                <summary>Writing Club (2011-2020)</summary>
-                Разработка ряда информационныйх сайтов. Разработка платформы
-                управления контентом
-                <br />
-                Было создано и запущенно 5 сайтов. Разработана основная часть
-                платформы как отдельный пакет - пример кода и одну из
-                промежуточных версий можно изучить тут
-                https://github.com/Miniwe/code_sample/tree/master/mcore
-                <br />Проект целиком создавался мной: архитектура, разработка,
-                наполнение базовой информацией со сторонних ресурсов - был
-                созданы боты для скачивания первоначальных данных. Настройка
-                Nginx, Mongodb Server
-                <br />
-                Некоторые фрилансерские разработки: petrogazeta.ru, inright.ru,
-                starguard.ru, tar-tass.ru, mosmonitor.ru, azcongress.ru
-                <br />
-                Создание сервиса Youopened.com. Разработка интерфейсной части
-                (Backbone, Twitter Bootstrap, HTML5, CSS3, HTML5 Canvas)
-                <br />
-                http://trafica.ru/, разработка интерфейсной части проекта на
-                Zend, Jquery, Raphael Стек:<em>
-                  MeteorJs, React, Redux, Redux Thunk, Semantic UI, Google Maps
-                  Api, MongoDB</em
-                >
-              </details>
-              <details>
-                <summary
-                  >Ряд разработок для зарубежных компаний (2016-2018)</summary
-                >
-                Разработка ресурса для HR Skailink и разные фрилансерские работы
-                (верстка, скрипты), Участие в разработке мобильного приложения
-                takefin.com (рефакторинг, работа с камерой, MeteorJs)
-                <br />
-                Maxiru (http://maxiru.com/) Разработка приложения для пассажиров
-                крузных Разработка экранов приложения была основная задача в
-                проекте. судов. Разработка сайта https://www.virginvoyages.com/
-                <br />
-                Meteor Factory (http://meteorfactory.io), Разработака ресурса
-                https://www.iplytics.com/ по поиску патентов. Занимался
-                разработкой внутренних страниц. Международная комманда из более
-                чем 10 разработчиков
-                <br />
-                FollowUp App - An evidence based EMR.Разработака приложения для
-                учета и сопровождения пациентов сети клиник в Канаде. Разработка
-                мобильной версии. Проект был доведен до MVP стадии, состоялясь
-                презентация конечным пользователям, но дальше видимо появились
-                проблемы с инвестициями. Ведущий разработчик на проекте.
-                Постановка задач через trello
-                <p
-                  >Стек технологий: Native Javascript, React, Styled
-                  Components,SemanticUI, Docker, JSON Schema SVG</p
-                >
-              </details>
-
-              <details>
-                <summary>AdLabs, www.adlabs.ru (2007 - 2009)</summary>
-                Web программист. Разработка программной части сайтов:
-                www.verto.ru , www.nevkusno.ru, www.intalia.ru,
-                www.rusjeweller.ru, www.seneschal.ru, www.liteway.ru,
-                www.bigmash.ru
-              </details>
-              <details>
-                <summary>ВЦ Каскад, www.vc-kaskad.ru (2002 - 2004)</summary>
-                1C, Web программист Старший инженер-программист (07/2003 -
-                04/2004), Внедрение и написание программ для автоматизации
-                предприятий. Специалист по интернет-технологиям (10/2002 -
-                07/2003), Разработка и поддержка сайта корпорации Каскад
-                www.kaskad.biz. Контроль над соблюдением договоров с фирмами
-                предоставляющими хостинг
-              </details>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-5 col-md-4">
-            <div class="sticky">
-              <h-43 class="title3">Образование</h-43>
-              <div class="right-subtitle">2000 г.</div>
-              <p
-                >Бакинский государственный университет, факультет "Прикладная
-                математика и экономическая кибернетика".
-              </p>
-              <p>Специальность: <strong>программист, математик</strong></p>
-              <h3 class="title3">Языки</h3>
-              <div class="row subtitle2">
-                <div class="col-9">
-                  Английский
-                  <br />
-                  <a
-                    >свободно читаю техническую документацию, могу
-                    объясниться</a
-                  >
-                </div>
-                <div class="col-3-4">
-                  <div class="right-subtitle">B1->B2</div>
-                </div>
-              </div>
-              <div class="row subtitle2">
-                <div class="col-9"> Русский </div>
-                <div class="col-3-4">
-                  <div class="right-subtitle">родной</div>
-                </div>
-              </div>
-              <div class="row subtitle2">
-                <div class="col-9">
-                  Прочие
-                  <br />
-                  <a>
-                    Сербский (на бытовом уровне)<br />
-                    Турецкий (на уровне понимания)<br />
-                    Испанский (изучаю)
-                  </a>
-                </div>
-                <div class="col-3-4">
-                  <div class="right-subtitle"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-7 col-md-8">
-            <h3 class="title3">&nbsp;</h3>
-            <p>
-              Пытаюсь всесторонне развиваться. Всегда можно выбрать и
-              переключиться на более узкую специальность, так как есть понимание
-              разных сфер разработки, а также знание разных языков и
-              инструментов программирования.
-            </p>
-            <p>
-              Почти 20 лет в веб-разработке с использованием Опыт разработки
-              сложного программного обеспечения, такого как CRM, платформы
-              показа рекламы, высоконагруженные распределенные системы. Готов к
-              командной работе с Agile-процессами, TDD и CI. Хорошее понимание и
-              способность настраивать процессы разработки и среды с нуля. Хорошо
-              создаю и программирую хорошо спроектированное, тестируемое,
-              масштабируемое и расширяемое программное обеспечение. Непрерывно
-              учусь, сейчас ищу возможности улучшить высоконагруженные и
-              архитектурные навыки программного обеспечения.
-            </p>
-            <p>
-              Активно изучаю использование систем ИИ в работе и использую в
-              проекте
-            </p>
-          </div>
-        </div>
-      </main>
-      <footer class="row">
-        <div class="col-5 col-md-4 title3"> Контакты </div>
-        <div class="col-3 col-md-4">
+      <div class="row" style="max-width: 480px; min-width: 300px">
+        <div class="col-6">
+          Телеграм:
           <a
             href="https://t.me/miniwe"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <i class="bi-telegram"></i>
-            &nbsp; @miniwe
+            @miniwe
           </a>
         </div>
-        <div class="col-4 col-md-4">
+        <div class="col-6">
+          Почта:
           <a
             href="mailto:miniwe@mail.ru"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <i class="bi-envelope"></i>
-            &nbsp; miniwe@mail.ru
+            miniwe@mail.ru
           </a>
         </div>
-      </footer>
+      </div>
+      <p>&nbsp;</p>
+      <section class="mb-4">
+        <h2>Ключевые навыки</h2>
+        <ul class="list-group">
+          <li class="list-group-item"
+            >JavaScript и TypeScript (экспертный уровень)</li
+          >
+          <li class="list-group-item">React, Redux Toolkit, MobX</li>
+          <li class="list-group-item">CSS, PostCSS, Less, Stylus, Sass</li>
+          <li class="list-group-item">MySQL, MongoDB, PostgreSQL</li>
+          <li class="list-group-item">AWS, Google Maps, Facebook API</li>
+          <li class="list-group-item">Git, Webpack, Vite, Docker</li>
+        </ul>
+      </section>
+
+      <section class="mb-4">
+        <h2>Профессиональный опыт</h2>
+        <div class="mb-3">
+          <h4>Старший фронтенд-разработчик в Mitgo</h4>
+          <p class="text-muted">Апрель 2022 – настоящее время</p>
+          <p
+            >Разработка Tapfiliate – платформы для отслеживания партнерских
+            программ и рефералов. Внедрение управления состоянием с Redux,
+            оптимизация рендеринга и уменьшение времени загрузки.
+            Ответственность за разработку ключевых компонентов веб-приложения.
+            Использование Jest для тестирования и интеграция аналитики данных
+            для улучшения пользовательского опыта.</p
+          >
+        </div>
+        <div class="mb-3">
+          <h4>Разработчик интерфейсов в Digital Agro</h4>
+          <p class="text-muted">Сентябрь 2021 – Апрель 2022</p>
+          <p
+            >Создание интерфейсов для аграрных задач с применением React и
+            TypeScript, интеграция с Google Maps и Leaflet.js.</p
+          >
+        </div>
+        <div class="mb-3">
+          <h4>Старший инженер-разработчик в EnBourse</h4>
+          <p class="text-muted">Август 2020 – Февраль 2021</p>
+          <p
+            >Разработка системы обучения трейдеров на базе Rocket.Chat,
+            улучшение чатов и внедрение веб-конференций с использованием
+            Janus.js (WebRTC).</p
+          >
+        </div>
+        <div class="mb-3">
+          <h4>Разработчик в BlockProof Tech</h4>
+          <p class="text-muted">Июль 2019 – Октябрь 2019</p>
+          <p
+            >Участие в создании платформы DAO Casino на блокчейн-протоколе,
+            разработка фронтенда, библиотек компонентов и административной
+            панели.</p
+          >
+        </div>
+      </section>
+
+      <section class="mb-4">
+        <h2>Образование</h2>
+        <p
+          >Бакинский государственный университет (2000) - Прикладная математика
+          и экономическая кибернетика.</p
+        >
+      </section>
+
+      <section>
+        <h2>Языки</h2>
+        <p
+          >Свободно владеет русским и английским языками, что позволяет
+          эффективно взаимодействовать с международными командами и
+          клиентами.</p
+        >
+      </section>
+      <hr />
+      <section>
+        <h4 align="center"
+          ><a href="http://localhost:3000/v3/">Развернутое резюме</a></h4
+        >
+        <p>&nbsp;</p>
+      </section>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
