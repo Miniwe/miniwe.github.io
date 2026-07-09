@@ -1,1530 +1,556 @@
-<!doctype html>
-<html lang="ru" data-theme="light">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Senior Full-Stack Engineer — miniwe · Москва</title>
-    <meta
-      name="description"
-      content="20 лет в TypeScript/Node.js/NestJS. Закрываю задачи, которые блокируют продукт: финансовая точность, архитектура под нагрузку, интеграции с внешними API. Москва."
-    />
-    <meta
-      name="keywords"
-      content="Senior Full-Stack Engineer, Node.js, TypeScript, NestJS, React, PostgreSQL, BullMQ, Redis, Docker, Москва"
-    />
-    <meta name="author" content="miniwe" />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://miniwe.github.io/" />
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="profile" />
-    <meta property="og:title" content="Senior Full-Stack Engineer — miniwe" />
-    <meta
-      property="og:description"
-      content="20 лет в TypeScript-экосистеме. Финансовая точность, архитектура под нагрузку, надёжные интеграции. Москва."
-    />
-    <meta property="og:url" content="https://miniwe.github.io/" />
-    <meta property="og:locale" content="ru_RU" />
-    <meta property="profile:first_name" content="miniwe" />
-    <meta property="profile:username" content="miniwe" />
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="Senior Full-Stack Engineer — miniwe" />
-    <meta
-      name="twitter:description"
-      content="20 лет в TypeScript-экосистеме. NestJS, PostgreSQL, BullMQ, React."
-    />
-
-    <!-- Structured Data: Person + Resume -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "miniwe",
-        "jobTitle": "Senior Full-Stack Engineer",
-        "url": "https://miniwe.github.io/",
-        "email": "miniwe@mail.ru",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Москва",
-          "addressCountry": "RU"
-        },
-        "sameAs": ["https://t.me/miniwe", "https://github.com/miniwe"],
-        "alumniOf": {
-          "@type": "CollegeOrUniversity",
-          "name": "Baku State University",
-          "department": "Прикладная математика"
-        },
-        "knowsAbout": [
-          "Node.js",
-          "TypeScript",
-          "NestJS",
-          "React",
-          "PostgreSQL",
-          "BullMQ",
-          "Redis",
-          "Docker",
-          "OpenAI API"
-        ]
-      }
-    </script>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300..700&display=swap"
-      rel="stylesheet"
-    />
-
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Виталий Дрюков — Senior Full-Stack Engineer / Архитектор решений / Tech Lead</title>
     <style>
-      /* ─── ART DIRECTION ────────────────────────────────────────────────────────
-       Concept: engineer-as-craftsman. Inspired by the illustration: warm amber
-       crystals, kraft paper textures, precise hand-drawn diagrams. Confidence
-       without noise.
-       Palette: warm parchment surfaces + deep terracotta accent
-       Typography: Instrument Serif (display) + DM Sans (body)
-       Density: spacious — portfolio/personal site register
-    ──────────────────────────────────────────────────────────────────────────── */
+        :root {
+            --bg-color: #ffffff;         /* Белый как база */
+            --card-bg: #f8fafc;          /* Мягкий светлый для карточек (Slate 50) */
+            --accent-bg: #e0f2fe;        /* Бледно-голубой для выделений (Sky 100) */
+            --border-color: #cbd5e1;     /* Контрастные границы (Slate 300) */
 
-      :root,
-      [data-theme='light'] {
-        --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
-        --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
-        --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
-        --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
-        --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
-        --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
-        --text-hero: clamp(2.5rem, 1rem + 5vw, 6rem);
+            /* Текстовые цвета */
+            --text-main: #0f172a;        /* Глубокий темный основной текст (Slate 900) */
+            --text-muted: #475569;       /* Понятный читаемый серый текст (Slate 600) */
+            --text-link: #0284c7;        /* Синий для ссылок */
 
-        --space-1: 0.25rem;
-        --space-2: 0.5rem;
-        --space-3: 0.75rem;
-        --space-4: 1rem;
-        --space-5: 1.25rem;
-        --space-6: 1.5rem;
-        --space-8: 2rem;
-        --space-10: 2.5rem;
-        --space-12: 3rem;
-        --space-16: 4rem;
-        --space-20: 5rem;
-        --space-24: 6rem;
+            /* Вкрапления по запросу */
+            --accent-blue: #1e3a8a;      /* Темно-синий/голубой для главных заголовков */
+            --accent-green: #14532d;     /* Темно-зеленый (для дат и логов) */
+            --accent-red: #7f1d1d;       /* Темно-красный (для маркеров кейсов) */
 
-        /* Warm parchment surfaces */
-        --color-bg: #f6f0e6;
-        --color-surface: #faf6ee;
-        --color-surface-2: #fdfaf5;
-        --color-surface-offset: #ede4d4;
-        --color-surface-dynamic: #e2d5c0;
-        --color-divider: #d8cdb8;
-        --color-border: #cfc3ab;
-
-        /* Ink text */
-        --color-text: #211c14;
-        --color-text-muted: #6b5f4a;
-        --color-text-faint: #a99880;
-        --color-text-inverse: #f6f0e6;
-
-        /* Terracotta accent */
-        --color-primary: #b54a1e;
-        --color-primary-hover: #8f3515;
-        --color-primary-active: #6b260f;
-        --color-primary-highlight: #f0ddd5;
-
-        /* Amber secondary (for tags/chips only) */
-        --color-amber: #c87c2a;
-        --color-amber-dim: #e8d5b0;
-
-        --radius-sm: 0.375rem;
-        --radius-md: 0.5rem;
-        --radius-lg: 0.75rem;
-        --radius-xl: 1rem;
-        --radius-full: 9999px;
-
-        --transition-interactive: 180ms cubic-bezier(0.16, 1, 0.3, 1);
-
-        --shadow-sm: 0 1px 3px oklch(0.2 0.03 55 / 0.08);
-        --shadow-md: 0 4px 16px oklch(0.2 0.03 55 / 0.1);
-        --shadow-lg: 0 12px 40px oklch(0.2 0.03 55 / 0.14);
-
-        --font-display: 'Instrument Serif', Georgia, serif;
-        --font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
-
-        --content-narrow: 640px;
-        --content-default: 900px;
-        --content-wide: 1100px;
-      }
-
-      [data-theme='dark'] {
-        --color-bg: #181410;
-        --color-surface: #1e1a14;
-        --color-surface-2: #231f18;
-        --color-surface-offset: #2a2419;
-        --color-surface-dynamic: #333026;
-        --color-divider: #3a3326;
-        --color-border: #46402f;
-        --color-text: #e8dfc8;
-        --color-text-muted: #9e9070;
-        --color-text-faint: #5e5642;
-        --color-text-inverse: #1e1a14;
-        --color-primary: #e07a4a;
-        --color-primary-hover: #c95f2d;
-        --color-primary-active: #a84520;
-        --color-primary-highlight: #3d2418;
-        --color-amber: #d99c52;
-        --color-amber-dim: #3a2f1a;
-        --shadow-sm: 0 1px 3px oklch(0 0 0 / 0.25);
-        --shadow-md: 0 4px 16px oklch(0 0 0 / 0.35);
-        --shadow-lg: 0 12px 40px oklch(0 0 0 / 0.45);
-      }
-
-      /* ─── RESET & BASE ───────────────────────────────────────────────────────── */
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      html {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-rendering: optimizeLegibility;
-        scroll-behavior: smooth;
-        scroll-padding-top: var(--space-16);
-      }
-      body {
-        min-height: 100dvh;
-        font-family: var(--font-body);
-        font-size: var(--text-base);
-        color: var(--color-text);
-        background-color: var(--color-bg);
-        line-height: 1.65;
-      }
-      img,
-      picture,
-      video,
-      canvas,
-      svg {
-        display: block;
-        max-width: 100%;
-        height: auto;
-      }
-      ul[role='list'],
-      ol[role='list'] {
-        list-style: none;
-      }
-      input,
-      button,
-      textarea,
-      select {
-        font: inherit;
-        color: inherit;
-      }
-      h1,
-      h2,
-      h3,
-      h4 {
-        text-wrap: balance;
-        line-height: 1.15;
-      }
-      p,
-      li {
-        text-wrap: pretty;
-      }
-      button {
-        cursor: pointer;
-        background: none;
-        border: none;
-      }
-      ::selection {
-        background: oklch(from var(--color-primary) l c h / 0.18);
-        color: var(--color-text);
-      }
-      :focus-visible {
-        outline: 2px solid var(--color-primary);
-        outline-offset: 3px;
-        border-radius: var(--radius-sm);
-      }
-      a,
-      button,
-      [role='button'] {
-        transition:
-          color var(--transition-interactive),
-          background var(--transition-interactive),
-          box-shadow var(--transition-interactive);
-      }
-      @media (prefers-reduced-motion: reduce) {
-        *,
-        *::before,
-        *::after {
-          animation-duration: 0.01ms !important;
-          transition-duration: 0.01ms !important;
+            --max-width: 920px;
         }
-      }
 
-      /* ─── SKIP LINK ──────────────────────────────────────────────────────────── */
-      .skip-link {
-        position: absolute;
-        top: -100%;
-        left: var(--space-4);
-        z-index: 9999;
-        background: var(--color-primary);
-        color: var(--color-text-inverse);
-        padding: var(--space-2) var(--space-4);
-        border-radius: var(--radius-md);
-        font-size: var(--text-sm);
-        font-weight: 600;
-        transition: top var(--transition-interactive);
-      }
-      .skip-link:focus {
-        top: var(--space-4);
-      }
-
-      /* ─── HEADER / NAV ───────────────────────────────────────────────────────── */
-      .site-header {
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        background: color-mix(in oklab, var(--color-bg) 88%, transparent);
-        backdrop-filter: blur(12px) saturate(1.4);
-        -webkit-backdrop-filter: blur(12px) saturate(1.4);
-        border-bottom: 1px solid var(--color-divider);
-        padding: var(--space-3) var(--space-4);
-      }
-      .header-inner {
-        max-width: var(--content-wide);
-        margin-inline: auto;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: var(--space-4);
-      }
-      .logo {
-        display: flex;
-        align-items: center;
-        gap: var(--space-2);
-        text-decoration: none;
-        color: var(--color-text);
-      }
-      .logo-mark {
-        width: 32px;
-        height: 32px;
-        flex-shrink: 0;
-      }
-      .logo-name {
-        font-family: var(--font-display);
-        font-size: var(--text-lg);
-        line-height: 1;
-      }
-      .logo-role {
-        font-size: var(--text-xs);
-        color: var(--color-text-muted);
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-      }
-      .header-nav {
-        display: flex;
-        align-items: center;
-        gap: var(--space-2);
-      }
-      .nav-link {
-        font-size: var(--text-sm);
-        color: var(--color-text-muted);
-        text-decoration: none;
-        padding: var(--space-2) var(--space-3);
-        border-radius: var(--radius-md);
-      }
-      .nav-link:hover {
-        color: var(--color-text);
-        background: var(--color-surface-offset);
-      }
-      .theme-toggle {
-        width: 36px;
-        height: 36px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: var(--radius-full);
-        color: var(--color-text-muted);
-        border: 1px solid var(--color-border);
-      }
-      .theme-toggle:hover {
-        color: var(--color-text);
-        background: var(--color-surface-offset);
-      }
-      .cta-btn {
-        font-size: var(--text-sm);
-        font-weight: 600;
-        padding: var(--space-2) var(--space-4);
-        background: var(--color-primary);
-        color: var(--color-text-inverse);
-        border-radius: var(--radius-md);
-        text-decoration: none;
-      }
-      .cta-btn:hover {
-        background: var(--color-primary-hover);
-      }
-      @media (max-width: 600px) {
-        .nav-link {
-          display: none;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-      }
 
-      /* ─── HERO ───────────────────────────────────────────────────────────────── */
-      .hero {
-        padding: clamp(var(--space-16), 10vw, var(--space-24)) var(--space-4)
-          clamp(var(--space-12), 8vw, var(--space-20));
-        max-width: var(--content-default);
-        margin-inline: auto;
-      }
-      .hero-eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: var(--space-2);
-        font-size: var(--text-xs);
-        font-weight: 600;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: var(--color-primary);
-        margin-bottom: var(--space-5);
-      }
-      .eyebrow-dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: var(--color-primary);
-        flex-shrink: 0;
-        animation: pulse 2s ease-in-out infinite;
-      }
-      @keyframes pulse {
-        0%,
-        100% {
-          opacity: 1;
-          transform: scale(1);
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            -webkit-print-color-adjust: exact; /* Гарантия печати фонов */
+            print-color-adjust: exact;
         }
-        50% {
-          opacity: 0.5;
-          transform: scale(0.75);
+
+        .resume-container {
+            width: 100%;
+            max-width: var(--max-width);
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
         }
-      }
-      .hero-title {
-        font-family: var(--font-display);
-        font-size: var(--text-hero);
-        color: var(--color-text);
-        font-weight: 400;
-        margin-bottom: var(--space-6);
-        letter-spacing: -0.02em;
-      }
-      .hero-title em {
-        font-style: italic;
-        color: var(--color-primary);
-      }
-      .hero-subtitle {
-        font-size: var(--text-lg);
-        color: var(--color-text-muted);
-        max-width: 58ch;
-        line-height: 1.6;
-        margin-bottom: var(--space-8);
-      }
-      .hero-meta {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--space-4) var(--space-6);
-        font-size: var(--text-sm);
-        color: var(--color-text-muted);
-        margin-bottom: var(--space-10);
-      }
-      .hero-meta a {
-        color: var(--color-text-muted);
-        text-decoration: none;
-      }
-      .hero-meta a:hover {
-        color: var(--color-primary);
-      }
-      .hero-meta span {
-        display: flex;
-        align-items: center;
-        gap: var(--space-2);
-      }
-      .hero-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--space-3);
-      }
-      .btn-primary {
-        display: inline-flex;
-        align-items: center;
-        gap: var(--space-2);
-        font-size: var(--text-sm);
-        font-weight: 600;
-        padding: var(--space-3) var(--space-6);
-        background: var(--color-primary);
-        color: var(--color-text-inverse);
-        border-radius: var(--radius-md);
-        text-decoration: none;
-      }
-      .btn-primary:hover {
-        background: var(--color-primary-hover);
-        box-shadow: var(--shadow-md);
-      }
-      .btn-secondary {
-        display: inline-flex;
-        align-items: center;
-        gap: var(--space-2);
-        font-size: var(--text-sm);
-        font-weight: 500;
-        padding: var(--space-3) var(--space-6);
-        border: 1px solid var(--color-border);
-        border-radius: var(--radius-md);
-        text-decoration: none;
-        color: var(--color-text);
-      }
-      .btn-secondary:hover {
-        background: var(--color-surface-offset);
-      }
 
-      /* Hero divider line */
-      .hero-rule {
-        border: none;
-        border-top: 1px solid var(--color-divider);
-        margin: var(--space-12) 0 0;
-      }
-
-      /* ─── SECTION SCAFFOLD ───────────────────────────────────────────────────── */
-      .section {
-        padding: clamp(var(--space-12), 7vw, var(--space-20)) var(--space-4);
-        max-width: var(--content-default);
-        margin-inline: auto;
-      }
-      .section-label {
-        font-size: var(--text-xs);
-        font-weight: 600;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--color-primary);
-        margin-bottom: var(--space-8);
-        display: flex;
-        align-items: center;
-        gap: var(--space-3);
-      }
-      .section-label::after {
-        content: '';
-        flex: 1;
-        height: 1px;
-        background: var(--color-divider);
-      }
-      .section-title {
-        font-family: var(--font-display);
-        font-size: var(--text-2xl);
-        font-weight: 400;
-        margin-bottom: var(--space-10);
-        letter-spacing: -0.01em;
-      }
-
-      /* ─── CASE CARDS ─────────────────────────────────────────────────────────── */
-      .cases-grid {
-        display: grid;
-        gap: var(--space-6);
-      }
-      .case-card {
-        background: var(--color-surface);
-        border: 1px solid var(--color-border);
-        border-radius: var(--radius-xl);
-        padding: var(--space-8);
-        box-shadow: var(--shadow-sm);
-        position: relative;
-        overflow: hidden;
-      }
-      .case-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: var(--color-primary-highlight);
-        border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-      }
-      .case-card:hover {
-        box-shadow: var(--shadow-md);
-      }
-      .case-number {
-        font-family: var(--font-display);
-        font-size: var(--text-2xl);
-        color: var(--color-surface-dynamic);
-        font-weight: 400;
-        position: absolute;
-        top: var(--space-4);
-        right: var(--space-6);
-        line-height: 1;
-        pointer-events: none;
-        user-select: none;
-      }
-      .case-heading {
-        font-family: var(--font-display);
-        font-size: var(--text-xl);
-        font-weight: 400;
-        margin-bottom: var(--space-5);
-        letter-spacing: -0.01em;
-      }
-      .case-body {
-        font-size: var(--text-base);
-        color: var(--color-text-muted);
-        line-height: 1.7;
-      }
-      .case-body p {
-        margin-bottom: var(--space-4);
-        max-width: 68ch;
-      }
-      .case-body p:last-of-type {
-        margin-bottom: 0;
-      }
-      .case-body strong {
-        color: var(--color-text);
-        font-weight: 600;
-      }
-      .case-body code {
-        font-family: 'SF Mono', 'Fira Code', monospace;
-        font-size: 0.9em;
-        background: var(--color-surface-offset);
-        padding: 0.1em 0.35em;
-        border-radius: var(--radius-sm);
-        color: var(--color-text);
-      }
-      .case-stack {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--space-2);
-        margin-top: var(--space-6);
-      }
-      .tag {
-        font-size: var(--text-xs);
-        font-weight: 500;
-        padding: 0.2em 0.7em;
-        border-radius: var(--radius-full);
-        background: var(--color-amber-dim);
-        color: var(--color-amber);
-        letter-spacing: 0.02em;
-      }
-
-      /* ─── STACK TABLE ────────────────────────────────────────────────────────── */
-      .stack-section {
-        background: var(--color-surface);
-      }
-      .stack-wrapper {
-        padding: clamp(var(--space-12), 7vw, var(--space-20)) var(--space-4);
-        max-width: var(--content-default);
-        margin-inline: auto;
-      }
-      .stack-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
-        gap: var(--space-4);
-      }
-      .stack-item {
-        background: var(--color-surface-2);
-        border: 1px solid var(--color-border);
-        border-radius: var(--radius-lg);
-        padding: var(--space-5) var(--space-6);
-      }
-      .stack-area {
-        font-size: var(--text-xs);
-        font-weight: 600;
-        letter-spacing: 0.07em;
-        text-transform: uppercase;
-        color: var(--color-text-faint);
-        margin-bottom: var(--space-2);
-      }
-      .stack-tools {
-        font-size: var(--text-sm);
-        color: var(--color-text-muted);
-        line-height: 1.5;
-      }
-
-      /* ─── PRINCIPLES ─────────────────────────────────────────────────────────── */
-      .principles-grid {
-        display: grid;
-        gap: var(--space-5);
-      }
-      .principle {
-        display: grid;
-        grid-template-columns: var(--space-8) 1fr;
-        gap: var(--space-4);
-        align-items: start;
-      }
-      .principle-num {
-        font-family: var(--font-display);
-        font-size: var(--text-lg);
-        font-style: italic;
-        color: var(--color-text-faint);
-        line-height: 1.2;
-      }
-      .principle-text {
-        font-size: var(--text-base);
-        color: var(--color-text-muted);
-        line-height: 1.65;
-      }
-      .principle-text strong {
-        color: var(--color-text);
-      }
-
-      /* ─── ABOUT HONEST ───────────────────────────────────────────────────────── */
-      .honest-grid {
-        display: grid;
-        gap: var(--space-6);
-        grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
-      }
-      .honest-card {
-        background: var(--color-surface);
-        border: 1px solid var(--color-border);
-        border-radius: var(--radius-xl);
-        padding: var(--space-8);
-      }
-      .honest-label {
-        font-size: var(--text-xs);
-        font-weight: 600;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: var(--color-text-faint);
-        margin-bottom: var(--space-4);
-      }
-      .honest-list {
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-3);
-        padding: 0;
-        list-style: none;
-      }
-      .honest-list li {
-        font-size: var(--text-base);
-        color: var(--color-text-muted);
-        padding-left: var(--space-5);
-        position: relative;
-      }
-      .honest-list li::before {
-        content: '—';
-        position: absolute;
-        left: 0;
-        color: var(--color-text-faint);
-      }
-
-      /* ─── EDUCATION ──────────────────────────────────────────────────────────── */
-      .edu-block {
-        display: flex;
-        gap: var(--space-6);
-        align-items: flex-start;
-        flex-wrap: wrap;
-      }
-      .edu-year {
-        font-family: var(--font-display);
-        font-size: var(--text-xl);
-        font-style: italic;
-        color: var(--color-text-faint);
-        flex-shrink: 0;
-        line-height: 1;
-        padding-top: 0.15em;
-      }
-      .edu-info {
-        flex: 1;
-        min-width: 200px;
-      }
-      .edu-uni {
-        font-size: var(--text-lg);
-        font-weight: 600;
-        margin-bottom: var(--space-1);
-      }
-      .edu-field {
-        font-size: var(--text-base);
-        color: var(--color-text-muted);
-      }
-
-      /* ─── FOOTER ─────────────────────────────────────────────────────────────── */
-      .site-footer {
-        border-top: 1px solid var(--color-divider);
-        padding: var(--space-12) var(--space-4);
-      }
-      .footer-inner {
-        max-width: var(--content-default);
-        margin-inline: auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: var(--space-6);
-      }
-      .footer-left {
-      }
-      .footer-name {
-        font-family: var(--font-display);
-        font-size: var(--text-xl);
-        font-weight: 400;
-        margin-bottom: var(--space-1);
-      }
-      .footer-tagline {
-        font-size: var(--text-sm);
-        color: var(--color-text-muted);
-      }
-      .footer-links {
-        display: flex;
-        gap: var(--space-4);
-        flex-wrap: wrap;
-      }
-      .footer-link {
-        font-size: var(--text-sm);
-        color: var(--color-text-muted);
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: var(--space-2);
-      }
-      .footer-link:hover {
-        color: var(--color-primary);
-      }
-      .footer-copy {
-        font-size: var(--text-xs);
-        color: var(--color-text-faint);
-        margin-top: var(--space-8);
-        text-align: center;
-      }
-
-      /* ─── SCROLL REVEAL (CSS-driven, no layout shift) ────────────────────────── */
-      .fade-in {
-        opacity: 1;
-      }
-      @supports (animation-timeline: scroll()) {
-        .fade-in {
-          opacity: 0;
-          animation: reveal-fade linear both;
-          animation-timeline: view();
-          animation-range: entry 0% entry 80%;
+        /* ХЕДЕР */
+        header {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 28px;
+            align-items: center;
+            border-bottom: 2px solid var(--text-main);
+            padding-bottom: 24px;
         }
-        .fade-in-delay-1 {
-          opacity: 0;
-          animation: reveal-fade linear both;
-          animation-timeline: view();
-          animation-range: entry 10% entry 90%;
-        }
-        .fade-in-delay-2 {
-          opacity: 0;
-          animation: reveal-fade linear both;
-          animation-timeline: view();
-          animation-range: entry 20% entry 100%;
-        }
-      }
-      @keyframes reveal-fade {
-        to {
-          opacity: 1;
-        }
-      }
 
-      /* Clip-path reveal for section titles */
-      .reveal-title {
-      }
-      @supports (animation-timeline: scroll()) {
-        .reveal-title {
-          clip-path: inset(100% 0 0 0);
-          animation: reveal-clip linear both;
-          animation-timeline: view();
-          animation-range: entry 0% entry 70%;
+        .profile-frame {
+            width: 130px;
+            height: 130px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
         }
-      }
-      @keyframes reveal-clip {
-        to {
-          clip-path: inset(0 0 0 0);
+
+        .profile-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 15%;
         }
-      }
 
-      /* ─── DECORATIVE GRAIN OVERLAY ───────────────────────────────────────────── */
-      .hero::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        opacity: 0.025;
-        border-radius: inherit;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-      }
-      .hero {
-        position: relative;
-      }
+        .header-text h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
 
-      /* ─── RESPONSIVE ─────────────────────────────────────────────────────────── */
-      @media (min-width: 640px) {
+                text-transform: none;
+    font-family: serif;
+    font-weight: 600;
+    color: #13542e;
+    font-variant: petite-caps;
+            margin-bottom: 2px;
+
+
+        }
+
+        .header-text .subtitle {
+            font-size: 1.2rem;
+            color: var(--accent-blue);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .contacts-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 20px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .contacts-grid a {
+            color: var(--text-link);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* СЕКЦИИ */
+        section {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 24px;
+        }
+
+        .section-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent-blue);
+            font-weight: 800;
+            border-left: 4px solid var(--accent-blue);
+            padding-left: 10px;
+            height: max-content;
+        }
+
+        .section-content {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .about-text {
+            font-size: 1rem;
+            color: var(--text-main);
+            text-align: justify;
+        }
+
+        /* КЕЙСЫ */
         .cases-grid {
-          grid-template-columns: 1fr;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
         }
-        .principles-grid {
-          grid-template-columns: 1fr 1fr;
+
+        .case-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 16px;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
         }
-      }
-      @media (min-width: 900px) {
-        .principles-grid {
-          grid-template-columns: 1fr 1fr;
+
+        .case-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: monospace;
+            font-size: 0.8rem;
+            font-weight: 700;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 4px;
+            margin-bottom: 2px;
         }
-      }
+
+        .case-num {
+            visibility: hidden;
+            color: var(--accent-red); /* Темно-красный маркер */
+        }
+
+        .case-tag {
+            color: var(--accent-green); /* Темно-зеленый тег статуса */
+            background-color: #e6f4ea;
+            padding: 1px 5px;
+            border-radius: 3px;
+        }
+
+        .case-title {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--text-main);
+        }
+
+        .case-desc {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+
+        /* СТЕК */
+        .stack-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .stack-category {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-top: 3px solid var(--accent-blue);
+            padding: 12px 14px;
+            border-radius: 4px;
+        }
+
+        .stack-category h4 {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            margin-bottom: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        .tech-inline {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.82rem;
+            color: var(--text-main);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .tech-inline span {
+            background-color: var(--accent-bg); /* Бледно-голубые плашки */
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid #bae6fd;
+            font-weight: 500;
+        }
+
+        /* ОПЫТ */
+        .timeline-item {
+            padding-bottom: 12px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .timeline-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .time-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 4px;
+        }
+
+        .role-company {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--text-main);
+        }
+
+        .role-company span {
+            color: var(--accent-blue);
+            font-weight: 500;
+        }
+
+        .duration {
+            font-size: 0.85rem;
+            color: var(--accent-green); /* Темно-зеленый для дат */
+            font-weight: 700;
+            font-family: monospace;
+            background-color: #f0fdf4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid #bbf7d0;
+        }
+
+        .job-desc {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            text-align: justify;
+        }
+
+        /* ДОПОЛНИТЕЛЬНО */
+        .meta-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .meta-box {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            border-radius: 4px;
+        }
+
+        .meta-box h4 {
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+        }
+
+        .meta-box p {
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+
+        /* АДАПТИВНОСТЬ ДЛЯ СМАРТФОНОВ */
+        @media (max-width: 768px) {
+            body {
+                padding: 16px;
+            }
+            header {
+                grid-template-columns: 1fr;
+                text-align: center;
+                justify-items: center;
+                gap: 14px;
+                padding-bottom: 16px;
+            }
+            section {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .cases-grid, .stack-wrapper, .meta-info-grid {
+                grid-template-columns: 1fr;
+            }
+            .time-header {
+                flex-direction: column;
+                gap: 6px;
+                align-items: flex-start;
+            }
+            .header-text h1 {
+                font-size: 1.8rem;
+            }
+
+
+        }
+
+        /* СТРОГИЕ ПРАВИЛА ПЕЧАТИ (A4 АДАПТАЦИЯ) */
+        @media print {
+            @page {
+                size: A4;
+                margin: 15mm 12mm;
+            }
+            body {
+                padding: 0;
+                font-size: 11pt;
+            }
+            .resume-container {
+                gap: 20px;
+            }
+            section {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                page-break-inside: auto;
+            }
+
+            .case-card, .stack-category, .timeline-item, .meta-box {
+                page-break-inside: avoid;
+            }
+            .contacts-grid a {
+                text-decoration: none;
+                color: var(--text-main);
+            }
+        }
     </style>
-  </head>
-  <body>
-    <a class="skip-link" href="#main">Перейти к содержимому</a>
+</head>
+<body>
 
-    <!-- ─── HEADER ────────────────────────────────────────────────────────────── -->
-    <header class="site-header" role="banner">
-      <div class="header-inner">
-        <a href="#" class="logo" aria-label="На главную">
-          <!-- SVG logo: crystal/module mark — references the illustration -->
-          <svg
-            class="logo-mark"
-            viewBox="0 0 32 32"
-            fill="none"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <polygon
-              points="16,2 26,8 26,20 16,26 6,20 6,8"
-              stroke="currentColor"
-              stroke-width="1.5"
-              fill="none"
-            />
-            <polygon
-              points="16,7 22,11 22,19 16,23 10,19 10,11"
-              fill="currentColor"
-              opacity="0.15"
-            />
-            <line
-              x1="16"
-              y1="2"
-              x2="16"
-              y2="26"
-              stroke="currentColor"
-              stroke-width="1"
-              opacity="0.4"
-            />
-            <circle cx="16" cy="14" r="2.5" fill="currentColor" opacity="0.7" />
-          </svg>
-          <div>
-            <div class="logo-name">miniwe</div>
-            <div class="logo-role">Full-Stack Engineer</div>
-          </div>
-        </a>
+<div class="resume-container">
 
-        <nav
-          class="header-nav"
-          role="navigation"
-          aria-label="Основная навигация"
-        >
-          <a href="#cases" class="nav-link">Кейсы</a>
-          <a href="#stack" class="nav-link">Стек</a>
-          <a href="#team" class="nav-link">Команда</a>
-          <button
-            class="theme-toggle"
-            data-theme-toggle
-            aria-label="Переключить тему"
-          >
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              aria-hidden="true"
-            >
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-            </svg>
-          </button>
-          <a href="mailto:miniwe@mail.ru" class="cta-btn">Написать</a>
-        </nav>
-      </div>
+    <!-- ХЕДЕР -->
+    <header>
+        <div class="profile-frame">
+            <img src="portret.png" alt="Виталий Дрюков">
+        </div>
+        <div class="header-text">
+            <h1>Виталий Дрюков</h1>
+            <div class="subtitle">Senior Full-Stack Engineer / Архитектор решений / Tech Lead</div>
+            <div class="contacts-grid">
+                <div>🗺 WorldWide (Офис: Баку / Удаленная / Проект)</div>
+                <div>📱 <a href="tel:+994518453796">+994 51 845 37 96</a></div>
+                <div>📧 <a href="mailto:messir.vdr@gmail.com">messir.vdr@gmail.com</a></div>
+                <div>Telegram: <a href="https://t.me/miniwe" target="_blank">@miniwe</a></div>
+                <div>GitHub: <a href="https://github.com/miniwe" target="_blank">github.com/miniwe</a></div>
+                <div>Boosty: <a href="https://boosty.to/miniwe" target="_blank">boosty.to/miniwe</a></div>
+                <div><a href="https://miniwe.github.io/legacy/v3/" target="_blank">Расширенная версия</a></div>
+            </div>
+        </div>
     </header>
 
-    <!-- ─── MAIN ──────────────────────────────────────────────────────────────── -->
-    <main id="main">
-      <!-- HERO -->
-      <section class="hero" aria-label="Обо мне">
-        <div class="hero-eyebrow">
-          <span class="eyebrow-dot" aria-hidden="true"></span>
-          Открыт к предложениям · Москва
+    <!-- О СЕБЕ -->
+    <section>
+        <div class="section-title">О подходе</div>
+        <div class="section-content">
+            <p class="about-text">
+                <strong>20+ лет в JS/TypeScript экосистеме:</strong> прошел путь от разработки интерфейсов высокой плотности до проектирования и развертывания отказоустойчивых высоконагруженных распределенных систем общегосударственного и enterprise уровня. Двигаюсь к архитектурному лидерству, глубоко ценю полную автономность и инженерный ownership. Каждое техническое решение жестко связываю с бизнес-метриками, обеспечивая масштабируемость без лишнего оверхеда.
+            </p>
         </div>
+    </section>
 
-        <h1 class="hero-title">
-          Тот, кого зовут,<br />
-          когда задача <em>застряла</em>
-        </h1>
+    <!-- КЕЙСЫ -->
+    <section>
+        <div class="section-title">Практические кейсы</div>
+        <div class="section-content">
+            <div class="cases-grid">
 
-        <p class="hero-subtitle">
-          20 лет в JS/TypeScript-экосистеме. Не стаж — насмотренность: видел,
-          как хорошие решения становятся плохими при росте. Работаю там, где
-          инженеру дают ownership, а не кусок тикета.
-        </p>
+                <div class="case-card">
+                    <div class="case-meta">
+                        <span class="case-num">CASE_01</span>
+                        <span class="case-tag">Обеспечение целостности данных</span>
+                    </div>
+                    <div class="case-title">Точность финансовых расчетов</div>
+                    <div class="case-desc">Внедрил прецизионную математику через <code>decimal.js</code> и строгую изоляцию уровней транзакций в PostgreSQL, полностью устранив накопление ошибок округления и гонки данных в распределенном ядре.</div>
+                </div>
 
-        <div class="hero-meta" role="list">
-          <span role="listitem">
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              aria-hidden="true"
-            >
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-              <circle cx="12" cy="10" r="3" />
-            </svg>
-            Москва, Россия
-          </span>
-          <span role="listitem">
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              aria-hidden="true"
-            >
-              <path
-                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
-              />
-              <polyline points="22,6 12,13 2,6" />
-            </svg>
-            <a href="mailto:miniwe@mail.ru">miniwe@mail.ru</a>
-          </span>
-          <span role="listitem">
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              aria-hidden="true"
-            >
-              <path
-                d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-8.609 3.33c-2.068.8-4.133 1.598-5.724 2.21a405.15 405.15 0 0 1-2.849 1.09c-.42.147-.99.332-1.473.901-.728.968.193 1.798.919 2.286 1.61.516 3.275 1.009 4.654 1.472.509 1.793.997 3.592 1.48 5.388.32 1.185.643 2.374.97 3.56.096.333.37.57.706.652.335.082.678-.02.912-.255l2.292-2.339 4.424 3.64c.7.575 1.744.14 1.87-.75l3.49-21.54A2.242 2.242 0 0 0 21.198 2.433z"
-              />
-            </svg>
-            <a
-              href="https://t.me/miniwe"
-              target="_blank"
-              rel="noopener noreferrer"
-              >@miniwe</a
-            >
-          </span>
-          <span role="listitem">
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              aria-hidden="true"
-            >
-              <path
-                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
-              />
-            </svg>
-            <a
-              href="https://github.com/miniwe"
-              target="_blank"
-              rel="noopener noreferrer"
-              >github.com/miniwe</a
-            >
-          </span>
+                <div class="case-card">
+                    <div class="case-meta">
+                        <span class="case-num">CASE_02</span>
+                        <span class="case-tag">Оптимизация асинхронных процессов</span>
+                    </div>
+                    <div class="case-title">Надежность бэкенда и очередей</div>
+                    <div class="case-desc">Вынес ресурсоемкие математические операции и генерацию тяжелых отчетов в изолированные воркеры на базе <code>BullMQ + Redis</code>, защитив API-серверы от HTTP-таймаутов и падений под пиковыми нагрузками.</div>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-meta">
+                        <span class="case-num">CASE_03</span>
+                        <span class="case-tag">Мультиарендная архитектура</span>
+                    </div>
+                    <div class="case-title">Изоляция корпоративных данных</div>
+                    <div class="case-desc">Спроектировал и развернул сквозную архитектуру Tenant-Aware безопасности на основе многоуровневых токенов JWT и кастомных RBAC/ABAC политик, полностью исключив утечки и пересечение данных между клиентами платформы.</div>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-meta">
+                        <span class="case-num">CASE_04</span>
+                        <span class="case-tag">Высоконагруженные системы</span>
+                    </div>
+                    <div class="case-title">Масштабные государственные системы</div>
+                    <div class="case-desc">Проектировал сложную архитектуру вертикальных и горизонтальных интеграционных связей для автоматизированных систем общегосударственного значения (IBS Group), оптимизировав производительность под максимальные требования безопасности.</div>
+                </div>
+
+            </div>
         </div>
+    </section>
 
-        <div class="hero-actions">
-          <a href="mailto:miniwe@mail.ru" class="btn-primary">
-            <svg
-              width="15"
-              height="15"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              aria-hidden="true"
-            >
-              <path
-                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
-              />
-              <polyline points="22,6 12,13 2,6" />
-            </svg>
-            Связаться
-          </a>
-          <a
-            href="https://t.me/miniwe"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn-secondary"
-          >
-            <svg
-              width="15"
-              height="15"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              aria-hidden="true"
-            >
-              <path
-                d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-8.609 3.33c-2.068.8-4.133 1.598-5.724 2.21a405.15 405.15 0 0 1-2.849 1.09c-.42.147-.99.332-1.473.901-.728.968.193 1.798.919 2.286 1.61.516 3.275 1.009 4.654 1.472.509 1.793.997 3.592 1.48 5.388.32 1.185.643 2.374.97 3.56.096.333.37.57.706.652.335.082.678-.02.912-.255l2.292-2.339 4.424 3.64c.7.575 1.744.14 1.87-.75l3.49-21.54A2.242 2.242 0 0 0 21.198 2.433z"
-              />
-            </svg>
-            Telegram
-          </a>
-          <a
-            href="https://github.com/miniwe"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn-secondary"
-            >GitHub</a
-          >
-          <a
-            href="./vitaly-dryukov-engineer.pdf"
-            download="./vitaly-dryukov-engineer.pdf"
-            rel="noopener noreferrer"
-            class="btn-primary"
-          >
-            Скачать
-          </a>
-          <a
-            href="https://miniwe.github.io/legacy/v3/"
-            target="_blank"
-            class="btn-secondary"
-            style="
-              font-weight: 500;
-              background: var(--color-amber-dim);
-              color: var(--color-amber);
-              letter-spacing: 0.02em;
-            "
-            >Полное резюме</a
-          >
-          <a
-            href="https://boosty.to/miniwe"
-            target="_blank"
-            class="btn-secondary"
-            >Boosty</a
-          >
+    <!-- ТЕХНОЛОГИЧЕСКИЙ СТЕК -->
+    <section>
+        <div class="section-title">Стек и компетенции</div>
+        <div class="section-content">
+            <div class="stack-wrapper">
+
+                <div class="stack-category">
+                    <h4>Бэкенд & Архитектура API</h4>
+                    <div class="tech-inline">
+                        <span>Node.js</span> <span>TypeScript</span> <span>NestJS</span> <span>Meteor.js</span> <span>GraphQL</span> <span>REST API</span> <span>Microservices</span>
+                    </div>
+                </div>
+
+                <div class="stack-category">
+                    <h4>Слои Данных & Очереди</h4>
+                    <div class="tech-inline">
+                        <span>PostgreSQL</span> <span>MySQL</span> <span>Redis</span> <span>BullMQ</span> <span>TypeORM</span> <span>Sequelize</span> <span>Transactions</span>
+                    </div>
+                </div>
+
+                <div class="stack-category">
+                    <h4>Фронтенд & State</h4>
+                    <div class="tech-inline">
+                        <span>React</span> <span>Redux Toolkit</span> <span>Next.js</span> <span>Effector</span> <span>FSD Layouts</span> <span>Highcharts</span>
+                    </div>
+                </div>
+
+                <div class="stack-category">
+                    <h4>Инфраструктура & AI</h4>
+                    <div class="tech-inline">
+                        <span>Docker</span> <span>CI/CD</span> <span>Git</span> <span>OpenAI API</span> <span>Prompting</span> <span>Jest Testing</span>
+                    </div>
+                </div>
+
+            </div>
         </div>
+    </section>
 
-        <hr class="hero-rule" aria-hidden="true" />
-      </section>
+    <!-- ОПЫТ РАБОТЫ -->
+    <section>
+        <div class="section-title">Опыт работы</div>
+        <div class="section-content">
 
-      <!-- CASES -->
-      <section class="section" id="cases" aria-labelledby="cases-title">
-        <div class="section-label" aria-hidden="true">Что умею решать</div>
-        <h2 class="section-title reveal-title" id="cases-title"
-          >Настоящие кейсы,<br />не список технологий</h2
-        >
+            <div class="timeline-item">
+                <div class="time-header">
+                    <div class="role-company">Senior Full-Stack Engineer <span>/ Mitgo Group (Tapfiliate)</span></div>
+                    <div class="duration">2022 – 2026</div>
+                </div>
+                <div class="job-desc">
+                    Проектирование и рефакторинг высоконагруженных компонентов международной партнерской трекинг-платформы. Оптимизация работы распределенных баз данных, внедрение отказоустойчивых паттернов обработки очередей задач, интеграция модулей AI для внутренней аналитики кода и автоматизации рутинных процессов разработки.
+                </div>
+            </div>
 
-        <div class="cases-grid">
-          <!-- CASE 1 -->
-          <article
-            class="case-card fade-in"
-            aria-label="Кейс: финансовая точность"
-          >
-            <span class="case-number" aria-hidden="true">01</span>
-            <h3 class="case-heading">Деньги не должны теряться</h3>
-            <div class="case-body">
-              <p
-                >В пул-расчётах на N победителей обнаружился классический враг —
-                <code>number</code> в JavaScript: бесконечная дробь, накопленная
-                погрешность, потеря доверия пользователей. Не критичный баг,
-                хуже — <strong>систематическая ненадёжность</strong>.</p
-              >
-              <p
-                >Выход не в аккуратности разработчиков, а в архитектуре: единая
-                утилита на <code>decimal.js</code> как доменный примитив,
-                <code>decimal(12,4)</code> на уровне БД, форматирование до двух
-                знаков строго в UI. Атомарные транзакции: активация и списание
-                либо оба, либо никакой. Финансовая точность стала свойством
-                системы.</p
-              >
+            <div class="timeline-item">
+                <div class="time-header">
+                    <div class="role-company">Старший инженер-разработчик / Архитектор <span>/ IBS Group</span></div>
+                    <div class="duration">2019 – 2020</div>
+                </div>
+                <div class="job-desc">
+                    Проектирование архитектуры и реализация сложной бизнес-логики распределенных систем общегосударственного значения (включая автоматизацию процессов возврата налогов для крупного бизнеса). Обеспечение жесткого соответствия критериям безопасности, отказоустойчивости и бесшовной миграции данных.
+                </div>
             </div>
-            <div class="case-stack" role="list" aria-label="Технологии">
-              <span class="tag" role="listitem">Node.js</span>
-              <span class="tag" role="listitem">TypeScript</span>
-              <span class="tag" role="listitem">NestJS</span>
-              <span class="tag" role="listitem">PostgreSQL</span>
-              <span class="tag" role="listitem">decimal.js</span>
-              <span class="tag" role="listitem">TypeORM</span>
-            </div>
-          </article>
 
-          <!-- CASE 2 -->
-          <article
-            class="case-card fade-in-delay-1"
-            aria-label="Кейс: архитектура под нагрузку"
-          >
-            <span class="case-number" aria-hidden="true">02</span>
-            <h3 class="case-heading">HTTP-таймаут не должен рушить бизнес</h3>
-            <div class="case-body">
-              <p
-                >Расчёт большого тура падал при превышении HTTP-таймаута.
-                Состояние оставалось несогласованным. Операцию запускали
-                вручную. Снова и снова.</p
-              >
-              <p
-                >Решение — вынос расчёта туда, где HTTP вообще не участвует.
-                <strong>BullMQ + Redis</strong>: настраиваемый параллелизм,
-                idempotent-дизайн, dead-letter queue ловит зависшие задачи.
-                Массовые расчёты стали независимы от HTTP-инфраструктуры,
-                наблюдаемы и восстанавливаемы.</p
-              >
-              <p
-                ><strong>Принцип:</strong> следующий инженер должен понять
-                решение без звонка предыдущему.</p
-              >
+            <div class="timeline-item">
+                <div class="time-header">
+                    <div class="role-company">IT-Консультант / Full-Stack Team Lead <span>/ Практика (РФ, США, Европа)</span></div>
+                    <div class="duration">15+ ЛЕТ</div>
+                </div>
+                <div class="job-desc">
+                    Консалтинг, технический аудит производительности приложений и управление полным циклом создания enterprise веб-платформ. Успешный запуск технологических решений и интеграций для бенефициаров из США, Великобритании, Германии, Франции и Чехии. Управление распределенными кросс-функциональными командами.
+                </div>
             </div>
-            <div class="case-stack" role="list" aria-label="Технологии">
-              <span class="tag" role="listitem">BullMQ</span>
-              <span class="tag" role="listitem">Redis</span>
-              <span class="tag" role="listitem">NestJS</span>
-              <span class="tag" role="listitem">TypeScript</span>
-            </div>
-          </article>
 
-          <!-- CASE 3 -->
-          <article
-            class="case-card fade-in-delay-2"
-            aria-label="Кейс: интеграции с внешними API"
-          >
-            <span class="case-number" aria-hidden="true">03</span>
-            <h3 class="case-heading"
-              >Провайдер меняет схему в пятницу вечером</h3
-            >
-            <div class="case-body">
-              <p
-                >Спортивный провайдер изменил структуру ответа — упала половина
-                обработчиков. Дежурство в выходные, ручные правки, объяснения на
-                память.</p
-              >
-              <p
-                >Ответ — не быстрее реагировать, а сделать так, чтобы ситуация
-                не возникала. Слой
-                <code>Raw Response → Adapter → Normalized DTO → Domain</code>:
-                исходные ответы логируются, ручной ввод — полноценный fallback с
-                теми же контрактами. Теперь изменения провайдера изолированы в
-                адаптере.</p
-              >
-            </div>
-            <div class="case-stack" role="list" aria-label="Технологии">
-              <span class="tag" role="listitem">TypeScript</span>
-              <span class="tag" role="listitem">NestJS</span>
-              <span class="tag" role="listitem">Zod</span>
-              <span class="tag" role="listitem">PostgreSQL</span>
-              <span class="tag" role="listitem">Structured Logging</span>
-            </div>
-          </article>
-
-          <!-- CASE 4 -->
-          <article
-            class="case-card fade-in"
-            aria-label="Кейс: multi-tenant безопасность"
-          >
-            <span class="case-number" aria-hidden="true">04</span>
-            <h3 class="case-heading">Чужие данные не должны утекать</h3>
-            <div class="case-body">
-              <p
-                >Проектировал системы с изоляцией на уровне запросов: JWT + RBAC
-                (USER / ADMIN / DEVELOPER), автоконвертация внешних
-                идентификаторов во внутренние, tenant-aware middleware.</p
-              >
-              <p
-                >Архитектура, при которой случайный <code>findAll()</code> без
-                фильтра tenant не становится инцидентом безопасности.
-                <strong>Защита встроена в слой</strong> — не в дисциплину
-                конкретного разработчика.</p
-              >
-            </div>
-            <div class="case-stack" role="list" aria-label="Технологии">
-              <span class="tag" role="listitem">JWT</span>
-              <span class="tag" role="listitem">RBAC</span>
-              <span class="tag" role="listitem">OAuth2/OIDC</span>
-              <span class="tag" role="listitem">NestJS Middleware</span>
-              <span class="tag" role="listitem">TypeORM</span>
-            </div>
-          </article>
         </div>
-      </section>
+    </section>
 
-      <!-- STACK -->
-      <div class="stack-section" id="stack">
-        <div class="stack-wrapper">
-          <div class="section-label fade-in" aria-hidden="true"
-            >Инструменты</div
-          >
-          <h2 class="section-title reveal-title"
-            >Стек под задачу,<br />не цель сам по себе</h2
-          >
-          <p
-            class="fade-in"
-            style="
-              color: var(--color-text-muted);
-              margin-bottom: var(--space-8);
-              max-width: 60ch;
-            "
-          >
-            Если ваш стек отличается — принципы переносятся: модульность,
-            контракты между слоями, атомарность и наблюдаемость работают в любом
-            фреймворке.
-          </p>
-          <div class="stack-grid">
-            <div class="stack-item fade-in">
-              <div class="stack-area">API и бизнес-логика</div>
-              <div class="stack-tools"
-                >Node.js · TypeScript · NestJS (Fastify)</div
-              >
+    <!-- ДОПОЛНИТЕЛЬНОЕ -->
+    <section>
+        <div class="section-title">Дополнительно</div>
+        <div class="section-content">
+            <div class="meta-info-grid">
+                <div class="meta-box">
+                    <h4>Образование</h4>
+                    <p><strong>БГУ (2000):</strong> Факультет прикладной математики и информатики.</p>
+                </div>
+                <div class="meta-box">
+                    <h4>Языковые компетенции</h4>
+                    <p>Русский (Родной), Английский (B2), Азербайджанский(А2), Прочие(Сербский, Испанский)</p>
+                </div>
             </div>
-            <div class="stack-item fade-in-delay-1">
-              <div class="stack-area">Данные и транзакции</div>
-              <div class="stack-tools">PostgreSQL · TypeORM</div>
-            </div>
-            <div class="stack-item fade-in-delay-2">
-              <div class="stack-area">Async и очереди</div>
-              <div class="stack-tools">BullMQ · Redis</div>
-            </div>
-            <div class="stack-item fade-in">
-              <div class="stack-area">Контракты и валидация</div>
-              <div class="stack-tools">Zod → DTO → Entity</div>
-            </div>
-            <div class="stack-item fade-in-delay-1">
-              <div class="stack-area">Аутентификация</div>
-              <div class="stack-tools">JWT · RBAC · OAuth2/OIDC</div>
-            </div>
-            <div class="stack-item fade-in-delay-2">
-              <div class="stack-area">Фронтенд</div>
-              <div class="stack-tools"
-                >React · RTK Query · Feature-Sliced Design</div
-              >
-            </div>
-            <div class="stack-item fade-in">
-              <div class="stack-area">Инфраструктура</div>
-              <div class="stack-tools">Docker · Docker Compose</div>
-            </div>
-            <div class="stack-item fade-in-delay-1">
-              <div class="stack-area">AI-интеграции</div>
-              <div class="stack-tools"
-                >OpenAI API · LLM-пайплайны (Node.js / Python)</div
-              >
-            </div>
-          </div>
         </div>
-      </div>
+    </section>
 
-      <!-- HOW I WORK IN A TEAM -->
-      <section class="section" id="team" aria-labelledby="team-title">
-        <div class="section-label fade-in" aria-hidden="true">Как работаю</div>
-        <h2 class="section-title reveal-title" id="team-title"
-          >Senior — не «пишет<br />правильный код»</h2
-        >
-        <p
-          class="fade-in"
-          style="
-            color: var(--color-text-muted);
-            margin-bottom: var(--space-10);
-            max-width: 62ch;
-          "
-        >
-          Senior принимает решения при неполной информации и документирует
-          trade-off явно, чтобы следующий человек понял, почему было сделано
-          именно так.
-        </p>
-        <div class="principles-grid">
-          <div class="principle fade-in">
-            <span class="principle-num" aria-hidden="true">1</span>
-            <p class="principle-text"
-              ><strong>Ownership от спецификации до production.</strong> Не
-              «написать по задаче», а помочь выбрать, что строить и где нельзя
-              накапливать долг.</p
-            >
-          </div>
-          <div class="principle fade-in-delay-1">
-            <span class="principle-num" aria-hidden="true">2</span>
-            <p class="principle-text"
-              ><strong>Технические спецификации</strong> как основа кода и
-              AI-инструментов. Хороший промпт = хороший brief: контекст,
-              результат, запреты, способ проверки.</p
-            >
-          </div>
-          <div class="principle fade-in-delay-2">
-            <span class="principle-num" aria-hidden="true">3</span>
-            <p class="principle-text"
-              ><strong>Продуктовый контекст.</strong> Знать, какую гипотезу
-              проверяет текущий релиз — уменьшает расстояние между проблемой
-              пользователя и техническим решением.</p
-            >
-          </div>
-          <div class="principle fade-in">
-            <span class="principle-num" aria-hidden="true">4</span>
-            <p class="principle-text"
-              ><strong>Code review как диалог.</strong> Замечания объясняю с
-              обоснованием trade-off, не «перепиши».</p
-            >
-          </div>
+    <!-- ЧТО ИЩУ -->
+    <section style="border-top: 2px solid var(--text-main); padding-top: 20px;">
+        <div class="section-title" style="color: var(--text-main);">Цель / Фокус</div>
+        <div class="section-content">
+            <p style="font-size: 1rem; color: var(--accent-blue); font-weight: 700;">
+                Ищу сложные технические вызовы, где критически важна чистота архитектуры, бескомпромиссное качество кодовой базы, работа со сложными структурами данных и высокий уровень инженерной автономности команды.
+            </p>
         </div>
-      </section>
+    </section>
 
-      <!-- HONEST -->
-      <section class="section" aria-labelledby="honest-title">
-        <div class="section-label fade-in" aria-hidden="true">Честно</div>
-        <h2 class="section-title reveal-title" id="honest-title"
-          >Что ищу и что<br />не моё</h2
-        >
-        <div class="honest-grid">
-          <div class="honest-card fade-in">
-            <div class="honest-label">Что не моё</div>
-            <ul class="honest-list" role="list">
-              <li>Формальная бюрократия без результата</li>
-              <li
-                >Роли, где «старший» означает только стаж без влияния на
-                решения</li
-              >
-            </ul>
-          </div>
-          <div class="honest-card fade-in-delay-1">
-            <div class="honest-label">Что ищу</div>
-            <ul class="honest-list" role="list">
-              <li>Реальный ownership над задачами — не кусок тикета</li>
-              <li
-                >Команду, где качество решений важнее скорости их
-                производства</li
-              >
-              <li>Среду, где через год я буду уметь больше, чем сейчас</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+</div>
 
-      <!-- EDUCATION -->
-      <section class="section" aria-labelledby="edu-title">
-        <div class="section-label fade-in" aria-hidden="true">Образование</div>
-        <h2 class="section-title reveal-title" id="edu-title"
-          >Академический<br />фундамент</h2
-        >
-        <div class="edu-block fade-in">
-          <div class="edu-year" aria-label="Год выпуска 2000">2000</div>
-          <div class="edu-info">
-            <div class="edu-uni">Baku State University</div>
-            <div class="edu-field">Прикладная математика · Программист</div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- ─── FOOTER ────────────────────────────────────────────────────────────── -->
-    <footer class="site-footer" role="contentinfo">
-      <div class="footer-inner">
-        <div class="footer-left">
-          <div class="footer-name">miniwe</div>
-          <div class="footer-tagline"
-            >Senior Full-Stack Engineer · Москва · 2026</div
-          >
-        </div>
-        <div class="footer-links">
-          <a href="mailto:miniwe@mail.ru" class="footer-link">
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              aria-hidden="true"
-            >
-              <path
-                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
-              />
-              <polyline points="22,6 12,13 2,6" />
-            </svg>
-            miniwe@mail.ru
-          </a>
-          <a
-            href="https://t.me/miniwe"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="footer-link"
-          >
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              aria-hidden="true"
-            >
-              <path
-                d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-8.609 3.33c-2.068.8-4.133 1.598-5.724 2.21a405.15 405.15 0 0 1-2.849 1.09c-.42.147-.99.332-1.473.901-.728.968.193 1.798.919 2.286 1.61.516 3.275 1.009 4.654 1.472.509 1.793.997 3.592 1.48 5.388.32 1.185.643 2.374.97 3.56.096.333.37.57.706.652.335.082.678-.02.912-.255l2.292-2.339 4.424 3.64c.7.575 1.744.14 1.87-.75l3.49-21.54A2.242 2.242 0 0 0 21.198 2.433z"
-              />
-            </svg>
-            @miniwe
-          </a>
-          <a
-            href="https://github.com/miniwe"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="footer-link"
-          >
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              aria-hidden="true"
-            >
-              <path
-                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
-              />
-            </svg>
-            GitHub
-          </a>
-        </div>
-      </div>
-      <p class="footer-copy"
-        >Node.js · TypeScript · NestJS · React · PostgreSQL · BullMQ · Redis ·
-        Docker · OpenAI API</p
-      >
-    </footer>
-
-    <!-- ─── JS: Theme toggle ───────────────────────────────────────────────────── -->
-    <script>
-      (function () {
-        var t = document.querySelector('[data-theme-toggle]');
-        var r = document.documentElement;
-        var d = matchMedia('(prefers-color-scheme:dark)').matches
-          ? 'dark'
-          : 'light';
-        r.setAttribute('data-theme', d);
-
-        function updateIcon(theme) {
-          if (!t) return;
-          if (theme === 'dark') {
-            t.innerHTML =
-              '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
-            t.setAttribute('aria-label', 'Переключить на светлую тему');
-          } else {
-            t.innerHTML =
-              '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
-            t.setAttribute('aria-label', 'Переключить на тёмную тему');
-          }
-        }
-
-        updateIcon(d);
-
-        if (t) {
-          t.addEventListener('click', function () {
-            d = d === 'dark' ? 'light' : 'dark';
-            r.setAttribute('data-theme', d);
-            updateIcon(d);
-          });
-        }
-      })();
-    </script>
-  </body>
+</body>
 </html>

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Виталий Дрюков — Senior Full-Stack Engineer / Архитектор решений / Tech Lead</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;        /* Глубокий темный (Slate 900) */
+            --card-bg: #1e293b;        /* Цвет блоков (Slate 800) */
+            --text-main: #f8fafc;      /* Основной белый текст */
+            --text-muted: #94a3b8;     /* Приглушенный текст */
+            --accent: #38bdf8;         /* Насыщенный голубой (Cyan) для ключевых элементов */
+            --accent-dim: rgba(56, 189, 248, 0.1);
+            --border-color: #334155;   /* Границы */
+            --max-width: 1000px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .resume-container {
+            width: 100%;
+            max-width: var(--max-width);
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        /* ХЕДЕР СЕТКА */
+        header {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 32px;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 32px;
+        }
+
+        .profile-frame {
+            width: 140px;
+            height: 140px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 15%; /* Фокус на портрете */
+        }
+
+        .header-text h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .header-text .subtitle {
+            font-size: 1.25rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .contacts-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px 24px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .contacts-grid a {
+            color: var(--text-main);
+            text-decoration: none;
+            border-bottom: 1px dashed var(--accent);
+            transition: color 0.2s;
+        }
+
+        .contacts-grid a:hover {
+            color: var(--accent);
+        }
+
+        /* СЕКЦИИ И СЕТКА */
+        section {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 24px;
+        }
+
+        .section-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            font-weight: 700;
+            padding-top: 4px;
+        }
+
+        .section-content {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* Описание обо мне */
+        .about-text {
+            font-size: 1.05rem;
+            color: var(--text-main);
+        }
+
+        /* КЕЙСЫ (Повышенная плотность и структура) */
+        .cases-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .case-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .case-num {
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .case-title {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--text-main);
+        }
+
+        .case-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* ТЕХ СТЕК (Плотность v3 на базе тегов и слоев) */
+        .stack-wrapper {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .stack-category {
+            background-color: rgba(30, 41, 59, 0.5);
+            border-left: 3px solid var(--accent);
+            padding: 12px 16px;
+        }
+
+        .stack-category h4 {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .tech-inline {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            word-spacing: 2px;
+        }
+
+        .tech-inline span {
+            color: var(--text-main);
+            background-color: var(--card-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 2px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* ОПЫТ РАБОТЫ */
+        .timeline-item {
+            position: relative;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+
+        .time-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 6px;
+        }
+
+        .role-company {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .role-company span {
+            color: var(--accent);
+            font-weight: 400;
+        }
+
+        .duration {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-family: monospace;
+        }
+
+        .job-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* ДОПОЛНИТЕЛЬНОЕ */
+        .meta-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .meta-box h4 {
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+            color: var(--text-main);
+        }
+
+        .meta-box p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* АДАПТИВНОСТЬ */
+        @media (max-width: 768px) {
+            body {
+                padding: 16px;
+            }
+            header {
+                grid-template-columns: 1fr;
+                text-align: center;
+                justify-items: center;
+                gap: 16px;
+            }
+            section {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .cases-grid, .stack-wrapper, .meta-info-grid {
+                grid-template-columns: 1fr;
+            }
+            .time-header {
+                flex-direction: column;
+                gap: 4px;
+            }
+        }
+
+        /* ОПТИМИЗАЦИЯ ДЛЯ ПЕЧАТИ (PDF) */
+        @media print {
+            body {
+                background: #fff;
+                color: #000;
+                padding: 0;
+            }
+            :root {
+                --bg-color: #fff;
+                --card-bg: #fff;
+                --text-main: #000;
+                --text-muted: #444;
+                --accent: #111;
+                --border-color: #ddd;
+            }
+            .resume-container {
+                gap: 20px;
+            }
+            .case-card {
+                page-break-inside: avoid;
+                border: 1px solid #ccc;
+            }
+            section {
+                grid-template-columns: 160px 1fr;
+                page-break-inside: avoid;
+            }
+            .tech-inline span {
+                border: 1px solid #ccc;
+                background: #f5f5f5;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="resume-container">
+
+    <!-- ХЕДЕР -->
+    <header>
+        <div class="profile-frame">
+            <img src="/portret.png" alt="Виталий Дрюков">
+        </div>
+        <div class="header-text">
+            <h1>Виталий Дрюков</h1>
+            <div class="subtitle">Senior Full-Stack Engineer / Архитектор решений / Tech Lead</div>
+            <div class="contacts-grid">
+                <div>📍 Москва, Россия (Удаленная / проектная работа)</div>
+                <div>✉️ <a href="mailto:miniwe@mail.ru">miniwe@mail.ru</a></div>
+                <div>📱 Telegram: <a href="https://t.me/miniwe" target="_blank">@miniwe</a></div>
+                <div>🐙 GitHub: <a href="https://github.com/miniwe" target="_blank">github.com/miniwe</a></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- О СЕБЕ -->
+    <section>
+        <div class="section-title">О подходе</div>
+        <div class="section-content">
+            <p class="about-text">
+                <strong>20+ лет в JS/TypeScript экосистеме:</strong> прошел путь от разработки интерфейсов высокой плотности до проектирования и развертывания отказоустойчивых высоконагруженных распределенных систем общегосударственного и enterprise уровня. Двигаюсь к архитектурному лидерству, глубоко ценю полную автономность и инженерный ownership. Каждое техническое решение жестко связываю с бизнес-метриками, обеспечивая масштабируемость без оверхеда.
+            </p>
+        </div>
+    </section>
+
+    <!-- КЕЙСЫ -->
+    <section>
+        <div class="section-title">Практические кейсы</div>
+        <div class="section-content">
+            <div class="cases-grid">
+
+                <div class="case-card">
+                    <div class="case-num">CASE_01 // DATA_INTEGRITY</div>
+                    <div class="case-title">Точность финансовых расчетов</div>
+                    <div class="case-desc">Внедрил прецизионную математику через <code>decimal.js</code> и строгую изоляцию уровней изоляции транзакций в PostgreSQL, полностью устранив накопление ошибок округления и гонки данных в распределенном ядре.</div>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-num">CASE_02 // ASYNC_PERF</div>
+                    <div class="case-title">Надежность бэкенда и очередей</div>
+                    <div class="case-desc">Вынес ресурсоемкие математические операции и генерацию тяжелых отчетов в изолированные воркеры на базе <code>BullMQ + Redis</code>, защитив API-серверы от HTTP-таймаутов и падений под пиковыми нагрузками.</div>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-num">CASE_03 // MULTI_TENANCY</div>
+                    <div class="case-title">Изоляция корпоративных данных</div>
+                    <div class="case-desc">Спроектировал и развернул сквозную архитектуру Tenant-Aware безопасности на основе многоуровневых токенов JWT и кастомных RBAC/ABAC политик, полностью исключив утечки и пересечение данных между клиентами платформы.</div>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-num">CASE_04 // HIGH_LOAD</div>
+                    <div class="case-title">Масштабные государственные системы</div>
+                    <div class="case-desc">Проектировал сложную архитектуру вертикальных и горизонтальных интеграционных связей для автоматизированных систем общегосударственного значения (IBS Group), оптимизировав производительность под максимальные требования безопасности.</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ТЕХНОЛОГИЧЕСКИЙ СТЕК -->
+    <section>
+        <div class="section-title">Стек и компетенции</div>
+        <div class="section-content">
+            <div class="stack-wrapper">
+
+                <div class="stack-category">
+                    <h4>Бэкенд & Архитектура API</h4>
+                    <div class="tech-inline">
+                        <span>Node.js</span> <span>TypeScript</span> <span>NestJS</span> <span>Meteor.js</span> <span>GraphQL (Apollo)</span> <span>REST API</span> <span>Microservices</span>
+                    </div>
+                </div>
+
+                <div class="stack-category">
+                    <h4>Слои Данных & Очереди</h4>
+                    <div class="tech-inline">
+                        <span>PostgreSQL</span> <span>MySQL</span> <span>Redis</span> <span>BullMQ</span> <span>TypeORM</span> <span>Sequelize</span> <span>Transaction Management</span>
+                    </div>
+                </div>
+
+                <div class="stack-category">
+                    <h4>Фронтенд & State Management</h4>
+                    <div class="tech-inline">
+                        <span>React</span> <span>Redux (Toolkit/Saga)</span> <span>Next.js</span> <span>Effector</span> <span>FSD (Feature-Sliced Design)</span> <span>Highcharts</span>
+                    </div>
+                </div>
+
+                <div class="stack-category">
+                    <h4>Инфраструктура, Окружение & AI</h4>
+                    <div class="tech-inline">
+                        <span>Docker</span> <span>CI/CD</span> <span>Git</span> <span>OpenAI API</span> <span>Prompt Engineering</span> <span>Jest (Automation Testing)</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ОПЫТ РАБОТЫ -->
+    <section>
+        <div class="section-title">Опыт работы</div>
+        <div class="section-content">
+
+            <div class="timeline-item">
+                <div class="time-header">
+                    <div class="role-company">Senior Full-Stack Engineer <span>/ Mitgo Group (Tapfiliate)</span></div>
+                    <div class="duration">2022 – Н.В.</div>
+                </div>
+                <div class="job-desc">
+                    Проектирование и рефакторинг высоконагруженных компонентов международной партнерской трекинг-платформы. Оптимизация работы распределенных баз данных, внедрение отказоустойчивых паттернов обработки очередей задач, интеграция модулей AI для внутренней аналитики кода и автоматизации.
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="time-header">
+                    <div class="role-company">Старший инженер-разработчик / Архитектор <span>/ IBS Group</span></div>
+                    <div class="duration">2019 – 2020</div>
+                </div>
+                <div class="job-desc">
+                    Проектирование архитектуры и реализация бизнес-логики распределенных систем общегосударственного значения (включая автоматизацию процессов возврата налогов для крупного бизнеса). Обеспечение жесткого соответствия критериям безопасности, отказоустойчивости и миграции данных.
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="time-header">
+                    <div class="role-company">IT-Консультант / Full-Stack Team Lead <span>/ Практика (РФ, США, Европа)</span></div>
+                    <div class="duration">15+ ЛЕТ СУММАРНО</div>
+                </div>
+                <div class="job-desc">
+                    Консалтинг, аудит производительности приложений и управление полным циклом создания веб-платформ. Успешный запуск технологических решений и интеграций для клиентов из США, Великобритании, Германии, Франции и Чехии. Управление распределенными кросс-функциональными командами.
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ОБРАЗОВАНИЕ / ФОКУС -->
+    <section>
+        <div class="section-title">Дополнительно</div>
+        <div class="section-content">
+            <div class="meta-info-grid">
+                <div class="meta-box">
+                    <h4>Образование</h4>
+                    <p><strong>БГУ (2000):</strong> Факультет прикладной математики и информатики.</p>
+                </div>
+                <div class="meta-box">
+                    <h4>Языковые компетенции</h4>
+                    <p>Русский (Родной), Английский (B2), Сербский, Испанский.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ЧТО ИЩУ -->
+    <section style="border-top: 1px dashed var(--border-color); padding-top: 24px;">
+        <div class="section-title" style="color: var(--text-main);">Цель / Фокус</div>
+        <div class="section-content">
+            <p style="font-size: 1rem; color: var(--accent); font-weight: 600;">
+                Ищу сложные технические вызовы, где критически важна чистота архитектуры, бескомпромиссное качество кодовой базы, работа с большими данными и высокий уровень инженерной автономности команды.
+            </p>
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>
