@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitaly Dryukov — Senior Full-Stack Engineer / Solutions Architect / Tech Lead</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Light Theme Palette */
+            --bg-color: #f8fafc;
+            --surface-bg: #ffffff;
+            --surface-border: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --accent-color: #2563eb;
+            --accent-hover: #1d4ed8;
+            --accent-light: #eff6ff;
+            --tag-bg: #f1f5f9;
+            --tag-text: #334155;
+            --tag-border: #cbd5e1;
+            --case-bg: #f8fafc;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                /* Dark Theme Palette (Default for Dark Mode) */
+                --bg-color: #0b0f19;
+                --surface-bg: #111827;
+                --surface-border: #1f293d;
+                --text-primary: #f3f4f6;
+                --text-secondary: #9ca3af;
+                --text-muted: #6b7280;
+                --accent-color: #3b82f6;
+                --accent-hover: #60a5fa;
+                --accent-light: rgba(59, 130, 246, 0.12);
+                --tag-bg: #1e293b;
+                --tag-text: #cbd5e1;
+                --tag-border: #334155;
+                --case-bg: #0d1322;
+                --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+                --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.3);
+            }
+        }
+
+        /* Manual Override Classes */
+        html[data-theme="light"] {
+            --bg-color: #f8fafc;
+            --surface-bg: #ffffff;
+            --surface-border: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --accent-color: #2563eb;
+            --accent-hover: #1d4ed8;
+            --accent-light: #eff6ff;
+            --tag-bg: #f1f5f9;
+            --tag-text: #334155;
+            --tag-border: #cbd5e1;
+            --case-bg: #f8fafc;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
+        html[data-theme="dark"] {
+            --bg-color: #0b0f19;
+            --surface-bg: #111827;
+            --surface-border: #1f293d;
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --accent-color: #3b82f6;
+            --accent-hover: #60a5fa;
+            --accent-light: rgba(59, 130, 246, 0.12);
+            --tag-bg: #1e293b;
+            --tag-text: #cbd5e1;
+            --tag-border: #334155;
+            --case-bg: #0d1322;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+            --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 960px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Controls / Theme Switcher */
+        .top-bar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .theme-toggle-btn {
+            background: var(--surface-bg);
+            border: 1px solid var(--surface-border);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .theme-toggle-btn:hover {
+            border-color: var(--accent-color);
+        }
+
+        /* Card Section Component */
+        .card {
+            background-color: var(--surface-bg);
+            border: 1px solid var(--surface-border);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Header Section */
+        header.card {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .profile-img-container {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--accent-color);
+            box-shadow: var(--shadow-md);
+            flex-shrink: 0;
+        }
+
+        .profile-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .header-info h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.25rem;
+        }
+
+        .header-info .subtitle {
+            font-size: 1.05rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.5rem 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .contact-item a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-item a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        /* Typography & Section Titles */
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: var(--surface-border);
+        }
+
+        p {
+            color: var(--text-secondary);
+            font-size: 0.98rem;
+            line-height: 1.65;
+        }
+
+        /* Cases Grid */
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .case-card {
+            background-color: var(--case-bg);
+            border: 1px solid var(--surface-border);
+            border-radius: 8px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .case-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .case-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            background: var(--accent-light);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .case-category {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .case-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .case-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--tag-bg);
+            color: var(--accent-color);
+            padding: 0.15rem 0.35rem;
+            border-radius: 4px;
+            font-size: 0.85em;
+        }
+
+        /* Tech Stack Section */
+        .stack-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .stack-group {
+            background: var(--case-bg);
+            border: 1px solid var(--surface-border);
+            border-radius: 8px;
+            padding: 1.25rem;
+        }
+
+        .stack-group h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .tag {
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            background-color: var(--tag-bg);
+            color: var(--tag-text);
+            border: 1px solid var(--tag-border);
+            padding: 0.25rem 0.55rem;
+            border-radius: 6px;
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1.75rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 1.5rem;
+            border-left: 2px solid var(--surface-border);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: 4px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 0.35rem;
+        }
+
+        .job-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .company-name {
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        .job-period {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .job-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        /* Extra Info Section */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .info-card h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            color: var(--text-primary);
+        }
+
+        /* Media Queries */
+        @media (max-width: 680px) {
+            header.card {
+                grid-template-columns: 1fr;
+                text-align: center;
+                justify-items: center;
+            }
+
+            .contact-grid {
+                justify-content: center;
+            }
+
+            .cases-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: black;
+                padding: 0;
+            }
+            .top-bar, .theme-toggle-btn {
+                display: none;
+            }
+            .card {
+                border: none;
+                box-shadow: none;
+                padding: 1rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- Header Controls -->
+        <div class="top-bar" style="display: none">
+            <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle Theme">
+                <span id="themeIcon">🌓</span>
+                <span id="themeText">System Theme</span>
+            </button>
+        </div>
+
+        <!-- Header Profile -->
+        <header class="card">
+            <div class="profile-img-container">
+                <img src="portret.png" alt="Vitaly Dryukov" onerror="this.src='https://via.placeholder.com/130?text=VD'">
+            </div>
+            <div class="header-info">
+                <h1>Vitaly Dryukov</h1>
+                <div class="subtitle">Senior Full-Stack Engineer / Solutions Architect / Tech Lead</div>
+                <div class="contact-grid">
+                    <div class="contact-item">🗺️ Worldwide (Baku Office / Remote / Contract)</div>
+                    <div class="contact-item">📱 <a href="tel:+994518453796">+994 51 845 37 96</a></div>
+                    <div class="contact-item">📧 <a href="mailto:messir.vdr@gmail.com">messir.vdr@gmail.com</a></div>
+                    <div class="contact-item">💬 Telegram: <a href="https://t.me/miniwe" target="_blank">@miniwe</a></div>
+                    <div class="contact-item">💻 GitHub: <a href="https://github.com/miniwe" target="_blank">github.com/miniwe</a></div>
+                    <div class="contact-item">⚡ Boosty: <a href="https://boosty.to/miniwe" target="_blank">boosty.to/miniwe</a></div>
+                    <div class="contact-item">🔗 <a href="https://miniwe.github.io/legacy/v3/" target="_blank">Extended Version</a></div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Engineering Approach -->
+        <section class="card">
+            <h2 class="section-title">Engineering Approach</h2>
+            <p>
+                <strong>20+ years in the JS/TypeScript ecosystem:</strong> Evolved from developing high-density user interfaces to architecting and deploying fault-tolerant, high-load distributed systems at enterprise and national scales. Moving towards architectural leadership, deeply valuing full engineering ownership and technical autonomy. Every architectural decision is strictly aligned with core business metrics, delivering maximum scalability with zero unnecessary overhead.
+            </p>
+        </section>
+
+        <!-- Practical Case Studies -->
+        <section class="card">
+            <h2 class="section-title">Practical Case Studies</h2>
+            <div class="cases-grid">
+
+                <div class="case-card">
+                    <div class="case-header">
+                        <span class="case-badge">CASE_01</span>
+                        <span class="case-category">Data Integrity</span>
+                    </div>
+                    <div class="case-title">Financial Precision & Integrity</div>
+                    <div class="case-desc">
+                        Implemented high-precision calculation mechanisms via <code>decimal.js</code> combined with strict PostgreSQL transaction isolation levels, completely eliminating rounding cumulative errors and data race conditions within the core distributed engine.
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-header">
+                        <span class="case-badge">CASE_02</span>
+                        <span class="case-category">Process Optimization</span>
+                    </div>
+                    <div class="case-title">Backend & Queue Reliability</div>
+                    <div class="case-desc">
+                        Offloaded compute-heavy mathematical operations and complex report generators to isolated background workers powered by <code>BullMQ + Redis</code>, shielding core API servers from HTTP timeouts and crash spikes under heavy loads.
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-header">
+                        <span class="case-badge">CASE_03</span>
+                        <span class="case-category">Multi-Tenant Security</span>
+                    </div>
+                    <div class="case-title">Enterprise Data Isolation</div>
+                    <div class="case-desc">
+                        Designed and deployed end-to-end Tenant-Aware architecture using multi-tiered JWT tokens and customized RBAC/ABAC policy models, guaranteeing complete isolation and preventing cross-tenant data leaks across platform clients.
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-header">
+                        <span class="case-badge">CASE_04</span>
+                        <span class="case-category">High-Load Engineering</span>
+                    </div>
+                    <div class="case-title">Nation-Scale Systems Architecture</div>
+                    <div class="case-desc">
+                        Architected complex vertical and horizontal integration networks for nationwide automated platforms (IBS Group), optimizing throughput and system responsiveness under strict security and compliance standards.
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Tech Stack & Competencies -->
+        <section class="card">
+            <h2 class="section-title">Tech Stack & Competencies</h2>
+            <div class="stack-grid">
+
+                <div class="stack-group">
+                    <h4>Backend & Architecture</h4>
+                    <div class="tags">
+                        <span class="tag">Node.js</span>
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">NestJS</span>
+                        <span class="tag">Meteor.js</span>
+                        <span class="tag">GraphQL</span>
+                        <span class="tag">REST API</span>
+                        <span class="tag">Microservices</span>
+                    </div>
+                </div>
+
+                <div class="stack-group">
+                    <h4>Data Layer & Queues</h4>
+                    <div class="tags">
+                        <span class="tag">PostgreSQL</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">Redis</span>
+                        <span class="tag">BullMQ</span>
+                        <span class="tag">TypeORM</span>
+                        <span class="tag">Sequelize</span>
+                        <span class="tag">ACID Transactions</span>
+                    </div>
+                </div>
+
+                <div class="stack-group">
+                    <h4>Frontend & State</h4>
+                    <div class="tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Redux Toolkit</span>
+                        <span class="tag">Next.js</span>
+                        <span class="tag">Effector</span>
+                        <span class="tag">FSD Layouts</span>
+                        <span class="tag">Highcharts</span>
+                    </div>
+                </div>
+
+                <div class="stack-group">
+                    <h4>Infrastructure & AI</h4>
+                    <div class="tags">
+                        <span class="tag">Docker</span>
+                        <span class="tag">CI/CD</span>
+                        <span class="tag">Git</span>
+                        <span class="tag">OpenAI API</span>
+                        <span class="tag">AI Prompting</span>
+                        <span class="tag">Jest</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Work Experience -->
+        <section class="card">
+            <h2 class="section-title">Work Experience</h2>
+            <div class="timeline">
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div class="job-title">Senior Full-Stack Engineer <span class="company-name">/ Mitgo Group (Tapfiliate)</span></div>
+                        <div class="job-period">2022 – 2026</div>
+                    </div>
+                    <div class="job-desc">
+                        Designed and refactored high-load core modules for a global affiliate tracking platform. Optimized distributed database queries, implemented resilient asynchronous task queues, and integrated custom AI workflows for internal code auditing and automation of development pipelines.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div class="job-title">Senior Lead Engineer / Solutions Architect <span class="company-name">/ IBS Group</span></div>
+                        <div class="job-period">2019 – 2020</div>
+                    </div>
+                    <div class="job-desc">
+                        Led architectural design and core business logic implementation for enterprise and nationwide distributed platforms (including automated corporate tax return systems). Ensured zero-downtime database migrations, fault tolerance, and high security compliance.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div class="job-title">IT Consultant / Full-Stack Team Lead <span class="company-name">/ Independent Consultancy</span></div>
+                        <div class="job-period">15+ YEARS</div>
+                    </div>
+                    <div class="job-desc">
+                        Conducted technical audits, app performance optimization, and end-to-end web platform architecture for international enterprise clients across the US, UK, Germany, France, and Czechia. Managed cross-functional distributed teams.
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Additional Information -->
+        <section class="card">
+            <h2 class="section-title">Additional Info</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4>Education</h4>
+                    <p><strong>Baku State University (2000):</strong> Faculty of Applied Mathematics and Computer Science.</p>
+                </div>
+                <div class="info-card">
+                    <h4>Languages</h4>
+                    <p>Russian (Native), English (B2 / Professional working proficiency), Azerbaijani (A2), Serbian, Spanish.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Career Focus -->
+        <section class="card">
+            <h2 class="section-title">Career Focus</h2>
+            <p>
+                Seeking complex technical and architectural challenges where clean codebase quality, sophisticated data structures, fault tolerance, and high engineering autonomy are valued.
+            </p>
+        </section>
+
+    </div>
+
+    <script>
+        // Theme Switcher Logic with LocalStorage & Preferences Detection
+        const toggleBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+
+        // Check stored theme or default to system preference
+        const storedTheme = localStorage.getItem('theme');
+
+        if (storedTheme) {
+            document.documentElement.setAttribute('data-theme', storedTheme);
+            updateButtonState(storedTheme);
+        } else {
+            updateButtonState('system');
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            let newTheme;
+
+            if (!currentTheme) {
+                // Currently system, switch to explicitly light or dark based on system
+                const systemIsDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                newTheme = systemIsDark ? 'light' : 'dark';
+            } else if (currentTheme === 'dark') {
+                newTheme = 'light';
+            } else {
+                newTheme = 'dark';
+            }
+
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateButtonState(newTheme);
+        });
+
+        function updateButtonState(theme) {
+            if (theme === 'dark') {
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Dark Mode';
+            } else if (theme === 'light') {
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Light Mode';
+            } else {
+                themeIcon.textContent = '🌓';
+                themeText.textContent = 'Auto (System)';
+            }
+        }
+    </script>
+</body>
+</html>
