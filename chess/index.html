@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BRUTAL 3D CHESS</title>
+  <!-- Three.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- PeerJS CDN for P2P Multiplayer -->
+  <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- 3D Canvas Container -->
+  <div id="canvas-container"></div>
+
+  <!-- UI Overlay -->
+  <div class="ui-wrapper">
+    <header class="interactive">
+      <h1>BRUTAL_3D_CHESS.EXE</h1>
+      <div class="subtitle">THREE.JS ISOMETRIC ENGINE // P2P MULTIPLAYER</div>
+    </header>
+
+    <div class="main-layout">
+      <!-- Left Panel: Status & Logs -->
+      <div class="left-panel interactive">
+        <div id="status-bar" class="status-bar white-turn">
+          ХОД: БЕЛЫЕ
+        </div>
+
+        <div class="panel">
+          <h2>ИСТОРИЯ ХОДОВ</h2>
+          <div id="move-log" class="move-log"></div>
+        </div>
+      </div>
+
+      <!-- Right Panel: Network & Controls -->
+      <div class="right-panel interactive">
+        <div class="panel">
+          <h2>ОНЛАЙН ИГРА (P2P)</h2>
+          <div id="my-id-display" class="id-box">Ваш ID: Подключение...</div>
+          <div class="network-controls">
+            <input type="text" id="peer-id-input" placeholder="Введите ID соперника">
+            <button id="connect-btn" class="btn btn-sm">ПОДКЛЮЧИТЬСЯ</button>
+          </div>
+          <div id="net-status" class="net-status">РЕЖИМ: ЛОКАЛЬНЫЙ (2 ИГРОКА)</div>
+        </div>
+
+        <div class="panel">
+          <h2>УПРАВЛЕНИЕ</h2>
+          <ul class="controls-hint">
+            <li><strong>ЛКМ (Зажать):</strong> Перетащить фигуру.</li>
+            <li><strong>Зеленые плитки:</strong> Возможный ход.</li>
+            <li><strong>Розовые плитки:</strong> Взятие фигуры.</li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <button id="restart-btn" class="btn">НОВАЯ ИГРА</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/chess-logic.js"></script>
+  <script src="js/network.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
