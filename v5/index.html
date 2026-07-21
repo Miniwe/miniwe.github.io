@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Perspective Showcase</title>
+  <style>
+    /* CSS Variables & Theme Setup */
+    :root {
+      --bg: #090a0f;
+      --surface: #12141d;
+      --surface-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f0f2f8;
+      --text-muted: #8b92a5;
+      --accent: #3b82f6;
+      --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+      --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Container & Layout */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navigation */
+    header {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--surface-border);
+      position: sticky;
+      top: 0;
+      background: rgba(9, 10, 15, 0.8);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+    }
+
+    .nav-btn {
+      background: var(--text-main);
+      color: var(--bg);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: transform 160ms var(--ease-out), opacity 160ms var(--ease-out);
+    }
+
+    .nav-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 96px 0 64px;
+      text-align: center;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      max-width: 850px;
+      margin: 0 auto 20px;
+      text-wrap: balance;
+    }
+
+    .hero-subtitle {
+      color: var(--text-muted);
+      font-size: 1.125rem;
+      max-width: 580px;
+      margin: 0 auto 32px;
+      text-wrap: pretty;
+    }
+
+    /* 3D Scene Viewport */
+    .scene-viewport {
+      perspective: 1200px;
+      padding: 40px 0 120px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+      transform-style: preserve-3d;
+    }
+
+    /* Interactive 3D Card */
+    .card-3d {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 16px;
+      padding: 32px;
+      transform-style: preserve-3d;
+      transition: transform 300ms var(--ease-out), border-color 300ms var(--ease-out), box-shadow 300ms var(--ease-out);
+      cursor: pointer;
+      will-change: transform;
+      position: relative;
+    }
+
+    .card-3d:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(59, 130, 246, 0.15);
+    }
+
+    .card-content {
+      transform: translateZ(30px);
+      transition: transform 300ms var(--ease-out);
+    }
+
+    .card-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .card-description {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .card-preview {
+      margin-top: 24px;
+      height: 160px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(255, 255, 255, 0.03));
+      border: 1px dashed var(--surface-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: translateZ(20px);
+      transition: transform 300ms var(--ease-out);
+    }
+
+    .card-preview-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
+    }
+
+    /* Scroll Reveal Initial State */
+    .reveal {
+      opacity: 0;
+      transform: translateY(60px) rotateX(-15deg) scale(0.92);
+      transition: opacity 800ms var(--ease-out), transform 800ms var(--ease-out);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0) rotateX(0deg) scale(1);
+    }
+
+    /* Reduced Motion Support */
+    @media (prefers-reduced-motion: reduce) {
+      .card-3d, .card-content, .card-preview, .reveal {
+        transition: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container" style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+      <div class="logo">Spatial Design</div>
+      <button class="nav-btn">Start Project</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1 class="hero-title">Interface dimensions built with spatial depth</h1>
+      <p class="hero-subtitle">High performance web architecture featuring physical motion and 3D viewport spatial layout.</p>
+    </section>
+
+    <section class="scene-viewport">
+      <div class="cards-grid">
+
+        <article class="card-3d reveal">
+          <div class="card-content">
+            <span class="card-badge">Dimension 01</span>
+            <h2 class="card-title">Perspective Engine</h2>
+            <p class="card-description">Hardware accelerated CSS transforms delivering responsive depth feedback on user pointer position.</p>
+            <div class="card-preview">
+              <div class="card-preview-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card-3d reveal">
+          <div class="card-content">
+            <span class="card-badge">Dimension 02</span>
+            <h2 class="card-title">Fluid Motion</h2>
+            <p class="card-description">Natural physics curves mapping interface state changes with zero layout thrashing.</p>
+            <div class="card-preview">
+              <div class="card-preview-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card-3d reveal">
+          <div class="card-content">
+            <span class="card-badge">Dimension 03</span>
+            <h2 class="card-title">Tactile Feedback</h2>
+            <p class="card-description">Precise spring calculations delivering immediate active visual confirmation for every interaction.</p>
+            <div class="card-preview">
+              <div class="card-preview-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // 3D Tilt Effect on Mouse Move
+    const cards = document.querySelectorAll('.card-3d');
+
+    cards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateX = ((y - centerY) / centerY) * -12;
+        const rotateY = ((x - centerX) / centerX) * 12;
+
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+      });
+    });
+
+    // Scroll Reveal with IntersectionObserver
+    const observerOptions = {
+      threshold: 0.15
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
