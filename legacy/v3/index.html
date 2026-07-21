@@ -195,6 +195,25 @@
       p + .row.subtitle2 {
         margin-top: 2rem;
       }
+
+
+/* Скрыть верхнюю панель Google */
+body > .skiptranslate iframe {
+  border: 1px solid red;
+  display: none !important;
+}
+body {
+    top: 0px !important;
+}
+
+.goog-te-banner-frame.skiptranslate {
+    display: none !important;
+}
+/* Скрыть всплывающую подсказку при наведении на переведенный текст */
+.goog-text-highlight {
+    background: transparent !important;
+    box-shadow: none !important;
+}
     </style>
     <script>
       window.addEventListener('load', () => {
@@ -237,14 +256,25 @@
         <div data-plugin="bs-darkmode-toggle"></div>
 
         <h2 class="title1 col-4"> Виталий Дрюков </h2>
+
+
         <h1 class="subtitle1 col-8 text-end">
           Фулстек JavaScript разработчик
         </h1>
+
+
       </header>
 
       <main>
         <div class="row">
           <div class="col-5 col-md-4">
+            <div class="sticky">
+              <h3 class="title3">
+
+                <div id="google_translate_element"></div>
+              </h3>
+
+</div>
             <div class="sticky">
               <h3 class="title3">Занятость</h3>
               <p
@@ -804,5 +834,21 @@
         </div>
       </footer>
     </div>
+
+
+<!-- Скрипт инициализации -->
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'ru', // Укажите основной язык вашей страницы (например, 'ru' - русский)
+      includedLanguages: 'en,es,de,fr,it,zh-CN', // Языки для выбора (уберите эту строку, если нужны вообще ВСЕ языки)
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+      autoDisplay: false
+    }, 'google_translate_element');
+  }
+</script>
+
+<!-- Загрузка библиотеки Google Translate -->
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   </body>
 </html>
