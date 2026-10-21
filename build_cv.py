@@ -31,7 +31,11 @@ from pathlib import Path
 # ушли вправо, а раздел «Стек» больше не выводится отдельным полотном:
 # он разбирается на словарь и раздаётся тегами по кейсам и местам работы
 # (решение человека 2026-10-22 — «полотно технологий оттолкнёт»).
-В_САЙДБАР = {"образование", "education", "təhsil", "формат", "working", "iş formatı"}
+В_САЙДБАР = {
+    "кратко", "summary", "qisaca",            # о себе
+    "образование", "education", "təhsil",      # образование и языки
+    "формат", "working", "iş formatı",         # формат работы
+}
 СТЕК_РАЗДЕЛ = {"стек", "stack", "stek"}
 
 
@@ -221,7 +225,7 @@ def собрать(язык, файл, исходник, метка):
         f'<a href="{f}" class="{"тек" if l == язык else ""}">{m}</a>'
         for l, f, _, m in ЯЗЫКИ)
     контакт_html = "".join(f"<p>{строчный(c)}</p>" for c in контакты if c.strip())
-    основное.insert(0, f'<section class="контакты"><h2>Контакты</h2>{контакт_html}</section>')
+    сайдбар.insert(0, f'<section class="контакты"><h2>Контакты</h2>{контакт_html}</section>')
 
     (КОРЕНЬ / файл).write_text(ШАБЛОН.format(
         язык=язык, имя=html.escape(имя), роль=html.escape(роль),
@@ -264,15 +268,15 @@ body{{
   padding:5px 10px;border:1px solid #55617a;border-radius:3px}}
 .языки a.тек{{color:#fff;border-color:#fff;background:rgba(255,255,255,.12)}}
 /* ── колонки ── */
-.тело{{display:grid;grid-template-columns:292px 1fr}}
-.слева{{background:var(--поле);padding:40px 28px 48px}}
+.тело{{display:grid;grid-template-columns:360px 1fr}}
+.слева{{background:var(--поле);padding:112px 34px 48px}}
 .справа{{padding:40px 52px 56px}}
 /* ── заголовки ── */
 h2{{font-size:15px;letter-spacing:.16em;text-transform:uppercase;margin:0 0 15px;
   padding-bottom:9px;border-bottom:2px solid var(--текст);font-weight:800}}
 .слева section{{margin-bottom:32px}}
 .слева h2{{font-size:13.5px;border-bottom-width:1.5px}}
-.слева p{{margin:0 0 10px;font-size:14.5px;line-height:1.55;color:var(--текст-2);overflow-wrap:anywhere}}
+.слева p{{margin:0 0 11px;font-size:14.8px;line-height:1.58;color:var(--текст-2);overflow-wrap:anywhere}}
 .справа section{{margin-bottom:34px;padding-left:40px;position:relative}}
 .справа section::before{{content:"";position:absolute;left:11px;top:4px;width:17px;height:17px;
   border-radius:50%;background:var(--тёмный)}}
@@ -303,7 +307,8 @@ code{{background:#e7ebf1;padding:1px 5px;border-radius:3px;font-size:13.5px;
 em{{color:var(--серый);font-size:13.5px}}
 /* ── планшет ── */
 @media (max-width:1000px){{
-  .тело{{grid-template-columns:250px 1fr}}
+  .тело{{grid-template-columns:300px 1fr}}
+  .слева{{padding:104px 24px 40px}}
   .справа{{padding:34px 32px 44px}}
   .шапка{{padding:34px 36px 30px 268px}} .шапка h1{{font-size:36px}}
 }}
@@ -312,7 +317,7 @@ em{{color:var(--серый);font-size:13.5px}}
   body{{font-size:16px;background:#fff}}
   .лист{{margin:0;box-shadow:none}}
   .тело{{display:flex;flex-direction:column}}
-  .справа{{order:1}} .слева{{order:2}}
+  .слева{{order:1}} .справа{{order:2}}
   .шапка{{display:flex;flex-direction:column;align-items:center;
     padding:26px 20px 24px;text-align:center;min-height:0}}
   .шапка>div:last-of-type{{order:2}}
@@ -320,7 +325,7 @@ em{{color:var(--серый);font-size:13.5px}}
   .шапка h1{{font-size:27px;letter-spacing:.03em}}
   .шапка .роль{{font-size:13px;letter-spacing:.07em;margin:10px auto 0}}
   .языки{{position:static;order:3;justify-content:center;margin:20px 0 0}}
-  .слева{{padding:28px 20px 30px}}
+  .слева{{padding:26px 20px 30px}}
   .справа{{padding:28px 20px 40px}}
   .справа section{{padding-left:26px}}
   .справа section::before{{left:0;width:13px;height:13px;top:5px}}
