@@ -247,7 +247,7 @@ def собрать(язык, файл, исходник, метка):
 <!-- Montserrat — заголовки, теги и мелкие надписи; Inter — текст.
      Подсеты latin, latin-ext и cyrillic: latin-ext нужен азербайджанскому
      (ə, ğ, ı, İ, ö, ş, ü, ç), cyrillic — русскому. -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600;700&family=Montserrat:wght@600;700;800&display=swap&subset=latin,latin-ext,cyrillic" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap&subset=latin,latin-ext,cyrillic" rel="stylesheet">
 <style>
 :root {{
   --тёмный:#2c3a4f; --поле:#eef1f5; --линия:#cfd6e0;
@@ -259,7 +259,7 @@ def собрать(язык, файл, исходник, метка):
 html{{-webkit-text-size-adjust:100%}}
 body{{
   margin:0;background:#8d96a5;color:var(--текст);
-  font:200 16.5px/1.64 var(--шрифт-текст);
+  font:400 16.5px/1.62 var(--шрифт-текст);
   -webkit-font-smoothing:antialiased;overflow-x:hidden;
 }}
 .лист{{max-width:1120px;margin:28px auto;background:#fff;box-shadow:0 2px 24px rgba(0,0,0,.22)}}
@@ -283,31 +283,31 @@ h2{{font-family:var(--шрифт-заголовки);font-size:15px;letter-spaci
   padding-bottom:9px;border-bottom:2px solid var(--текст);font-weight:800}}
 .слева section{{margin-bottom:32px}}
 .слева h2{{font-size:13.5px;border-bottom-width:1.5px}}
-.слева p{{font-weight:200;margin:0 0 11px;font-size:14.8px;line-height:1.58;color:var(--текст-2);overflow-wrap:anywhere}}
+.слева p{{margin:0 0 11px;font-size:14.8px;line-height:1.58;color:var(--текст-2);overflow-wrap:anywhere}}
 .справа section{{margin-bottom:34px;padding-left:40px;position:relative}}
 .справа section::before{{content:"";position:absolute;left:11px;top:4px;width:17px;height:17px;
   border-radius:50%;background:var(--тёмный)}}
 .справа section::after{{content:"";position:absolute;left:19px;top:22px;bottom:6px;width:1px;background:var(--линия)}}
 .справа section:last-child::after{{display:none}}
-.справа p{{font-weight:200;margin:0 0 12px;color:var(--текст-2)}}
+.справа p{{margin:0 0 12px;color:var(--текст-2)}}
 /* ── записи ── */
 .запись{{margin:0 0 20px}}
 .запись h3{{font-family:var(--шрифт-заголовки);margin:0 0 5px;font-size:16.5px;font-weight:700;line-height:1.35;
   display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 18px;align-items:baseline}}
 .запись h3>strong{{flex:1 1 60%}}
 .запись .дата{{font-family:var(--шрифт-заголовки);flex:0 0 auto;font-size:13.5px;color:var(--серый);font-weight:500;letter-spacing:.02em}}
-.запись p{{font-weight:200;margin:0;color:var(--текст-2)}}
+.запись p{{margin:0;color:var(--текст-2)}}
 /* ── стек ── */
 ul.стек{{list-style:none;margin:0;padding:0}}
 ul.стек li{{margin-bottom:14px;font-size:14px;line-height:1.55}}
 ul.стек li b{{font-family:var(--шрифт-заголовки);display:block;font-size:12px;letter-spacing:.09em;text-transform:uppercase;
   color:var(--тёмный);margin-bottom:3px;font-weight:800}}
-ul.стек li span{{font-weight:200;color:var(--текст-2);overflow-wrap:anywhere}}
+ul.стек li span{{color:var(--текст-2);overflow-wrap:anywhere}}
 p.теги{{margin:9px 0 0;display:flex;flex-wrap:wrap;gap:6px}}
 p.теги span{{font-family:var(--шрифт-заголовки);font-size:12px;font-weight:600;letter-spacing:.05em;background:var(--тёмный);
   color:#fff;border-radius:3px;padding:4px 10px;white-space:nowrap;
   -webkit-print-color-adjust:exact;print-color-adjust:exact}}
-section.контакты p{{font-weight:200;margin:0 0 7px;font-size:15px;color:var(--текст-2)}}
+section.контакты p{{margin:0 0 7px;font-size:15px;color:var(--текст-2)}}
 section.контакты{{margin-bottom:30px}}
 a{{color:var(--акцент)}}
 code{{background:#e7ebf1;padding:1px 5px;border-radius:3px;font-size:13.5px;
@@ -347,8 +347,6 @@ em{{color:var(--серый);font-size:13.5px}}
 @page {{ margin: 9mm 9mm 8mm; }}
 @media print {{
   html,body{{background:#fff}}
-  /* Inter 200 на бумаге на 9pt рассыпается — для печати 400. */
-  body,.слева p,.справа p,.запись p,section.контакты p{{font-weight:400}}
   body{{font-size:9.4pt;line-height:1.4;color:#000}}
   .лист{{margin:0;box-shadow:none;max-width:none}}
   .языки{{display:none}}
