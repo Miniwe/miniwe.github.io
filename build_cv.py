@@ -14,7 +14,7 @@ import unicodedata
 from datetime import date
 from pathlib import Path
 
-ХРАНИЛИЩЕ = Path.home() / "Projects/LifeTracker/LifeTracker/(P) Проекты/13 Резюме и поиск работы"
+ХРАНИЛИЩЕ = Path.home() / "Projects/LifeTracker/LifeTracker/(P) Проекты/13 Резюме и поиск работы/50-резюме"
 КОРЕНЬ = Path(__file__).parent
 
 # Опыт до этого года на страницу не выводится — решение человека 2026-10-22.
