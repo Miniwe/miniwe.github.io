@@ -1,556 +1,128 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Виталий Дрюков — Senior Full-Stack Engineer / Архитектор решений / Tech Lead</title>
-    <style>
-        :root {
-            --bg-color: #ffffff;         /* Белый как база */
-            --card-bg: #f8fafc;          /* Мягкий светлый для карточек (Slate 50) */
-            --accent-bg: #e0f2fe;        /* Бледно-голубой для выделений (Sky 100) */
-            --border-color: #cbd5e1;     /* Контрастные границы (Slate 300) */
-
-            /* Текстовые цвета */
-            --text-main: #0f172a;        /* Глубокий темный основной текст (Slate 900) */
-            --text-muted: #475569;       /* Понятный читаемый серый текст (Slate 600) */
-            --text-link: #0284c7;        /* Синий для ссылок */
-
-            /* Вкрапления по запросу */
-            --accent-blue: #1e3a8a;      /* Темно-синий/голубой для главных заголовков */
-            --accent-green: #14532d;     /* Темно-зеленый (для дат и логов) */
-            --accent-red: #7f1d1d;       /* Темно-красный (для маркеров кейсов) */
-
-            --max-width: 920px;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.5;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
-            -webkit-print-color-adjust: exact; /* Гарантия печати фонов */
-            print-color-adjust: exact;
-        }
-
-        .resume-container {
-            width: 100%;
-            max-width: var(--max-width);
-            display: flex;
-            flex-direction: column;
-            gap: 28px;
-        }
-
-        /* ХЕДЕР */
-        header {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 28px;
-            align-items: center;
-            border-bottom: 2px solid var(--text-main);
-            padding-bottom: 24px;
-        }
-
-        .profile-frame {
-            width: 130px;
-            height: 130px;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-        }
-
-        .profile-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center 15%;
-        }
-
-        .header-text h1 {
-            font-size: 2.2rem;
-            font-weight: 600;
-
-                text-transform: none;
-    font-family: serif;
-    font-weight: 600;
-    color: #13542e;
-    font-variant: petite-caps;
-            margin-bottom: 2px;
-
-
-        }
-
-        .header-text .subtitle {
-            font-size: 1.2rem;
-            color: var(--accent-blue);
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .contacts-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px 20px;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .contacts-grid a {
-            color: var(--text-link);
-            text-decoration: none;
-            font-weight: 600;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        /* СЕКЦИИ */
-        section {
-            display: grid;
-            grid-template-columns: 200px 1fr;
-            gap: 24px;
-        }
-
-        .section-title {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--accent-blue);
-            font-weight: 800;
-            border-left: 4px solid var(--accent-blue);
-            padding-left: 10px;
-            height: max-content;
-        }
-
-        .section-content {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .about-text {
-            font-size: 1rem;
-            color: var(--text-main);
-            text-align: justify;
-        }
-
-        /* КЕЙСЫ */
-        .cases-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-        }
-
-        .case-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 16px;
-            border-radius: 6px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .case-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-family: monospace;
-            font-size: 0.8rem;
-            font-weight: 700;
-            border-bottom: 1px dashed var(--border-color);
-            padding-bottom: 4px;
-            margin-bottom: 2px;
-        }
-
-        .case-num {
-            visibility: hidden;
-            color: var(--accent-red); /* Темно-красный маркер */
-        }
-
-        .case-tag {
-            color: var(--accent-green); /* Темно-зеленый тег статуса */
-            background-color: #e6f4ea;
-            padding: 1px 5px;
-            border-radius: 3px;
-        }
-
-        .case-title {
-            font-weight: 700;
-            font-size: 1rem;
-            color: var(--text-main);
-        }
-
-        .case-desc {
-            font-size: 0.88rem;
-            color: var(--text-muted);
-        }
-
-        /* СТЕК */
-        .stack-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-        }
-
-        .stack-category {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-top: 3px solid var(--accent-blue);
-            padding: 12px 14px;
-            border-radius: 4px;
-        }
-
-        .stack-category h4 {
-            font-size: 0.9rem;
-            color: var(--text-main);
-            margin-bottom: 6px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.02em;
-        }
-
-        .tech-inline {
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-            font-size: 0.82rem;
-            color: var(--text-main);
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-        }
-
-        .tech-inline span {
-            background-color: var(--accent-bg); /* Бледно-голубые плашки */
-            padding: 2px 6px;
-            border-radius: 4px;
-            border: 1px solid #bae6fd;
-            font-weight: 500;
-        }
-
-        /* ОПЫТ */
-        .timeline-item {
-            padding-bottom: 12px;
-            border-bottom: 1px dashed var(--border-color);
-        }
-
-        .timeline-item:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-
-        .time-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 4px;
-        }
-
-        .role-company {
-            font-weight: 700;
-            font-size: 1.05rem;
-            color: var(--text-main);
-        }
-
-        .role-company span {
-            color: var(--accent-blue);
-            font-weight: 500;
-        }
-
-        .duration {
-            font-size: 0.85rem;
-            color: var(--accent-green); /* Темно-зеленый для дат */
-            font-weight: 700;
-            font-family: monospace;
-            background-color: #f0fdf4;
-            padding: 2px 6px;
-            border-radius: 4px;
-            border: 1px solid #bbf7d0;
-        }
-
-        .job-desc {
-            font-size: 0.92rem;
-            color: var(--text-muted);
-            text-align: justify;
-        }
-
-        /* ДОПОЛНИТЕЛЬНО */
-        .meta-info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-        }
-
-        .meta-box {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 12px;
-            border-radius: 4px;
-        }
-
-        .meta-box h4 {
-            font-size: 0.9rem;
-            margin-bottom: 4px;
-            color: var(--accent-blue);
-            text-transform: uppercase;
-        }
-
-        .meta-box p {
-            font-size: 0.9rem;
-            color: var(--text-main);
-        }
-
-        /* АДАПТИВНОСТЬ ДЛЯ СМАРТФОНОВ */
-        @media (max-width: 768px) {
-            body {
-                padding: 16px;
-            }
-            header {
-                grid-template-columns: 1fr;
-                text-align: center;
-                justify-items: center;
-                gap: 14px;
-                padding-bottom: 16px;
-            }
-            section {
-                display: grid;
-                grid-template-columns: 1fr;
-                gap: 8px;
-            }
-            .cases-grid, .stack-wrapper, .meta-info-grid {
-                grid-template-columns: 1fr;
-            }
-            .time-header {
-                flex-direction: column;
-                gap: 6px;
-                align-items: flex-start;
-            }
-            .header-text h1 {
-                font-size: 1.8rem;
-            }
-
-
-        }
-
-        /* СТРОГИЕ ПРАВИЛА ПЕЧАТИ (A4 АДАПТАЦИЯ) */
-        @media print {
-            @page {
-                size: A4;
-                margin: 15mm 12mm;
-            }
-            body {
-                padding: 0;
-                font-size: 11pt;
-            }
-            .resume-container {
-                gap: 20px;
-            }
-            section {
-                grid-template-columns: 1fr;
-                gap: 16px;
-                page-break-inside: auto;
-            }
-
-            .case-card, .stack-category, .timeline-item, .meta-box {
-                page-break-inside: avoid;
-            }
-            .contacts-grid a {
-                text-decoration: none;
-                color: var(--text-main);
-            }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Виталий Дрюков — Senior Full-Stack Engineer</title>
+<style>
+:root {
+  --тёмный:#2c3a4f; --поле:#eef1f5; --линия:#cfd6e0;
+  --текст:#1b2430; --текст-2:#2d3747; --серый:#4e5a6b; --акцент:#1f4e79;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:#8d96a5;color:var(--текст);
+  font:400 16.5px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI","Inter",
+       "Helvetica Neue",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+.лист{max-width:1120px;margin:28px auto;background:#fff;box-shadow:0 2px 24px rgba(0,0,0,.22)}
+/* ── шапка ── */
+.шапка{background:var(--тёмный);color:#fff;padding:40px 48px 36px 300px;position:relative;min-height:176px}
+.фото{position:absolute;left:44px;top:34px;width:216px;height:216px;border-radius:50%;
+  object-fit:cover;object-position:50% 22%;border:9px solid #fff;background:#fff}
+.шапка h1{margin:0;font-size:43px;line-height:1.06;letter-spacing:.05em;font-weight:800;text-transform:uppercase}
+.шапка .роль{margin:12px 0 0;font-size:15.5px;line-height:1.5;letter-spacing:.11em;
+  text-transform:uppercase;color:#cfd7e3;font-weight:400;max-width:48em}
+.языки{position:absolute;right:30px;top:24px;display:flex;gap:5px}
+.языки a{color:#b9c2d0;text-decoration:none;font-size:12.5px;letter-spacing:.1em;
+  padding:5px 10px;border:1px solid #55617a;border-radius:3px}
+.языки a.тек{color:#fff;border-color:#fff;background:rgba(255,255,255,.12)}
+/* ── колонки ── */
+.тело{display:grid;grid-template-columns:292px 1fr}
+.слева{background:var(--поле);padding:40px 28px 48px}
+.справа{padding:40px 52px 56px}
+/* ── заголовки ── */
+h2{font-size:15px;letter-spacing:.16em;text-transform:uppercase;margin:0 0 15px;
+  padding-bottom:9px;border-bottom:2px solid var(--текст);font-weight:800}
+.слева section{margin-bottom:32px}
+.слева h2{font-size:13.5px;border-bottom-width:1.5px}
+.слева p{margin:0 0 10px;font-size:14.5px;line-height:1.55;color:var(--текст-2);overflow-wrap:anywhere}
+.справа section{margin-bottom:34px;padding-left:40px;position:relative}
+.справа section::before{content:"";position:absolute;left:11px;top:4px;width:17px;height:17px;
+  border-radius:50%;background:var(--тёмный)}
+.справа section::after{content:"";position:absolute;left:19px;top:22px;bottom:6px;width:1px;background:var(--линия)}
+.справа section:last-child::after{display:none}
+.справа p{margin:0 0 12px;color:var(--текст-2)}
+/* ── записи ── */
+.запись{margin:0 0 20px}
+.запись h3{margin:0 0 5px;font-size:16.5px;font-weight:700;line-height:1.35;
+  display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 18px;align-items:baseline}
+.запись h3>strong{flex:1 1 60%}
+.запись .дата{flex:0 0 auto;font-size:13.5px;color:var(--серый);font-weight:500;letter-spacing:.02em}
+.запись p{margin:0;color:var(--текст-2)}
+/* ── стек ── */
+ul.стек{list-style:none;margin:0;padding:0}
+ul.стек li{margin-bottom:14px;font-size:14px;line-height:1.55}
+ul.стек li b{display:block;font-size:12px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--тёмный);margin-bottom:3px;font-weight:800}
+ul.стек li span{color:var(--текст-2);overflow-wrap:anywhere}
+p.теги{margin:9px 0 0;display:flex;flex-wrap:wrap;gap:6px}
+p.теги span{font-size:12px;letter-spacing:.04em;background:#eef1f6;color:#33405a;
+  border:1px solid #dde3ec;border-radius:3px;padding:3px 9px;white-space:nowrap}
+section.контакты p{margin:0 0 7px;font-size:15px;color:var(--текст-2)}
+section.контакты{margin-bottom:30px}
+a{color:var(--акцент)}
+code{background:#e7ebf1;padding:1px 5px;border-radius:3px;font-size:13.5px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+em{color:var(--серый);font-size:13.5px}
+/* ── планшет ── */
+@media (max-width:1000px){
+  .тело{grid-template-columns:250px 1fr}
+  .справа{padding:34px 32px 44px}
+  .шапка{padding:34px 36px 30px 268px} .шапка h1{font-size:36px}
+}
+/* ── мобильный ── */
+@media (max-width:760px){
+  body{font-size:16px;background:#fff}
+  .лист{margin:0;box-shadow:none}
+  .тело{display:flex;flex-direction:column}
+  .справа{order:1} .слева{order:2}
+  .шапка{display:flex;flex-direction:column;align-items:center;
+    padding:26px 20px 24px;text-align:center;min-height:0}
+  .шапка>div:last-of-type{order:2}
+  .фото{position:static;display:block;margin:0 auto 18px;width:148px;height:148px;border-width:6px}
+  .шапка h1{font-size:27px;letter-spacing:.03em}
+  .шапка .роль{font-size:13px;letter-spacing:.07em;margin:10px auto 0}
+  .языки{position:static;order:3;justify-content:center;margin:20px 0 0}
+  .слева{padding:28px 20px 30px}
+  .справа{padding:28px 20px 40px}
+  .справа section{padding-left:26px}
+  .справа section::before{left:0;width:13px;height:13px;top:5px}
+  .справа section::after{left:6px;top:20px}
+  .запись h3{display:block;font-size:16px}
+  p.теги span{font-size:11.5px;padding:3px 7px}
+  .запись .дата{display:block;margin-top:2px;font-size:13px}
+  h2{font-size:14px}
+}
+/* ── печать ── */
+@media print{
+  body{background:#fff;font-size:11pt;line-height:1.45}
+  .лист{margin:0;box-shadow:none;max-width:none}
+  .языки{display:none}
+  .шапка{padding:22px 24px 20px 190px;min-height:0}
+  .фото{width:140px;height:140px;left:26px;top:20px;border-width:5px}
+  .шапка h1{font-size:27pt} .шапка .роль{font-size:9.5pt}
+  .слева,.справа{padding:22px 20px}
+  section,.запись{break-inside:avoid}
+}
+</style>
 </head>
 <body>
-
-<div class="resume-container">
-
-    <!-- ХЕДЕР -->
-    <header>
-        <div class="profile-frame">
-            <img src="/portret.png" alt="Виталий Дрюков">
-        </div>
-        <div class="header-text">
-            <h1>Виталий Дрюков</h1>
-            <div class="subtitle">Senior Full-Stack Engineer / Архитектор решений / Tech Lead</div>
-            <div class="contacts-grid">
-                <div>🗺 WorldWide (Офис: Баку / Удаленная / Проект)</div>
-                <div>📱 <a href="tel:+994518453796">+994 51 845 37 96</a></div>
-                <div>📧 <a href="mailto:messir.vdr@gmail.com">messir.vdr@gmail.com</a></div>
-                <div>Telegram: <a href="https://t.me/miniwe" target="_blank">@miniwe</a></div>
-                <div>GitHub: <a href="https://github.com/miniwe" target="_blank">github.com/miniwe</a></div>
-                <div>Boosty: <a href="https://boosty.to/miniwe" target="_blank">boosty.to/miniwe</a></div>
-                <div><a href="https://miniwe.github.io/legacy/v3/" target="_blank">Расширенная версия</a></div>
-            </div>
-        </div>
-    </header>
-
-    <!-- О СЕБЕ -->
-    <section>
-        <div class="section-title">О подходе</div>
-        <div class="section-content">
-            <p class="about-text">
-                <strong>20+ лет в JS/TypeScript экосистеме:</strong> прошел путь от разработки интерфейсов высокой плотности до проектирования и развертывания отказоустойчивых высоконагруженных распределенных систем общегосударственного и enterprise уровня. Двигаюсь к архитектурному лидерству, глубоко ценю полную автономность и инженерный ownership. Каждое техническое решение жестко связываю с бизнес-метриками, обеспечивая масштабируемость без лишнего оверхеда.
-            </p>
-        </div>
-    </section>
-
-    <!-- КЕЙСЫ -->
-    <section>
-        <div class="section-title">Практические кейсы</div>
-        <div class="section-content">
-            <div class="cases-grid">
-
-                <div class="case-card">
-                    <div class="case-meta">
-                        <span class="case-num">CASE_01</span>
-                        <span class="case-tag">Обеспечение целостности данных</span>
-                    </div>
-                    <div class="case-title">Точность финансовых расчетов</div>
-                    <div class="case-desc">Внедрил прецизионную математику через <code>decimal.js</code> и строгую изоляцию уровней транзакций в PostgreSQL, полностью устранив накопление ошибок округления и гонки данных в распределенном ядре.</div>
-                </div>
-
-                <div class="case-card">
-                    <div class="case-meta">
-                        <span class="case-num">CASE_02</span>
-                        <span class="case-tag">Оптимизация асинхронных процессов</span>
-                    </div>
-                    <div class="case-title">Надежность бэкенда и очередей</div>
-                    <div class="case-desc">Вынес ресурсоемкие математические операции и генерацию тяжелых отчетов в изолированные воркеры на базе <code>BullMQ + Redis</code>, защитив API-серверы от HTTP-таймаутов и падений под пиковыми нагрузками.</div>
-                </div>
-
-                <div class="case-card">
-                    <div class="case-meta">
-                        <span class="case-num">CASE_03</span>
-                        <span class="case-tag">Мультиарендная архитектура</span>
-                    </div>
-                    <div class="case-title">Изоляция корпоративных данных</div>
-                    <div class="case-desc">Спроектировал и развернул сквозную архитектуру Tenant-Aware безопасности на основе многоуровневых токенов JWT и кастомных RBAC/ABAC политик, полностью исключив утечки и пересечение данных между клиентами платформы.</div>
-                </div>
-
-                <div class="case-card">
-                    <div class="case-meta">
-                        <span class="case-num">CASE_04</span>
-                        <span class="case-tag">Высоконагруженные системы</span>
-                    </div>
-                    <div class="case-title">Масштабные государственные системы</div>
-                    <div class="case-desc">Проектировал сложную архитектуру вертикальных и горизонтальных интеграционных связей для автоматизированных систем общегосударственного значения (IBS Group), оптимизировав производительность под максимальные требования безопасности.</div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- ТЕХНОЛОГИЧЕСКИЙ СТЕК -->
-    <section>
-        <div class="section-title">Стек и компетенции</div>
-        <div class="section-content">
-            <div class="stack-wrapper">
-
-                <div class="stack-category">
-                    <h4>Бэкенд & Архитектура API</h4>
-                    <div class="tech-inline">
-                        <span>Node.js</span> <span>TypeScript</span> <span>NestJS</span> <span>Meteor.js</span> <span>GraphQL</span> <span>REST API</span> <span>Microservices</span>
-                    </div>
-                </div>
-
-                <div class="stack-category">
-                    <h4>Слои Данных & Очереди</h4>
-                    <div class="tech-inline">
-                        <span>PostgreSQL</span> <span>MySQL</span> <span>Redis</span> <span>BullMQ</span> <span>TypeORM</span> <span>Sequelize</span> <span>Transactions</span>
-                    </div>
-                </div>
-
-                <div class="stack-category">
-                    <h4>Фронтенд & State</h4>
-                    <div class="tech-inline">
-                        <span>React</span> <span>Redux Toolkit</span> <span>Next.js</span> <span>Effector</span> <span>FSD Layouts</span> <span>Highcharts</span>
-                    </div>
-                </div>
-
-                <div class="stack-category">
-                    <h4>Инфраструктура & AI</h4>
-                    <div class="tech-inline">
-                        <span>Docker</span> <span>CI/CD</span> <span>Git</span> <span>OpenAI API</span> <span>Prompting</span> <span>Jest Testing</span>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- ОПЫТ РАБОТЫ -->
-    <section>
-        <div class="section-title">Опыт работы</div>
-        <div class="section-content">
-
-            <div class="timeline-item">
-                <div class="time-header">
-                    <div class="role-company">Senior Full-Stack Engineer <span>/ Mitgo Group (Tapfiliate)</span></div>
-                    <div class="duration">2022 – 2026</div>
-                </div>
-                <div class="job-desc">
-                    Проектирование и рефакторинг высоконагруженных компонентов международной партнерской трекинг-платформы. Оптимизация работы распределенных баз данных, внедрение отказоустойчивых паттернов обработки очередей задач, интеграция модулей AI для внутренней аналитики кода и автоматизации рутинных процессов разработки.
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time-header">
-                    <div class="role-company">Старший инженер-разработчик / Архитектор <span>/ IBS Group</span></div>
-                    <div class="duration">2019 – 2020</div>
-                </div>
-                <div class="job-desc">
-                    Проектирование архитектуры и реализация сложной бизнес-логики распределенных систем общегосударственного значения (включая автоматизацию процессов возврата налогов для крупного бизнеса). Обеспечение жесткого соответствия критериям безопасности, отказоустойчивости и бесшовной миграции данных.
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time-header">
-                    <div class="role-company">IT-Консультант / Full-Stack Team Lead <span>/ Практика (РФ, США, Европа)</span></div>
-                    <div class="duration">15+ ЛЕТ</div>
-                </div>
-                <div class="job-desc">
-                    Консалтинг, технический аудит производительности приложений и управление полным циклом создания enterprise веб-платформ. Успешный запуск технологических решений и интеграций для бенефициаров из США, Великобритании, Германии, Франции и Чехии. Управление распределенными кросс-функциональными командами.
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- ДОПОЛНИТЕЛЬНОЕ -->
-    <section>
-        <div class="section-title">Дополнительно</div>
-        <div class="section-content">
-            <div class="meta-info-grid">
-                <div class="meta-box">
-                    <h4>Образование</h4>
-                    <p><strong>БГУ (2000):</strong> Факультет прикладной математики и информатики.</p>
-                </div>
-                <div class="meta-box">
-                    <h4>Языковые компетенции</h4>
-                    <p>Русский (Родной), Английский (B2), Азербайджанский(А2), Прочие(Сербский, Испанский)</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ЧТО ИЩУ -->
-    <section style="border-top: 2px solid var(--text-main); padding-top: 20px;">
-        <div class="section-title" style="color: var(--text-main);">Цель / Фокус</div>
-        <div class="section-content">
-            <p style="font-size: 1rem; color: var(--accent-blue); font-weight: 700;">
-                Ищу сложные технические вызовы, где критически важна чистота архитектуры, бескомпромиссное качество кодовой базы, работа со сложными структурами данных и высокий уровень инженерной автономности команды.
-            </p>
-        </div>
-    </section>
-
+<div class="лист">
+  <header class="шапка">
+    <img class="фото" src="portret.png" alt="">
+    <div class="языки"><a href="index.html" class="тек">RU</a> <a href="en.html" class="">EN</a> <a href="az.html" class="">AZ</a></div>
+    <div>
+      <h1>Виталий Дрюков</h1>
+      <p class="роль">Senior Full-Stack Engineer · Node.js / TypeScript · архитектура и полная ответственность за техническую часть</p>
+    </div>
+  </header>
+  <div class="тело">
+    <aside class="слева"><section><h2>Образование и языки</h2><article class="запись"><h3><strong>Бакинский государственный университет</strong></h3><p>2000 — факультет прикладной математики и экономической кибернетики. Специальность: программист, математик.</p></article><p>Русский — родной · Английский — B1–B2, свободно читаю техническую документацию · Сербский — разговорный · Турецкий — понимание · Испанский — изучаю</p></section><section><h2>Формат работы</h2><p>Полностью удалённо, GMT+4. Оформление по контракту или ИП. Привычен к полной ответственности за техническую часть и к работе в условиях, когда требования формируются по ходу.</p></section></aside>
+    <main class="справа"><section class="контакты"><h2>Контакты</h2><p>📍 Баку, Азербайджан · работаю полностью удалённо (GMT+4), без ограничений по часовым поясам</p><p>📱 +994 51 845 37 96 · ✉️ messir.vdr@gmail.com · Telegram <a href="https://t.me/miniwe">@miniwe</a> · <a href="https://github.com/miniwe">github.com/miniwe</a> · <a href="https://miniwe.github.io/">miniwe.github.io</a></p></section><section><h2>Кратко</h2><article class="запись"><h3><strong>Инженер, который доводит ИИ-функции до продакшена и умеет доказать, что они работают.</strong></h3><p>Собрал и эксплуатирую контур retrieval: гибридный поиск (Qdrant + BM25) по базе на 19 802 чанка, инкрементальная переиндексация, доступ через бота и MCP, маршрутизация моделей через LiteLLM. LangChain/LlamaIndex сознательно не брал — нужен был контроль над индексацией и гибридизацией.</p><p class="теги"><span>Qdrant</span><span>BM25</span><span>LiteLLM</span></p></article><p>Отдельно — <strong>оценка качества</strong>, а не только интеграция: эталонные наборы, пороги приёмки, сравнение «до/после», стоимость и время на единицу работы. Веду собственные исследовательские эксперименты и публикую отрицательный результат, если гипотеза не подтвердилась, вместо того чтобы выдавать любой исход за успех.</p><p>20+ лет в веб-разработке. Начинал с плотного фронтенда, последние годы вес сместился в бэкенд, архитектуру и эксплуатацию: проектирую модульные сервисы на Node.js/NestJS и PHP/Laravel, собираю их в Docker-контуре, довожу до продакшена и отвечаю за то, как они там живут.</p><p>Привычный режим — полная ответственность за техническую часть продукта: от выяснения бизнес-цели у заказчика до CI/CD, логов и метрик. Хорошо работаю там, где требований ещё нет и их надо сформировать по ходу. Документацию и состояние проекта веду отдельно от кода, всегда в виде, готовом к передаче.</p></section><section><h2>Ключевые кейсы</h2><article class="запись"><h3><strong>Гибридный поиск по базе знаний (2026, собственная инфраструктура)</strong></h3><p>Собрал поисковый контур над личной базой заметок: CouchDB как источник, Qdrant как векторное хранилище, эмбеддинги <code>multilingual-e5-small</code>, BM25 как лексическая половина гибрида. Итог — <strong>19 802 чанка</strong> в индексе, полная и инкрементальная переиндексация, всё внутри одной Docker-сети. Доступ к поиску — через Telegram-бота и MCP-интерфейс; маршрутизация моделей (локальные и облачные) через LiteLLM.</p><p class="теги"><span>Qdrant</span><span>BM25</span><span>LiteLLM</span><span>MCP</span><span>Docker</span></p></article><article class="запись"><h3><strong>Конвейер улучшения фотографий недвижимости (2026, EvPro)</strong></h3><p>Модуль на PHP 8.4 / Laravel 12 для пакетной обработки фото объектов. Решение об улучшении принимается по <strong>девяти измеряемым признакам</strong> кадра (яркость, контраст, тени, света, шум, резкость и др.), свёрнутым в единую оценку прироста, поверх — <strong>одиннадцать защитных проверок</strong>, не дающих опубликовать кадр, если качество просело. Каскад «локальная обработка → внешняя генеративная модель» с явным разделением, что делается бесплатно, а что уходит наружу за деньги. Замерены время и стоимость единицы работы (23–28 с на кадр локально; ~$3.10 на прогон партии из 62 кадров через внешнюю модель) — это позволило обсуждать качество с бизнесом в деньгах, а не в ощущениях.</p><p class="теги"><span>Laravel 12</span><span>PHP 8.4</span></p></article><article class="запись"><h3><strong>Методология ведения проектов JD+PARA (2026, открытый код)</strong></h3><p>Собственная система ведения технических проектов: Johnny.Decimal для нумерации, P.A.R.A. для разделения проектов и ресурсов, MOC для связей — с правилами, по которым с документацией работают и человек, и ИИ-агенты. Ключевое отличие от органайзера: <strong>вопрос, решение и заметка знания — отдельные сущности с обязательными полями.</strong> У вопроса — «что изменится от ответа», у решения — отвергнутые варианты и условие пересмотра, у находки — «чем опровергается». Это делает проект передаваемым: следующий участник (или агент) не повторяет уже проделанную работу. Применяется в <strong>девяти собственных проектах</strong>: 236 вопросов, 178 решений, 141 заметка знания. Стартовый набор опубликован — <a href="https://github.com/Miniwe/jdpara">github.com/Miniwe/jdpara</a>.</p></article><article class="запись"><h3><strong>Точность денежных расчётов в распределённом ядре</strong></h3><p>Убрал ошибки округления и гонки данных: точная арифметика на <code>decimal.js</code> плюс строгие уровни изоляции транзакций PostgreSQL.</p><p class="теги"><span>PostgreSQL</span></p></article><article class="запись"><h3><strong>Вынос тяжёлых операций в воркеры</strong></h3><p>Ресурсоёмкие расчёты и генерация отчётов перенесены в изолированные воркеры на <code>BullMQ + Redis</code> — API-серверы перестали ловить HTTP-таймауты на пиковой нагрузке. Реализованы повторы, идемпотентность и dead-letter.</p><p class="теги"><span>Redis</span><span>BullMQ</span></p></article><article class="запись"><h3><strong>Мультитенантная безопасность</strong></h3><p>Сквозной tenant-aware доступ на JWT с собственными RBAC/ABAC-политиками — утечки данных между клиентами исключены на уровне контракта, а не на уровне аккуратности разработчика.</p></article><article class="запись"><h3><strong>Фронтенд affiliate-платформы Tapfiliate (Mitgo)</strong></h3><p>Вёл фронтенд веб-приложения целиком: архитектура, микрофронтенды, кодогенерация клиента из OpenAPI, оптимизация рендеринга, тесты на Jest. Участвовал в найме — проводил технические собеседования.</p><p class="теги"><span>OpenAPI</span></p></article><article class="запись"><h3><strong>DAO Casino — с первой версии до MVP (BlockProof Tech)</strong></h3><p>Ведущий фронтенд блокчейн-платформы: лендинг, кошелёк, компонентная библиотека, админка. Команда ~15 человек, Scrum.</p></article><article class="запись"><h3><strong>Высоконагруженная государственная система возврата налогов (IBS)</strong></h3><p>Проектирование архитектуры распределённой системы общегосударственного масштаба: вертикальные и горизонтальные связи между модулями, оптимизация производительности под жёсткие требования безопасности.</p></article></section><section><h2>Опыт работы</h2><article class="запись"><h3><strong>EvPro</strong><span class="дата">Баку, Азербайджан · 06/2026 – н.в.</span></h3><p>Backend-разработчик — медиаплатформа портала объявлений недвижимости (техзадание EV-475). Спроектировал и реализовал на PHP 8.4/Laravel 12 модульный конвейер улучшения фотографий: независимые шаги обработки (баланс белого, HDR, экспозиция, CLAHE, контраст, насыщенность, перспектива, шумоподавление, резкость), систему оценки и защитных проверок, каскад «локальная обработка → внешний генеративный/апскейл-сервис» с явным разделением бесплатной и платной обработки и учётом стоимости вызова. Собрал поставку в единый Docker-образ, вынес вспомогательные Python-инструменты разработки в отдельный репозиторий. Сдал работу по чек-листу соответствия техзаданию — 58 из 59 пунктов, с независимой сверкой кода.</p><p class="теги"><span>Docker</span><span>Laravel 12</span><span>PHP 8.4</span></p></article><article class="запись"><h3><strong>Самостоятельное развитие: ИИ и собственные проекты</strong><span class="дата">11/2025 – 05/2026</span></h3><p>Перерыв между штатными позициями, использованный целенаправленно: построил персональную ИИ-инфраструктуру (LiteLLM как единая точка маршрутизации моделей, локальные модели на Ollama), гибридный поиск по базе знаний (Qdrant + BM25, эмбеддинги <code>multilingual-e5-small</code>, инкрементальная переиндексация), доступ через Telegram-бота и MCP-интерфейс. Подробности — в разделе «Собственные проекты» ниже.</p><p class="теги"><span>Qdrant</span><span>BM25</span><span>LiteLLM</span><span>MCP</span><span>Ollama</span></p></article><article class="запись"><h3><strong>Mitgo Group (Tapfiliate)</strong><span class="дата">04/2022 – 10/2025</span></h3><p>Senior Frontend / Fullstack Engineer. Платформа партнёрского трекинга и рефералов. NodeJS, React, Redux Toolkit, TypeScript, микрофронтенды, PHP, Symfony.</p><p class="теги"><span>Node.js</span><span>TypeScript</span><span>Redux Toolkit</span><span>React</span></p></article><article class="запись"><h3><strong>Digital Agro</strong><span class="дата">09/2021 – 04/2022</span></h3><p>Разработчик. Интерфейсы для сельского хозяйства: веб-карты полей, слои, геоаналитика. JavaScript, React, TypeScript, Leaflet.js, H3, Google Maps, Styled Components.</p><p class="теги"><span>TypeScript</span><span>React</span></p></article><article class="запись"><h3><strong>EnBourse</strong><span class="дата">08/2020 – 02/2021</span></h3><p>Senior Development Engineer. Система обучения трейдингу. NodeJS, MeteorJS, React, Rocket.Chat, WebRTC.</p><p class="теги"><span>Node.js</span><span>React</span></p></article><article class="запись"><h3><strong>IBS Group</strong><span class="дата">11/2019 – 02/2020</span></h3><p>Senior Engineer / Архитектор решений. Распределённая система возврата налогов общегосударственного значения.</p></article><article class="запись"><h3><strong>BlockProof Tech (DAO Casino)</strong><span class="дата">07/2019 – 10/2019</span></h3><p>Разработчик, ведущий фронтенд блокчейн-платформы. NodeJS, TypeScript, React, Redux Saga, GraphQL, PostgreSQL.</p><p class="теги"><span>Node.js</span><span>PostgreSQL</span><span>TypeScript</span><span>React</span><span>GraphQL</span></p></article><article class="запись"><h3><strong>JivoSite</strong><span class="дата">03/2018 – 09/2018</span></h3><p>Разработчик. Native JavaScript, React, React Native, SVG.</p><p class="теги"><span>React</span></p></article><article class="запись"><h3><strong>Evrone</strong><span class="дата">07/2012 – 04/2016</span></h3><p>Frontend-разработчик. Ruby on Rails, CoffeeScript, Sass, Backbone, Knockout.</p></article><article class="запись"><h3><strong>Частная практика / ИТ-консультирование</strong></h3><p>15+ лет суммарно, параллельно основным местам Полный цикл веб-приложений и корпоративных платформ: оценка требований, расчёт сроков и бюджета, координация разработчиков, сдача проекта. Заказчики из США, Великобритании, Германии, Франции, Чехии и Канады.</p></article></section><section><h2>Собственные проекты</h2><article class="запись"><h3><strong>GoalScorer</strong></h3><p>монорепозиторий NestJS + React (Vite/TS) в Docker, subdomain-роутинг, миграция кеша на <code>@nestjs/cache-manager</code> v3 + Keyv, CI/CD и мониторинг на своих серверах. Задумывался как переиспользуемый шаблон под будущие продукты, поэтому решения принимались в пользу предсказуемости и низкой стоимости изменений.</p><p class="теги"><span>Docker</span><span>NestJS</span><span>React</span><span>CI/CD</span></p></article><article class="запись"><h3><strong>Персональная ИИ-инфраструктура</strong></h3><p>LiteLLM как единая точка маршрутизации моделей, локальные модели через Ollama, Telegram-бот как интерфейс, гибридный поиск по базе знаний (см. кейсы), Caddy/HAProxy на периметре, всё поднято на собственном VPS.</p><p class="теги"><span>LiteLLM</span><span>Ollama</span><span>HAProxy</span><span>Caddy</span><span>VPS</span></p></article><article class="запись"><h3><strong>Геоаналитика многолетних насаждений</strong></h3><p>исследовательский проект на Sentinel-2 и Google Earth Engine: композиты и признаки по годам, разметка, классификатор, веб-карта с легендой и пояснениями.</p></article></section></main>
+  </div>
 </div>
-
 </body>
 </html>
