@@ -26,12 +26,29 @@ from pathlib import Path
 САЙТ = "https://miniwe.github.io/"
 ПРОФИЛИ = ["https://github.com/miniwe", "https://t.me/miniwe", САЙТ]
 
-# код · файл · исходник · метка переключателя · локаль OG · город в адресе
+# Каждый язык живёт по своему подпути: /ru/, /en/, /az/. Русская лежит ещё
+# и в корне — это основной адрес, его дают в отклике на вакансию, поэтому
+# canonical русской указывает на «/», а /ru/ существует как копия для тех,
+# кому уже отправляли такую ссылку (на сайте с августа были /en и /ru).
+# код · адрес от корня · исходник · метка переключателя · локаль OG · город
 ЯЗЫКИ = [
-    ("ru", "index.html", "резюме-2026-09.md", "RU", "ru_RU", "Баку"),
-    ("en", "en.html", "cv-2026-09-en.md", "EN", "en_US", "Baku"),
-    ("az", "az.html", "cv-2026-09-az.md", "AZ", "az_AZ", "Bakı"),
+    ("ru", "", "резюме-2026-09.md", "RU", "ru_RU", "Баку"),
+    ("en", "en/", "cv-2026-09-en.md", "EN", "en_US", "Baku"),
+    ("az", "az/", "cv-2026-09-az.md", "AZ", "az_AZ", "Bakı"),
 ]
+# Тот же язык по второму адресу. canonical такой страницы смотрит на основной.
+АЛИАСЫ = [("ru", "ru/")]
+
+
+def адрес(путь: str) -> str:
+    """Относительный путь от корня → полный URL."""
+    return САЙТ + путь
+
+
+def наверх(путь: str) -> str:
+    """Сколько раз подняться, чтобы попасть в корень: '' → '', 'en/' → '../'.
+    Картинки и иконки лежат в корне, а страницы — на разной глубине."""
+    return "../" * путь.count("/")
 
 # Языки владения — из раздела «Образование и языки». Азербайджанского в списке
 # нет намеренно: в резюме он не заявлен, а разметка не место для допущений.
@@ -300,10 +317,10 @@ def цель(текст: str) -> str:
     return m.group(1).strip().strip('"') if m else ""
 
 
-def разметка(язык, файл, имя, роль, опис, город, контакты, навыки, цель_, изменено):
+def разметка(язык, путь, имя, роль, опис, город, контакты, навыки, цель_, изменено):
     """JSON-LD: ProfilePage + Person. Ровно то, что читают Google, LinkedIn
     и парсеры вакансий; дублирует видимое на странице, ничего не добавляя."""
-    страница = САЙТ if файл == "index.html" else САЙТ + файл
+    страница = адрес(путь)
     человек = {
         "@type": "Person",
         "@id": САЙТ + "#person",
@@ -341,23 +358,25 @@ def разметка(язык, файл, имя, роль, опис, город,
     return текст.replace("</", "<\\/")
 
 
-def мета(язык, файл, имя, роль, опис, локаль) -> str:
-    страница = САЙТ if файл == "index.html" else САЙТ + файл
+def мета(язык, путь, канон, имя, роль, опис, локаль) -> str:
+    """`путь` — где файл лежит (для относительных ссылок на иконки),
+    `канон` — какой адрес объявлен основным. У копии /ru/ они расходятся."""
+    вверх = наверх(путь)
     альтернативы = "\n".join(
-        f'<link rel="alternate" hreflang="{л}" href="{САЙТ if ф == "index.html" else САЙТ + ф}">'
+        f'<link rel="alternate" hreflang="{л}" href="{адрес(ф)}">'
         for л, ф, *_ in ЯЗЫКИ)
     э = html.escape
     return f"""<meta name="description" content="{э(опис)}">
 <meta name="author" content="{э(имя)}">
 <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
-<link rel="canonical" href="{страница}">
+<link rel="canonical" href="{канон}">
 {альтернативы}
 <link rel="alternate" hreflang="x-default" href="{САЙТ}">
 <meta property="og:type" content="profile">
 <meta property="og:site_name" content="{э(имя)}">
 <meta property="og:title" content="{э(имя)} — {э(роль.split('·')[0].strip())}">
 <meta property="og:description" content="{э(опис)}">
-<meta property="og:url" content="{страница}">
+<meta property="og:url" content="{канон}">
 <meta property="og:image" content="{САЙТ}og-cover.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -372,13 +391,17 @@ def мета(язык, файл, имя, роль, опис, локаль) -> st
 <meta name="twitter:description" content="{э(опис)}">
 <meta name="twitter:image" content="{САЙТ}og-cover.png">
 <meta name="theme-color" content="#2c3a4f">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">"""
+<link rel="icon" href="{вверх}favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="{вверх}apple-touch-icon.png">"""
 
 
-def собрать(язык, файл, исходник, метка, локаль, город):
-    путь = ХРАНИЛИЩЕ / исходник
-    текст = путь.read_text(encoding="utf-8")
+def собрать(язык, путь, исходник, метка, локаль, город, канон=None):
+    """`путь` — адрес страницы от корня ('' = корень, 'en/' = /en/).
+    `канон` задают только для копии: у /ru/ он указывает на корень."""
+    канон = адрес(канон if канон is not None else путь)
+    файл = (путь + "index.html") if путь else "index.html"
+    источник = ХРАНИЛИЩЕ / исходник
+    текст = источник.read_text(encoding="utf-8")
     имя, роль, контакты, разделы = разобрать(текст)
 
     словарь = словарь_технологий(разделы)
@@ -391,28 +414,33 @@ def собрать(язык, файл, исходник, метка, локал�
         кусок = f'<section><h2>{html.escape(заголовок)}</h2>{тело}</section>'
         (сайдбар if в_сайдбар(заголовок) else основное).append(кусок)
 
+    вверх = наверх(путь)
     переключатель = " ".join(
-        f'<a href="{f}" class="{"тек" if l == язык else ""}" hreflang="{l}">{m}</a>'
+        f'<a href="{вверх + f or "./"}" class="{"тек" if l == язык else ""}" '
+        f'hreflang="{l}">{m}</a>'
         for l, f, _, m, _loc, _г in ЯЗЫКИ)
     контакт_html = "".join(f"<p>{строчный(c)}</p>" for c in контакты if c.strip())
     подпись = html.escape(ПОДПИСЬ_КОНТАКТОВ.get(язык, "Контакты"))
     сайдбар.insert(0, f'<section class="контакты"><h2>{подпись}</h2>{контакт_html}</section>')
 
     опис = описание(разделы)
-    изменено = date.fromtimestamp(путь.stat().st_mtime).isoformat()
+    изменено = date.fromtimestamp(источник.stat().st_mtime).isoformat()
     навыки = навыки_разметки(словарь, текст)
 
-    (КОРЕНЬ / файл).write_text(ШАБЛОН.format(
+    куда = КОРЕНЬ / файл
+    куда.parent.mkdir(parents=True, exist_ok=True)
+    куда.write_text(ШАБЛОН.format(
         язык=язык, имя=html.escape(имя), роль=html.escape(роль),
         титул=html.escape(f"{имя} — {роль.split('·')[0].strip()}"),
-        мета=мета(язык, файл, имя, роль, опис, локаль),
-        разметка=разметка(язык, файл, имя, роль, опис, город,
+        вверх=вверх,
+        мета=мета(язык, путь, канон, имя, роль, опис, локаль),
+        разметка=разметка(язык, канон.removeprefix(САЙТ), имя, роль, опис, город,
                           контактные_данные(контакты), навыки,
                           цель(текст), изменено),
         контакты=контакт_html, сайдбар="".join(сайдбар),
         основное="".join(основное), переключатель=переключатель,
     ), encoding="utf-8")
-    print(f"  {файл}  ({len(сайдбар)} разделов слева, {len(основное)} справа, "
+    print(f"  /{путь}  → {файл}  ({len(сайдбар)} слева, {len(основное)} справа, "
           f"description {len(опис)} знаков, knowsAbout {len(навыки)})")
 
 
@@ -587,7 +615,7 @@ em{{color:var(--серый);font-size:13.5px}}
 <body>
 <div class="лист">
   <header class="шапка">
-    <img class="фото" src="portret.png" alt="">
+    <img class="фото" src="{вверх}portret.png" alt="">
     <div class="языки">{переключатель}</div>
     <div>
       <h1>{имя}</h1>
@@ -607,16 +635,14 @@ def карта_сайта():
     """sitemap.xml с перекрёстными hreflang: иначе поисковик считает три языка
     тремя разными страницами и выбирает из них одну на свой вкус."""
     ссылки = "".join(
-        f'\n    <xhtml:link rel="alternate" hreflang="{л}" '
-        f'href="{САЙТ if ф == "index.html" else САЙТ + ф}"/>'
+        f'\n    <xhtml:link rel="alternate" hreflang="{л}" href="{адрес(ф)}"/>'
         for л, ф, *_ in ЯЗЫКИ)
     ссылки += f'\n    <xhtml:link rel="alternate" hreflang="x-default" href="{САЙТ}"/>'
     записи = []
-    for _, файл, исходник, *_ in ЯЗЫКИ:
-        адрес = САЙТ if файл == "index.html" else САЙТ + файл
+    for _, путь, исходник, *_ in ЯЗЫКИ:
         изменено = date.fromtimestamp((ХРАНИЛИЩЕ / исходник).stat().st_mtime)
         записи.append(f"""  <url>
-    <loc>{адрес}</loc>
+    <loc>{адрес(путь)}</loc>
     <lastmod>{изменено.isoformat()}</lastmod>{ссылки}
   </url>""")
     (КОРЕНЬ / "sitemap.xml").write_text(
@@ -631,5 +657,8 @@ if __name__ == "__main__":
     print("Сборка резюме из хранилища:")
     for я in ЯЗЫКИ:
         собрать(*я)
+    for язык, путь in АЛИАСЫ:
+        основной = next(я for я in ЯЗЫКИ if я[0] == язык)
+        собрать(язык, путь, *основной[2:], канон=основной[1])
     карта_сайта()
     print("Готово. Проверить:  serve .   →  http://localhost:3000/")

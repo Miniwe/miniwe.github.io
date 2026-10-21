@@ -92,8 +92,8 @@ from build_cv import ХРАНИЛИЩЕ, КОРЕНЬ, разобрать, бе�
 
 # Куда указывает canonical: на человеческую версию того же языка.
 КАНОН = {"ru": "https://miniwe.github.io/",
-         "en": "https://miniwe.github.io/en.html",
-         "az": "https://miniwe.github.io/az.html"}
+         "en": "https://miniwe.github.io/en/",
+         "az": "https://miniwe.github.io/az/"}
 
 ШАБЛОН = """<!DOCTYPE html>
 <html lang="{язык}">
