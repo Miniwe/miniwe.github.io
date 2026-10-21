@@ -260,11 +260,11 @@ body{{
 .шапка{{background:var(--тёмный);color:#fff;padding:40px 48px 36px 300px;position:relative;min-height:176px}}
 .фото{{position:absolute;left:44px;top:34px;width:216px;height:216px;border-radius:50%;
   object-fit:cover;object-position:50% 22%;border:9px solid #fff;background:#fff}}
-.шапка h1{{margin:0;font-size:43px;line-height:1.06;letter-spacing:.05em;font-weight:800;text-transform:uppercase}}
-.шапка .роль{{margin:12px 0 0;font-size:15.5px;line-height:1.5;letter-spacing:.11em;
-  text-transform:uppercase;color:#cfd7e3;font-weight:400;max-width:48em}}
+.шапка h1{{margin:0;font-size:35px;line-height:1.1;letter-spacing:.045em;font-weight:800;text-transform:uppercase}}
+.шапка .роль{{margin:12px 0 0;font-size:14.5px;line-height:1.55;letter-spacing:.1em;
+  text-transform:uppercase;color:#e3e8f0;font-weight:600;max-width:48em}}
 .языки{{position:absolute;right:30px;top:24px;display:flex;gap:5px}}
-.языки a{{color:#b9c2d0;text-decoration:none;font-size:12.5px;letter-spacing:.1em;
+.языки a{{color:#c8d0dd;text-decoration:none;font-size:12.5px;font-weight:600;letter-spacing:.1em;
   padding:5px 10px;border:1px solid #55617a;border-radius:3px}}
 .языки a.тек{{color:#fff;border-color:#fff;background:rgba(255,255,255,.12)}}
 /* ── колонки ── */
@@ -297,8 +297,9 @@ ul.стек li b{{display:block;font-size:12px;letter-spacing:.09em;text-transfo
   color:var(--тёмный);margin-bottom:3px;font-weight:800}}
 ul.стек li span{{color:var(--текст-2);overflow-wrap:anywhere}}
 p.теги{{margin:9px 0 0;display:flex;flex-wrap:wrap;gap:6px}}
-p.теги span{{font-size:12px;letter-spacing:.04em;background:#eef1f6;color:#33405a;
-  border:1px solid #dde3ec;border-radius:3px;padding:3px 9px;white-space:nowrap}}
+p.теги span{{font-size:12px;font-weight:600;letter-spacing:.05em;background:var(--тёмный);
+  color:#fff;border-radius:3px;padding:4px 10px;white-space:nowrap;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}}
 section.контакты p{{margin:0 0 7px;font-size:15px;color:var(--текст-2)}}
 section.контакты{{margin-bottom:30px}}
 a{{color:var(--акцент)}}
@@ -310,7 +311,7 @@ em{{color:var(--серый);font-size:13.5px}}
   .тело{{grid-template-columns:300px 1fr}}
   .слева{{padding:104px 24px 40px}}
   .справа{{padding:34px 32px 44px}}
-  .шапка{{padding:34px 36px 30px 268px}} .шапка h1{{font-size:36px}}
+  .шапка{{padding:34px 36px 30px 268px}} .шапка h1{{font-size:31px}}
 }}
 /* ── мобильный ── */
 @media (max-width:760px){{
@@ -322,7 +323,7 @@ em{{color:var(--серый);font-size:13.5px}}
     padding:26px 20px 24px;text-align:center;min-height:0}}
   .шапка>div:last-of-type{{order:2}}
   .фото{{position:static;display:block;margin:0 auto 18px;width:148px;height:148px;border-width:6px}}
-  .шапка h1{{font-size:27px;letter-spacing:.03em}}
+  .шапка h1{{font-size:24px;letter-spacing:.03em}}
   .шапка .роль{{font-size:13px;letter-spacing:.07em;margin:10px auto 0}}
   .языки{{position:static;order:3;justify-content:center;margin:20px 0 0}}
   .слева{{padding:26px 20px 30px}}
@@ -336,15 +337,41 @@ em{{color:var(--серый);font-size:13.5px}}
   h2{{font-size:14px}}
 }}
 /* ── печать ── */
-@media print{{
-  body{{background:#fff;font-size:11pt;line-height:1.45}}
+@page {{ margin: 9mm 8mm; }}
+@media print {{
+  html,body{{background:#fff}}
+  body{{font-size:9.6pt;line-height:1.42;color:#000}}
   .лист{{margin:0;box-shadow:none;max-width:none}}
   .языки{{display:none}}
-  .шапка{{padding:22px 24px 20px 190px;min-height:0}}
-  .фото{{width:140px;height:140px;left:26px;top:20px;border-width:5px}}
-  .шапка h1{{font-size:27pt}} .шапка .роль{{font-size:9.5pt}}
-  .слева,.справа{{padding:22px 20px}}
-  section,.запись{{break-inside:avoid}}
+  /* тёмные плашки должны печататься, иначе шапка и теги станут пустыми */
+  .шапка,p.теги span{{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+  /* шапка должна быть выше фото целиком, иначе круг налезает
+     на первый заголовок серого блока */
+  .шапка{{padding:14px 18px 13px 152px;min-height:142px}}
+  .фото{{width:112px;height:112px;left:20px;top:13px;border-width:4px}}
+  .шапка h1{{font-size:20.5pt;letter-spacing:.04em}}
+  .шапка .роль{{font-size:8pt;letter-spacing:.07em;margin-top:7px}}
+  .тело{{grid-template-columns:232px 1fr}}
+  .слева{{padding:18px 16px 18px;background:#f1f3f7;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact}}
+  .справа{{padding:16px 20px 18px}}
+  h2{{font-size:9pt;margin-bottom:9px;padding-bottom:5px;border-bottom-width:1.4pt}}
+  .слева h2{{font-size:8.4pt}}
+  .слева p{{font-size:8.8pt;line-height:1.45;margin-bottom:6px}}
+  .справа section{{margin-bottom:17px;padding-left:24px}}
+  .справа section::before{{width:10px;height:10px;left:5px;top:3px}}
+  .справа section::after{{left:10px;top:14px}}
+  .запись{{margin-bottom:11px}}
+  .запись h3{{font-size:10pt;margin-bottom:3px}}
+  .запись .дата{{font-size:8.4pt}}
+  .справа p,.запись p{{margin-bottom:6px}}
+  p.теги{{margin-top:5px;gap:4px}}
+  p.теги span{{font-size:7.6pt;padding:2px 6px;border-radius:2px}}
+  code{{background:#eceff3;font-size:8.6pt}}
+  a{{color:#000;text-decoration:none}}
+  /* ничего не рвётся посреди записи */
+  section,.запись,.запись h3{{break-inside:avoid;page-break-inside:avoid}}
+  h2{{break-after:avoid;page-break-after:avoid}}
 }}
 </style>
 </head>
