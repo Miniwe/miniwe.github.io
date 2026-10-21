@@ -8,8 +8,10 @@
 самодостаточные файлы со встроенным CSS, чтобы `serve .` работал без сборки.
 """
 import html
+import json
 import re
 import unicodedata
+from datetime import date
 from pathlib import Path
 
 ХРАНИЛИЩЕ = Path.home() / "Projects/LifeTracker/LifeTracker/(P) Проекты/13 Резюме и поиск работы"
@@ -19,11 +21,21 @@ from pathlib import Path
 # В хранилище полная хронология остаётся: это фильтр показа, а не правка резюме.
 ОПЫТ_С = 2010
 
+# Канонический адрес. Нужен и человеку (ссылка в подписи), и машине:
+# по нему строятся canonical, hreflang, og:url и @id в JSON-LD.
+САЙТ = "https://miniwe.github.io/"
+ПРОФИЛИ = ["https://github.com/miniwe", "https://t.me/miniwe", САЙТ]
+
+# код · файл · исходник · метка переключателя · локаль OG · город в адресе
 ЯЗЫКИ = [
-    ("ru", "index.html", "резюме-2026-09.md", "RU"),
-    ("en", "en.html", "cv-2026-09-en.md", "EN"),
-    ("az", "az.html", "cv-2026-09-az.md", "AZ"),
+    ("ru", "index.html", "резюме-2026-09.md", "RU", "ru_RU", "Баку"),
+    ("en", "en.html", "cv-2026-09-en.md", "EN", "en_US", "Baku"),
+    ("az", "az.html", "cv-2026-09-az.md", "AZ", "az_AZ", "Bakı"),
 ]
+
+# Языки владения — из раздела «Образование и языки». Азербайджанского в списке
+# нет намеренно: в резюме он не заявлен, а разметка не место для допущений.
+ЯЗЫКИ_ВЛАДЕНИЯ = ["ru", "en", "sr", "tr"]
 
 # Какие разделы уходят в левую колонку. Ключ — первое слово заголовка в нижнем
 # регистре, чтобы одинаково ловить «Стек» / «Stack» / «Texnologiyalar».
@@ -39,10 +51,16 @@ from pathlib import Path
 СТЕК_РАЗДЕЛ = {"стек", "stack", "stek"}
 
 
+# Буквы, которые NFD не разлагает: у них нет базовой латинской формы с
+# диакритикой, это самостоятельные знаки. Снимаем вручную, иначе «Qısaca»
+# никогда не совпадёт с ключом «qisaca».
+НЕРАЗЛОЖИМЫЕ = str.maketrans({"ı": "i", "ə": "e", "ß": "ss", "ø": "o", "đ": "d"})
+
+
 def без_диакритики(s: str) -> str:
-    """İş → is. Турецкая İ в нижнем регистре даёт i + комбинирующую точку,
-    из-за чего startswith('iş') не срабатывает. Снимаем комбинирующие знаки."""
-    разложено = unicodedata.normalize("NFD", s.lower())
+    """İş → is, Qısaca → qisaca. Турецкая İ в нижнем регистре даёт i +
+    комбинирующую точку, из-за чего startswith('iş') не срабатывает."""
+    разложено = unicodedata.normalize("NFD", s.lower().translate(НЕРАЗЛОЖИМЫЕ))
     return "".join(c for c in разложено if not unicodedata.combining(c))
 
 
@@ -131,6 +149,8 @@ def словарь_технологий(разделы) -> list:
                 for кусок in re.split(r"[,·]", ячейки[1]):
                     к = re.sub(r"[*`]", "", кусок).strip()
                     к = re.sub(r"\s*\(.*?\)\s*", " ", к).strip()
+                    if not any(c.isalpha() for c in к):
+                        continue  # «---» из разделителя таблицы — не технология
                     if 2 <= len(к) <= 22 and " " not in к.strip() or (
                             2 <= len(к) <= 22 and к.count(" ") == 1 and any(c.isdigit() for c in к)):
                         слова.append(к)
@@ -146,6 +166,7 @@ def словарь_технологий(разделы) -> list:
     "TypeScript": ["typescript", " ts,", "(ts)"],
     "Redux Toolkit": ["redux toolkit"],
     "Qdrant": ["qdrant"], "BM25": ["bm25"], "LiteLLM": ["litellm"],
+    "RAG": ["rag:", " rag ", "rag-"],
     "MCP": ["mcp-", "mcp ", "mcp."], "Ollama": ["ollama"],
     "Docker": ["docker"], "NestJS": ["nestjs", "nest.js"],
     "Laravel 12": ["laravel 12"], "PHP 8.4": ["php 8.4"],
@@ -207,8 +228,146 @@ def блок_в_html(блок: str, словарь: list = ()) -> str:
     return f"<p>{строчный(' '.join(строки))}</p>"
 
 
-def собрать(язык, файл, исходник, метка):
-    текст = (ХРАНИЛИЩЕ / исходник).read_text(encoding="utf-8")
+# ──────────────────────────────────────────────────────────────────────────
+# Метаданные. Отдельный блок, потому что читает их не человек: поисковик,
+# превью в мессенджере, парсер вакансий и ИИ-скринер. Всё берётся из того же
+# Markdown, что и видимый текст, — второго источника правды не заводим.
+
+КРАТКО = {"кратко", "summary", "qisaca"}
+
+
+def описание(разделы: dict, предел: int = 185) -> str:
+    """Meta description: первый абзац «Кратко», целыми предложениями.
+
+    Обрыв на полуслове в выдаче выглядит хуже, чем короткий текст, поэтому
+    набираем предложения, пока помещаются, и останавливаемся."""
+    for заголовок, блоки in разделы.items():
+        if not any(без_диакритики(заголовок).startswith(к) for к in КРАТКО):
+            continue
+        if not блоки:
+            return ""
+        сырой = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", блоки[0])
+        сырой = re.sub(r"[*`#]", "", сырой)
+        сырой = re.sub(r"\s+", " ", сырой).strip()
+        итог = ""
+        for предложение in re.split(r"(?<=[.!?])\s+", сырой):
+            if итог and len(итог) + 1 + len(предложение) > предел:
+                break
+            итог = f"{итог} {предложение}".strip()
+        return итог or сырой[:предел]
+    return ""
+
+
+def навыки_разметки(словарь: list, текст: str, предел: int = 40) -> list:
+    """knowsAbout для JSON-LD. Ядро стека вперёд: список режется по пределу, и
+    алфавитный порядок выкинул бы как раз Qdrant, TypeScript и Node.js.
+    Канонические написания из СИНОНИМЫ берём только если они есть в тексте —
+    разметка не должна заявлять больше, чем сказано в резюме."""
+    низ = текст.lower()
+    ядро = [к for к, формы in СИНОНИМЫ.items() if any(ф in низ for ф in формы)]
+    остальное = sorted((set(словарь) - set(ядро)), key=str.lower)
+    return (sorted(ядро, key=str.lower) + остальное)[:предел]
+
+
+def контактные_данные(контакты: list) -> dict:
+    """Почта и телефон из строки контактов — для JSON-LD, где они отдельными
+    полями, а не куском текста."""
+    строка = " ".join(контакты)
+    почта = re.search(r"[\w.+-]+@[\w-]+\.[\w.]+", строка)
+    телефон = re.search(r"\+\d[\d\s()\u2011-]{7,}\d", строка)
+    return {
+        "почта": почта.group(0) if почта else "",
+        "телефон": re.sub(r"\s+", " ", телефон.group(0)).strip() if телефон else "",
+    }
+
+
+def цель(текст: str) -> str:
+    """Поле target из фронтматтера — чем человек занят на рынке прямо сейчас.
+    В разметке это Person.seeks: единственное место, где «ищу работу»
+    написано машиночитаемо."""
+    m = re.search(r"^target:\s*(.+)$", текст, re.M)
+    return m.group(1).strip().strip('"') if m else ""
+
+
+def разметка(язык, файл, имя, роль, опис, город, контакты, навыки, цель_, изменено):
+    """JSON-LD: ProfilePage + Person. Ровно то, что читают Google, LinkedIn
+    и парсеры вакансий; дублирует видимое на странице, ничего не добавляя."""
+    страница = САЙТ if файл == "index.html" else САЙТ + файл
+    человек = {
+        "@type": "Person",
+        "@id": САЙТ + "#person",
+        "name": имя,
+        "jobTitle": роль.split("·")[0].strip(),
+        "description": опис,
+        "url": САЙТ,
+        "image": САЙТ + "portret.png",
+        "sameAs": ПРОФИЛИ,
+        "address": {"@type": "PostalAddress",
+                    "addressLocality": город, "addressCountry": "AZ"},
+        "alumniOf": {"@type": "CollegeOrUniversity",
+                     "name": "Baku State University", "sameAs": "https://bsu.edu.az/"},
+        "knowsLanguage": ЯЗЫКИ_ВЛАДЕНИЯ,
+        "knowsAbout": навыки,
+    }
+    if контакты["почта"]:
+        человек["email"] = "mailto:" + контакты["почта"]
+    if контакты["телефон"]:
+        человек["telephone"] = контакты["телефон"]
+    if цель_:
+        человек["seeks"] = {"@type": "Demand", "name": цель_}
+    граф = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {"@type": "ProfilePage", "@id": страница + "#page", "url": страница,
+             "name": f"{имя} — {роль.split('·')[0].strip()}",
+             "inLanguage": язык, "dateModified": изменено,
+             "mainEntity": {"@id": САЙТ + "#person"}},
+            человек,
+        ],
+    }
+    текст = json.dumps(граф, ensure_ascii=False, indent=1)
+    # </script> внутри строки закрыл бы тег раньше времени
+    return текст.replace("</", "<\\/")
+
+
+def мета(язык, файл, имя, роль, опис, локаль) -> str:
+    страница = САЙТ if файл == "index.html" else САЙТ + файл
+    альтернативы = "\n".join(
+        f'<link rel="alternate" hreflang="{л}" href="{САЙТ if ф == "index.html" else САЙТ + ф}">'
+        for л, ф, *_ in ЯЗЫКИ)
+    э = html.escape
+    return f"""<meta name="description" content="{э(опис)}">
+<meta name="author" content="{э(имя)}">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
+<link rel="canonical" href="{страница}">
+{альтернативы}
+<link rel="alternate" hreflang="x-default" href="{САЙТ}">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="{э(имя)}">
+<meta property="og:title" content="{э(имя)} — {э(роль.split('·')[0].strip())}">
+<meta property="og:description" content="{э(опис)}">
+<meta property="og:url" content="{страница}">
+<meta property="og:image" content="{САЙТ}og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{э(имя)} — {э(роль.split('·')[0].strip())}">
+<meta property="og:locale" content="{локаль}">
+{chr(10).join(f'<meta property="og:locale:alternate" content="{л}">' for _, _, _, _, л, _ in ЯЗЫКИ if л != локаль)}
+<meta property="profile:first_name" content="{э(имя.split()[0])}">
+<meta property="profile:last_name" content="{э(имя.split()[-1])}">
+<meta property="profile:username" content="miniwe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{э(имя)} — {э(роль.split('·')[0].strip())}">
+<meta name="twitter:description" content="{э(опис)}">
+<meta name="twitter:image" content="{САЙТ}og-cover.png">
+<meta name="theme-color" content="#2c3a4f">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">"""
+
+
+def собрать(язык, файл, исходник, метка, локаль, город):
+    путь = ХРАНИЛИЩЕ / исходник
+    текст = путь.read_text(encoding="utf-8")
     имя, роль, контакты, разделы = разобрать(текст)
 
     словарь = словарь_технологий(разделы)
@@ -222,18 +381,27 @@ def собрать(язык, файл, исходник, метка):
         (сайдбар if в_сайдбар(заголовок) else основное).append(кусок)
 
     переключатель = " ".join(
-        f'<a href="{f}" class="{"тек" if l == язык else ""}">{m}</a>'
-        for l, f, _, m in ЯЗЫКИ)
+        f'<a href="{f}" class="{"тек" if l == язык else ""}" hreflang="{l}">{m}</a>'
+        for l, f, _, m, _loc, _г in ЯЗЫКИ)
     контакт_html = "".join(f"<p>{строчный(c)}</p>" for c in контакты if c.strip())
     сайдбар.insert(0, f'<section class="контакты"><h2>Контакты</h2>{контакт_html}</section>')
+
+    опис = описание(разделы)
+    изменено = date.fromtimestamp(путь.stat().st_mtime).isoformat()
+    навыки = навыки_разметки(словарь, текст)
 
     (КОРЕНЬ / файл).write_text(ШАБЛОН.format(
         язык=язык, имя=html.escape(имя), роль=html.escape(роль),
         титул=html.escape(f"{имя} — {роль.split('·')[0].strip()}"),
+        мета=мета(язык, файл, имя, роль, опис, локаль),
+        разметка=разметка(язык, файл, имя, роль, опис, город,
+                          контактные_данные(контакты), навыки,
+                          цель(текст), изменено),
         контакты=контакт_html, сайдбар="".join(сайдбар),
         основное="".join(основное), переключатель=переключатель,
     ), encoding="utf-8")
-    print(f"  {файл}  ({len(сайдбар)} разделов слева, {len(основное)} справа)")
+    print(f"  {файл}  ({len(сайдбар)} разделов слева, {len(основное)} справа, "
+          f"description {len(опис)} знаков, knowsAbout {len(навыки)})")
 
 
 ШАБЛОН = """<!DOCTYPE html>
@@ -242,6 +410,7 @@ def собрать(язык, файл, исходник, метка):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{титул}</title>
+{мета}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Montserrat — заголовки, теги и мелкие надписи; Inter — текст.
@@ -392,6 +561,9 @@ em{{color:var(--серый);font-size:13.5px}}
   .справа section>h2+.запись{{break-before:avoid;page-break-before:avoid}}
 }}
 </style>
+<script type="application/ld+json">
+{разметка}
+</script>
 </head>
 <body>
 <div class="лист">
@@ -412,8 +584,33 @@ em{{color:var(--серый);font-size:13.5px}}
 </html>
 """
 
+def карта_сайта():
+    """sitemap.xml с перекрёстными hreflang: иначе поисковик считает три языка
+    тремя разными страницами и выбирает из них одну на свой вкус."""
+    ссылки = "".join(
+        f'\n    <xhtml:link rel="alternate" hreflang="{л}" '
+        f'href="{САЙТ if ф == "index.html" else САЙТ + ф}"/>'
+        for л, ф, *_ in ЯЗЫКИ)
+    ссылки += f'\n    <xhtml:link rel="alternate" hreflang="x-default" href="{САЙТ}"/>'
+    записи = []
+    for _, файл, исходник, *_ in ЯЗЫКИ:
+        адрес = САЙТ if файл == "index.html" else САЙТ + файл
+        изменено = date.fromtimestamp((ХРАНИЛИЩЕ / исходник).stat().st_mtime)
+        записи.append(f"""  <url>
+    <loc>{адрес}</loc>
+    <lastmod>{изменено.isoformat()}</lastmod>{ссылки}
+  </url>""")
+    (КОРЕНЬ / "sitemap.xml").write_text(
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n'
+        '        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
+        + "\n".join(записи) + "\n</urlset>\n", encoding="utf-8")
+    print(f"  sitemap.xml ({len(записи)} адреса)")
+
+
 if __name__ == "__main__":
     print("Сборка резюме из хранилища:")
     for я in ЯЗЫКИ:
         собрать(*я)
+    карта_сайта()
     print("Готово. Проверить:  serve .   →  http://localhost:3000/")

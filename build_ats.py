@@ -71,11 +71,21 @@ from build_cv import ХРАНИЛИЩЕ, КОРЕНЬ, разобрать, бе�
 
 ТЕКУЩЕЕ = {"ru": "настоящее время", "en": "present", "az": "present"}
 
+# Куда указывает canonical: на человеческую версию того же языка.
+КАНОН = {"ru": "https://miniwe.github.io/",
+         "en": "https://miniwe.github.io/en.html",
+         "az": "https://miniwe.github.io/az.html"}
+
 ШАБЛОН = """<!DOCTYPE html>
 <html lang="{язык}">
 <head>
 <meta charset="utf-8">
 <title>{имя} — {роль_кратко}</title>
+<!-- Машинная версия того же резюме. В выдачу её не пускаем: для поисковика
+     это дубль index.html, и дубль без вёрстки вытеснил бы оригинал. Канонический
+     адрес указан явно, за парсером вакансий файл остаётся доступен. -->
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="{канон}">
 <style>
 @page {{ margin: 11mm 13mm; }}
 body {{ font-family: Arial, Helvetica, sans-serif; font-size: 10pt; line-height: 1.32;
@@ -193,6 +203,7 @@ def собрать(язык, файл, исходник):
            lambda к: без_диакритики(к).startswith(("формат", "working", "is formati")))
 
     (КОРЕНЬ / файл).write_text(ШАБЛОН.format(
+        канон=КАНОН[язык],
         язык=язык, имя=html.escape(имя), роль=чистый(роль),
         роль_кратко=html.escape(роль.split("·")[0].strip()),
         тело="\n".join(части)), encoding="utf-8")
