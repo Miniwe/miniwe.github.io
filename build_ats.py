@@ -53,7 +53,17 @@ from build_cv import ХРАНИЛИЩЕ, КОРЕНЬ, разобрать, бе�
   ("Methodology", "Agile, Scrum, code review, technical interviews, architecture decision records, Johnny.Decimal, PARA"),
  ],
 }
-НАВЫКИ["az"] = НАВЫКИ["en"]
+НАВЫКИ["az"] = [
+  ("Dillər və platformalar", "Node.js, TypeScript, JavaScript, PHP 8.4, Python, Rust, Go"),
+  ("Backend", "NestJS, Express, Meteor.js, Laravel 12, Symfony, REST, GraphQL, Apollo, OpenAPI, gRPC"),
+  ("Data və növbələr", "PostgreSQL, MySQL, MongoDB, Redis, TypeORM, Sequelize, Prisma, BullMQ, RabbitMQ, tranzaksiyalar, təcrid səviyyələri, indekslər, icra planları"),
+  ("Frontend", "React, Redux Toolkit, Redux Saga, Effector, MobX, Next.js, Vue, Inertia.js, FSD, TanStack, Ant Design, Material UI, Tailwind, Sass, PostCSS, BEM, Highcharts, GSAP, SVG"),
+  ("İnfrastruktur və DevOps", "Docker, docker-compose, multi-stage yığımlar, CI/CD, GitHub Actions, Caddy, HAProxy, nginx, Linux, Ubuntu, Oracle Cloud, VPS, S3, MinIO, Tailscale"),
+  ("Süni intellekt və maşın öyrənməsi", "LLM, RAG, retrieval, vektor axtarış, Qdrant, pgvector, BM25, embedding-lər, multilingual-e5-small, LiteLLM, OpenRouter, Ollama, MCP, agentlər, function calling, strukturlaşdırılmış çıxış, strim, prompt engineering, keyfiyyətin qiymətləndirilməsi, etalon dəstlər"),
+  ("Keyfiyyət və istismar", "Jest, Playwright, avtotestlər, E2E, struktur loqlar, health-check-lər, metriklər, monitorinq, mərhələli yayımlar"),
+  ("GIS və data", "Leaflet, H3, Google Maps API, Yandex Xəritələr API, Sentinel-2, Google Earth Engine, Copernicus"),
+  ("Metodologiya", "Agile, Scrum, kod-review, texniki müsahibələr, arxitektura qərarları (ADR), Johnny.Decimal, PARA"),
+]
 
 ЗАГОЛОВКИ = {
  "ru": dict(контакты="Контакты", профиль="Профиль", навыки="Навыки",
@@ -63,7 +73,12 @@ from build_cv import ХРАНИЛИЩЕ, КОРЕНЬ, разобрать, бе�
             опыт="Work Experience", проекты="Projects", образование="Education",
             языки="Languages", формат="Work arrangement"),
 }
-ЗАГОЛОВКИ["az"] = ЗАГОЛОВКИ["en"]
+# Азербайджанская версия адресована местным работодателям (решение
+# человека 2026-10-22), поэтому заголовки на азербайджанском, а не
+# английские «международные». Английский набор остаётся у en.
+ЗАГОЛОВКИ["az"] = dict(контакты="Əlaqə", профиль="Profil", навыки="Bacarıqlar",
+                       опыт="İş təcrübəsi", проекты="Layihələr",
+                       образование="Təhsil", языки="Dillər", формат="İş formatı")
 
 # По чему узнаём абзац про владение языками внутри раздела образования.
 ЯЗЫКОВОЙ = re.compile(
@@ -73,7 +88,7 @@ from build_cv import ХРАНИЛИЩЕ, КОРЕНЬ, разобрать, бе�
          ("en", "ats-en.html", "cv-2026-09-en.md"),
          ("az", "ats-az.html", "cv-2026-09-az.md")]
 
-ТЕКУЩЕЕ = {"ru": "настоящее время", "en": "present", "az": "present"}
+ТЕКУЩЕЕ = {"ru": "настоящее время", "en": "present", "az": "hazırda"}
 
 # Куда указывает canonical: на человеческую версию того же языка.
 КАНОН = {"ru": "https://miniwe.github.io/",
@@ -134,17 +149,17 @@ def контакты_строками(контакты, язык):
     текст = " ".join(контакты)
     поля = []
     for шаблон, метка in [
-            (r"(\+\d[\d\s]{8,})", {"ru": "Телефон", "en": "Phone"}),
-            (r"([\w.+-]+@[\w-]+\.[\w.]+)", {"ru": "Email", "en": "Email"}),
+            (r"(\+\d[\d\s]{8,})", {"ru": "Телефон", "en": "Phone", "az": "Telefon"}),
+            (r"([\w.+-]+@[\w-]+\.[\w.]+)", {"ru": "Email", "en": "Email", "az": "E-poçt"}),
             (r"Telegram\s*\[?@?([\w]+)", {"ru": "Telegram", "en": "Telegram"}),
             (r"(github\.com/[\w-]+)", {"ru": "GitHub", "en": "GitHub"}),
-            (r"(miniwe\.github\.io)", {"ru": "Сайт", "en": "Website"})]:
+            (r"(miniwe\.github\.io)", {"ru": "Сайт", "en": "Website", "az": "Veb-sayt"})]:
         м = re.search(шаблон, текст)
         if м:
             поля.append((метка.get(язык, метка["en"]), м.group(1).strip()))
     место = re.search(r"(Баку[^·\n]*|Bak[ıi][^·\n]*)", текст)
     if место:
-        поля.insert(0, ({"ru": "Местоположение"}.get(язык, "Location"),
+        поля.insert(0, ({"ru": "Местоположение", "az": "Ünvan"}.get(язык, "Location"),
                         чистый(место.group(1))))
     return "".join(f'<p class="мета">{м}: {чистый(з)}</p>' for м, з in поля)
 
