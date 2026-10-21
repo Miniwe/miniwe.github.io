@@ -451,6 +451,13 @@ body{{
 .шапка h1{{font-family:var(--шрифт-заголовки);margin:0;font-size:35px;line-height:1.1;letter-spacing:.045em;font-weight:800;text-transform:uppercase}}
 .шапка .роль{{font-family:var(--шрифт-заголовки);margin:12px 0 0;font-size:14.5px;line-height:1.55;letter-spacing:.1em;
   text-transform:uppercase;color:#e3e8f0;font-weight:600;max-width:48em}}
+/* Строка роли двуязычная: английское название должности плюс фраза на
+   языке страницы. Браузер под lang="az" поднимает регистр по турецким
+   правилам и «Senior / TypeScript» становятся «SENİOR / TYPESCRİPT».
+   Правила для английского сломали бы азербайджанское «texniki» → «TEXNIKI».
+   Единственный честный выход — не трогать регистр на этой странице;
+   заголовки разделов остаются прописными, они целиком азербайджанские. */
+html[lang="az"] .шапка .роль{{text-transform:none;letter-spacing:.04em}}
 .языки{{position:absolute;right:30px;top:24px;display:flex;gap:5px}}
 .языки a{{font-family:var(--шрифт-заголовки);color:#c8d0dd;text-decoration:none;font-size:12.5px;font-weight:600;letter-spacing:.1em;
   padding:5px 10px;border:1px solid #55617a;border-radius:3px}}
