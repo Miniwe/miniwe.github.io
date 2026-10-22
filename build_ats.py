@@ -39,7 +39,8 @@ from build_cv import ХРАНИЛИЩЕ, КОРЕНЬ, разобрать, бе�
   ("ИИ и машинное обучение", "LLM, RAG, retrieval, векторный поиск, Qdrant, pgvector, BM25, эмбеддинги, multilingual-e5-small, LiteLLM, OpenRouter, Ollama, MCP, агенты, function calling, структурированный вывод, стриминг, prompt engineering, оценка качества, эталонные наборы"),
   ("Качество и эксплуатация", "Jest, Playwright, автотесты, E2E, структурные логи, health-checks, метрики, мониторинг, поэтапные выкатки"),
   ("ГИС и данные", "Leaflet, H3, Google Maps API, Яндекс.Карты API, Sentinel-2, Google Earth Engine, Copernicus"),
-  ("Методология", "Agile, Scrum, код-ревью, технические собеседования, архитектурные решения (ADR), Johnny.Decimal, PARA"),
+  ("Требования и анализ", "сбор требований у заказчика, пользовательские сценарии, критерии приёмки, чек-лист соответствия ТЗ, проектирование интеграций, контракты OpenAPI, оценка сроков и бюджета, координация разработчиков"),
+  ("Методология", "Agile, Scrum, Kanban, Waterfall, Jira, Confluence, Trello, диаграмма Ганта, код-ревью, технические собеседования, архитектурные решения (ADR), Johnny.Decimal, PARA"),
  ],
  "en": [
   ("Languages and platforms", "Node.js, TypeScript, JavaScript, PHP 8.4, Python, Rust, Go"),
@@ -50,7 +51,8 @@ from build_cv import ХРАНИЛИЩЕ, КОРЕНЬ, разобрать, бе�
   ("AI and machine learning", "LLM, RAG, retrieval, vector search, Qdrant, pgvector, BM25, embeddings, multilingual-e5-small, LiteLLM, OpenRouter, Ollama, MCP, agents, function calling, structured outputs, streaming, prompt engineering, evaluation, reference sets"),
   ("Quality and operations", "Jest, Playwright, automated tests, E2E, structured logging, health checks, metrics, monitoring, staged rollouts"),
   ("GIS and data", "Leaflet, H3, Google Maps API, Yandex Maps API, Sentinel-2, Google Earth Engine, Copernicus"),
-  ("Methodology", "Agile, Scrum, code review, technical interviews, architecture decision records, Johnny.Decimal, PARA"),
+  ("Requirements and analysis", "requirements elicitation, user scenarios, acceptance criteria, specification conformance checklists, integration design, OpenAPI contracts, effort and budget estimation, developer coordination"),
+  ("Methodology", "Agile, Scrum, Kanban, Waterfall, Jira, Confluence, Trello, Gantt charts, code review, technical interviews, architecture decision records, Johnny.Decimal, PARA"),
  ],
 }
 НАВЫКИ["az"] = [
@@ -62,7 +64,8 @@ from build_cv import ХРАНИЛИЩЕ, КОРЕНЬ, разобрать, бе�
   ("Süni intellekt və maşın öyrənməsi", "LLM, RAG, retrieval, vektor axtarış, Qdrant, pgvector, BM25, embedding-lər, multilingual-e5-small, LiteLLM, OpenRouter, Ollama, MCP, agentlər, function calling, strukturlaşdırılmış çıxış, strim, prompt engineering, keyfiyyətin qiymətləndirilməsi, etalon dəstlər"),
   ("Keyfiyyət və istismar", "Jest, Playwright, avtotestlər, E2E, struktur loqlar, health-check-lər, metriklər, monitorinq, mərhələli yayımlar"),
   ("GIS və data", "Leaflet, H3, Google Maps API, Yandex Xəritələr API, Sentinel-2, Google Earth Engine, Copernicus"),
-  ("Metodologiya", "Agile, Scrum, kod-review, texniki müsahibələr, arxitektura qərarları (ADR), Johnny.Decimal, PARA"),
+  ("Tələblər və analiz", "sifarişçidən tələblərin toplanması, istifadəçi ssenariləri, qəbul meyarları, texniki tapşırığa uyğunluq checklist-i, inteqrasiyaların layihələndirilməsi, OpenAPI kontraktları, müddət və büdcənin qiymətləndirilməsi, developerlərin koordinasiyası"),
+  ("Metodologiya", "Agile, Scrum, Kanban, Waterfall, Jira, Confluence, Trello, Gantt diaqramı, kod-review, texniki müsahibələr, arxitektura qərarları (ADR), Johnny.Decimal, PARA"),
 ]
 
 ЗАГОЛОВКИ = {
