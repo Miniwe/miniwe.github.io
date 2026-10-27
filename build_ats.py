@@ -156,6 +156,7 @@ def контакты_строками(контакты, язык):
             (r"([\w.+-]+@[\w-]+\.[\w.]+)", {"ru": "Email", "en": "Email", "az": "E-poçt"}),
             (r"Telegram\s*\[?@?([\w]+)", {"ru": "Telegram", "en": "Telegram"}),
             (r"(github\.com/[\w-]+)", {"ru": "GitHub", "en": "GitHub"}),
+            (r"(linkedin\.com/in/[\w-]+)", {"ru": "LinkedIn", "en": "LinkedIn", "az": "LinkedIn"}),
             (r"(miniwe\.github\.io)", {"ru": "Сайт", "en": "Website", "az": "Veb-sayt"})]:
         м = re.search(шаблон, текст)
         if м:

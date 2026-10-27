@@ -24,7 +24,8 @@ from pathlib import Path
 # Канонический адрес. Нужен и человеку (ссылка в подписи), и машине:
 # по нему строятся canonical, hreflang, og:url и @id в JSON-LD.
 САЙТ = "https://miniwe.github.io/"
-ПРОФИЛИ = ["https://github.com/miniwe", "https://t.me/miniwe", САЙТ]
+ПРОФИЛИ = ["https://github.com/miniwe", "https://t.me/miniwe",
+           "https://www.linkedin.com/in/vitaly-dryukov-a63a0669/", САЙТ]
 
 # Каждый язык живёт по своему подпути: /ru/, /en/, /az/. Русская лежит ещё
 # и в корне — это основной адрес, его дают в отклике на вакансию, поэтому
